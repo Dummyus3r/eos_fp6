@@ -49,7 +49,7 @@
     <linkfile src="target" dest="build/target" />
     <linkfile src="tools" dest="build/tools" />
   </project>
-  <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
+  <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" revision="2464-u-naburecovery" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
   <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />

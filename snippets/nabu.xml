@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+        <remote  name="gitlab" fetch="https://gitlab.com"/>
+        <project name="LineageOS/android_hardware_xiaomi" path="hardware/xiaomi" remote="github" revision="lineage-21" />
+        <project name="althafvly/android_device_xiaomi_nabu" path="device/xiaomi/nabu" remote="github" revision="lineage-21" />
+        <project name="dev-harsh1998/android_kernel_xiaomi_nabu" path="kernel/xiaomi/nabu" remote="github" revision="lineage-21" depth="1" />
+        <project name="dev-harsh1998/android_vendor_xiaomi_nabu" path="vendor/xiaomi/nabu" remote="gitlab" revision="lineage-21" depth="1" />
+</manifest>
