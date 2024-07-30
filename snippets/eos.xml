@@ -65,7 +65,7 @@
     <linkfile src="tools" dest="build/tools" />
   </project>
   <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed" remote="e" />
-  <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
+  <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" revision="2464-a14-naburecovery" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
   <project path="external/dng_sdk" name="e/os/android_external_dng_sdk" groups="pdk" remote="e" />
   <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk" remote="e" />
