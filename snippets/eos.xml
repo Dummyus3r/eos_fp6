@@ -5,6 +5,7 @@
   <remove-project path="build/make" name="LineageOS/android_build" groups="pdk"/>
   <remove-project path="build/soong" name="LineageOS/android_build_soong" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
+  <remove-project path="bootable/deprecated-ota" name="LineageOS/android_bootable_deprecated-ota" groups="pdk-cw" />
   <remove-project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" />
   <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="frameworks/libs/systemui" name="LineageOS/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" />
@@ -54,6 +55,7 @@
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
   </project>
   <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
+  <project path="bootable/deprecated-ota" name="e/os/android_bootable_deprecated-ota" groups="pdk-cw" remote="e" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
   <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />
