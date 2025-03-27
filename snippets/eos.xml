@@ -99,7 +99,7 @@
   <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
 
   <!-- PreBuilts -->
-  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
+  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" />
 
   <!-- PicoTTS -->
   <project path="external/svox" name="e/os/picotts" remote="e" />
