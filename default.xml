@@ -2,7 +2,7 @@
 <manifest>
 
   <remote  name="github"
-           fetch=".."
+           fetch="https://github.com"
            review="review.lineageos.org" />
 
   <remote  name="private"
@@ -1031,4 +1031,5 @@
   </project>
 
   <include name="snippets/lineage.xml" />
+  <include name="snippets/eos.xml" />
 </manifest>
