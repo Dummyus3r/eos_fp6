@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="e"
+           fetch="https://gitlab.e.foundation"
+           revision="refs/heads/a16"/>
+
+  <remote  name="e-priv"
+           fetch="ssh://git@gitlab.e.foundation:2222"
+           revision="refs/heads/a16"/>
+
+  <!-- Remove projects -->
+  <remove-project path="android" name="LineageOS/android" />
+
+  <!-- /e/OS additions -->
+  <project path="android" name="e/os/android" remote="e" />
+</manifest>
