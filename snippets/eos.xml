@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Remove projects -->
+  <remove-project path="android" name="LineageOS/android" />
+
+  <!-- /e/OS additions -->
+  <project path="android" name="e/os/android" remote="e" />
+</manifest>
