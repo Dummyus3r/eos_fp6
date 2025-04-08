@@ -15,11 +15,11 @@
 
   <remote  name="e"
            fetch="https://gitlab.e.foundation"
-           revision="refs/heads/v1-t"/>
+           revision="refs/heads/v3.0-t"/>
 
   <remote  name="e-priv"
            fetch="ssh://git@gitlab.e.foundation:2222"
-           revision="refs/heads/v1-t"/>
+           revision="refs/heads/v3.0-t"/>
 
   <default revision="refs/heads/lineage-20.0"
            remote="github"
