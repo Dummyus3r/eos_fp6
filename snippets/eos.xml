@@ -39,6 +39,7 @@
   <remove-project path="packages/providers/MediaProvider" name="LineageOS/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/services/Telephony" name="LineageOS/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/overlays/Lineage" name="LineageOS/android_packages_overlays_Lineage" />
+  <remove-project path="system/core" name="LineageOS/android_system_core" groups="pdk" />
   <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
   <remove-project path="vendor/qcom/opensource/fm-commonsys" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
   <!-- /e/ OS additions -->
@@ -88,6 +89,7 @@
   <project path="packages/providers/MediaProvider" name="e/os/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/overlays/Lineage" name="e/os/android_packages_overlays_Lineage" remote="e" />
+  <project path="system/core" name="e/os/android_system_core" groups="pdk" remote="e" />
   <project path="vendor/lineage" name="e/os/android_vendor_lineage" remote="e" />
   <project path="vendor/qcom/opensource/fm-commonsys" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
 
