@@ -3,6 +3,7 @@
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
   <remove-project path="build/make" name="LineageOS/android_build" groups="pdk"/>
+  <remove-project path="build/release" name="LineageOS/android_build_release" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
   <remove-project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" />
   <remove-project path="frameworks/av" name="LineageOS/android_frameworks_av" groups="pdk" />
@@ -51,6 +52,7 @@
     <linkfile src="target" dest="build/target" />
     <linkfile src="tools" dest="build/tools" />
   </project>
+  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed" remote="e" />
   <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
   <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk" remote="e" />
