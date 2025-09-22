@@ -11,7 +11,93 @@
 
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
+  <remove-project path="build/soong" name="LineageOS/android_build_soong" groups="pdk,tradefed" />
+  <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
+  <remove-project path="bootable/deprecated-ota" name="LineageOS/android_bootable_deprecated-ota" groups="pdk-cw" />
+  <remove-project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" />
+  <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="frameworks/libs/systemui" name="LineageOS/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="frameworks/opt/vcard" name="platform/frameworks/opt/vcard" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="lineage-sdk" name="LineageOS/android_lineage-sdk" />
+  <remove-project path="packages/apps/Backgrounds" name="LineageOS/android_packages_apps_Backgrounds" />
+  <remove-project path="packages/apps/Contacts" name="LineageOS/android_packages_apps_Contacts" groups="pdk-fs" />
+  <remove-project path="packages/apps/Dialer" name="LineageOS/android_packages_apps_Dialer" groups="pdk-fs" />
+  <remove-project path="packages/apps/DocumentsUI" name="LineageOS/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/apps/EmergencyInfo" name="LineageOS/android_packages_apps_EmergencyInfo" groups="pdk-fs" />
+  <remove-project path="packages/apps/FMRadio" name="LineageOS/android_packages_apps_FMRadio" />
+  <remove-project path="packages/apps/Gallery2" name="LineageOS/android_packages_apps_Gallery2" groups="pdk-fs" />
+  <remove-project path="packages/apps/Launcher3" name="LineageOS/android_packages_apps_Launcher3" groups="pdk-fs,sysui-studio,pdk-cw-tvc" />
+  <remove-project path="packages/apps/ImsServiceEntitlement" name="platform/packages/apps/ImsServiceEntitlement" groups="pdk-fs" />
+  <remove-project path="packages/apps/LineageParts" name="LineageOS/android_packages_apps_LineageParts" />
+  <remove-project path="packages/apps/Settings" name="LineageOS/android_packages_apps_Settings" groups="pdk-fs" />
+  <remove-project path="packages/apps/SetupWizard" name="LineageOS/android_packages_apps_SetupWizard" />
+  <remove-project path="packages/apps/SettingsIntelligence" name="LineageOS/android_packages_apps_SettingsIntelligence" groups="pdk-fs" />
+  <remove-project path="packages/apps/ThemePicker" name="LineageOS/android_packages_apps_ThemePicker" groups="pdk-fs" />
+  <remove-project path="packages/apps/Updater" name="LineageOS/android_packages_apps_Updater" />
+  <remove-project path="packages/apps/WallpaperPicker2" name="LineageOS/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" />
+  <remove-project path="packages/inputmethods/LatinIME" name="LineageOS/android_packages_inputmethods_LatinIME" groups="pdk-fs" />
+  <remove-project path="packages/modules/Connectivity" name="LineageOS/android_packages_modules_Connectivity" groups="pdk-fs" />
+  <remove-project path="packages/modules/DnsResolver" name="platform/packages/modules/DnsResolver" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/modules/Permission" name="LineageOS/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/services/Telephony" name="LineageOS/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/overlays/Lineage" name="LineageOS/android_packages_overlays_Lineage" />
+  <remove-project path="system/core" name="LineageOS/android_system_core" groups="pdk" />
+  <remove-project path="vendor/apn" name="LineageOS/android_vendor_apn" />
+  <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
+  <remove-project path="vendor/qcom/opensource/commonsys/fm" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
 
   <!-- /e/OS additions -->
   <project path="android" name="e/os/android" remote="e" />
+  <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+  <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
+  <project path="bootable/deprecated-ota" name="e/os/android_bootable_deprecated-ota" groups="pdk-cw" remote="e" />
+  <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
+  <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="frameworks/opt/vcard" name="e/os/android_frameworks_opt_vcard" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="lineage-sdk" name="e/os/android_lineage-sdk" remote="e" />
+  <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" revision="main" />
+  <project path="packages/apps/Contacts" name="e/os/android_packages_apps_Contacts" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/Dialer" name="e/os/android_packages_apps_Dialer" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/DocumentsUI" name="e/os/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/apps/EmergencyInfo" name="e/os/android_packages_apps_EmergencyInfo" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/FMRadio" name="e/os/android_packages_apps_FMRadio" remote="e" />
+  <project path="packages/apps/Gallery2" name="e/os/android_packages_apps_Gallery2" groups="pdk-fs" remote="e" revision="main" />
+  <project path="packages/apps/Launcher3" name="e/os/BlissLauncher3" groups="pdk-fs,sysui-studio,pdk-cw-tvc" remote="e" />
+  <project path="packages/apps/ImsServiceEntitlement" name="e/os/android_packages_apps_ImsServiceEntitlement" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/LineageParts" name="e/os/android_packages_apps_LineageParts" remote="e" />
+  <project path="packages/apps/Settings" name="e/os/android_packages_apps_Settings" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/SettingsIntelligence" name="e/os/android_packages_apps_SettingsIntelligence" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/SetupWizard" name="e/os/android_packages_apps_SetupWizard" remote="e"/>
+  <project path="packages/apps/ThemePicker" name="e/os/android_packages_apps_ThemePicker" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" revision="main" />
+  <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" remote="e" />
+  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="main" />
+  <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/overlays/Lineage" name="e/os/android_packages_overlays_Lineage" remote="e" />
+  <project path="system/core" name="e/os/android_system_core" groups="pdk" remote="e" />
+  <project path="vendor/apn" name="e/os/android_vendor_apn" remote="e" revision="develop" />
+  <project path="vendor/lineage" name="e/os/android_vendor_lineage" remote="e" />
+  <project path="vendor/qcom/opensource/commonsys/fm" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
+
+  <!-- ih8sn -->
+  <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="master" />
+
+  <!-- eLib -->
+  <project path="packages/apps/elib" name="e/os/elib" remote="e" />
+
+  <!-- PreBuilts -->
+  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
+
+  <!-- PicoTTS -->
+  <project path="external/svox" name="e/os/picotts" remote="e" revision="master" />
+
+  <!-- vendor /e/os -->
+  <project path="vendor/eos" name="e/os/android_vendor_eos" remote="e" />
 </manifest>
