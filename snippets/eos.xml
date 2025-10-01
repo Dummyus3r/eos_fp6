@@ -118,7 +118,7 @@
   <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
 
   <!-- PicoTTS -->
-  <project path="external/svox" name="e/os/picotts" remote="e" />
+  <project path="external/svox" name="e/os/picotts" remote="e" revision="master" />
 
   <!-- vendor /e/os -->
   <project path="vendor/eos" name="e/os/android_vendor_eos" remote="e" />
