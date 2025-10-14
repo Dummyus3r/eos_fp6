@@ -11,7 +11,6 @@
 
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
-  <remove-project path="build/release" name="LineageOS/android_build_release" groups="pdk,tradefed,sysui-studio" />
   <remove-project path="build/soong" name="LineageOS/android_build_soong" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
   <remove-project path="bootable/deprecated-ota" name="LineageOS/android_bootable_deprecated-ota" groups="pdk-cw" />
@@ -53,7 +52,6 @@
 
   <!-- /e/OS additions -->
   <project path="android" name="e/os/android" remote="e" />
-  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed,sysui-studio" remote="e" />
   <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
     <linkfile src="root.bp" dest="Android.bp" />
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
@@ -101,9 +99,6 @@
 
   <!-- eLib -->
   <project path="packages/apps/elib" name="e/os/elib" remote="e" />
-
-  <!-- SplitInstall -->
-  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
 
   <!-- PreBuilts -->
   <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
