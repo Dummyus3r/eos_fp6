@@ -15,11 +15,11 @@
 
   <remote  name="e"
            fetch="https://gitlab.e.foundation"
-           revision="refs/heads/a15"/>
+           revision="refs/heads/v3.3-a15"/>
 
   <remote  name="e-priv"
            fetch="ssh://git@gitlab.e.foundation:2222"
-           revision="refs/heads/a15"/>
+           revision="refs/heads/v3.3-a15"/>
 
   <default revision="refs/heads/lineage-22.2"
            remote="github"
@@ -997,7 +997,7 @@
   <project path="tools/treble" name="platform/tools/treble" groups="tools,pdk" remote="aosp" />
   <project path="tools/trebuchet" name="platform/tools/trebuchet" groups="tools,cts,pdk,pdk-cw-fs,pdk-fs" remote="aosp" />
   <project path="trusty/device/arm/generic-arm64" name="trusty/device/arm/generic-arm64" groups="trusty,pdk" remote="aosp" />
-  <project path="trusty/device/arm/vexpress-a15" name="trusty/device/arm/vexpress-a15" groups="trusty,pdk" remote="aosp" />
+  <project path="trusty/device/arm/vexpress-v3.3-a15" name="trusty/device/arm/vexpress-a15" groups="trusty,pdk" remote="aosp" />
   <project path="trusty/device/nxp/imx7d" name="trusty/device/nxp/imx7d" groups="trusty,pdk" remote="aosp" />
   <project path="trusty/device/x86/generic-x86_64" name="trusty/device/x86/generic-x86_64" groups="trusty,pdk" remote="aosp" />
   <project path="trusty/hardware/nxp" name="trusty/lk/nxp" groups="trusty,pdk" remote="aosp" />
