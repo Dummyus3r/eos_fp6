@@ -108,7 +108,10 @@
   <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="v3.3" />
 
   <!-- PreBuilts -->
-  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v3.3" />
+  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v3.3" >
+    <linkfile src="Maps/Android13le_mk" dest="prebuilts/prebuiltapks/Maps/Android.mk" />
+    <linkfile src="OpenKeychain/Android13le_mk" dest="prebuilts/prebuiltapks/OpenKeychain/Android.mk" />
+  </project>
 
   <!-- PicoTTS -->
   <project path="external/svox" name="e/os/picotts" remote="e" />
