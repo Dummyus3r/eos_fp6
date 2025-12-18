@@ -11,7 +11,6 @@
 
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
-  <remove-project path="build/release" name="LineageOS/android_build_release" groups="pdk,tradefed,sysui-studio" />
   <remove-project path="build/soong" name="LineageOS/android_build_soong" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
   <remove-project path="bootable/deprecated-ota" name="LineageOS/android_bootable_deprecated-ota" groups="pdk-cw" />
@@ -48,12 +47,12 @@
   <remove-project path="packages/services/Telephony" name="LineageOS/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/overlays/Lineage" name="LineageOS/android_packages_overlays_Lineage" />
   <remove-project path="system/core" name="LineageOS/android_system_core" groups="pdk" />
+  <remove-project path="vendor/apn" name="LineageOS/android_vendor_apn" />
   <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
   <remove-project path="vendor/qcom/opensource/commonsys/fm" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
 
   <!-- /e/OS additions -->
   <project path="android" name="e/os/android" remote="e" />
-  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed,sysui-studio" remote="e" />
   <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
     <linkfile src="root.bp" dest="Android.bp" />
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
@@ -93,6 +92,7 @@
   <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/overlays/Lineage" name="e/os/android_packages_overlays_Lineage" remote="e" />
   <project path="system/core" name="e/os/android_system_core" groups="pdk" remote="e" />
+  <project path="vendor/apn" name="e/os/android_vendor_apn" remote="e" revision="develop" />
   <project path="vendor/lineage" name="e/os/android_vendor_lineage" remote="e" />
   <project path="vendor/qcom/opensource/commonsys/fm" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
 
@@ -101,9 +101,6 @@
 
   <!-- eLib -->
   <project path="packages/apps/elib" name="e/os/elib" remote="e" />
-
-  <!-- SplitInstall -->
-  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
 
   <!-- PreBuilts -->
   <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
