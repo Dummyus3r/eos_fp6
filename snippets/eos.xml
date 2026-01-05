@@ -7,6 +7,7 @@
   <remove-project path="build/release" name="LineageOS/android_build_release" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
   <remove-project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" />
+  <remove-project path="external/dng_sdk" name="LineageOS/android_external_dng_sdk" groups="pdk" />
   <remove-project path="frameworks/av" name="LineageOS/android_frameworks_av" groups="pdk" />
   <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="frameworks/native" name="LineageOS/android_frameworks_native" groups="pdk-cw-fs,pdk-fs" />
@@ -66,6 +67,7 @@
   <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed" remote="e" />
   <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
+  <project path="external/dng_sdk" name="e/os/android_external_dng_sdk" groups="pdk" remote="e" />
   <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk" remote="e" />
   <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="frameworks/native" name="e/os/android_frameworks_native" groups="pdk-cw-fs,pdk-fs" remote="e" />
