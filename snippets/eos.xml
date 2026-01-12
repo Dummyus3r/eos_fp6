@@ -89,7 +89,7 @@
   <project path="packages/apps/Trebuchet" name="e/os/BlissLauncher3" remote="e" />
   <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" />
   <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" remote="e" />
-  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e"/>
+  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="main" />
   <project path="packages/modules/Bluetooth" name="e/os/android_packages_modules_Bluetooth" groups="pdk" remote="e" />
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
