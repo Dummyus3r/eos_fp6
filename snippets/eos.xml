@@ -69,7 +69,7 @@
   <project path="packages/apps/DocumentsUI" name="e/os/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/apps/EmergencyInfo" name="e/os/android_packages_apps_EmergencyInfo" groups="pdk-fs" remote="e" />
   <project path="packages/apps/FMRadio" name="e/os/android_packages_apps_FMRadio" remote="e" />
-  <project path="packages/apps/Gallery2" name="e/os/android_packages_apps_Gallery2" groups="pdk-fs" remote="e" revision="main" />
+  <project path="packages/apps/Gallery2" name="e/os/android_packages_apps_Gallery2" groups="pdk-fs" remote="e" revision="v3.5" />
   <project path="packages/apps/ImsServiceEntitlement" name="e/os/android_packages_apps_ImsServiceEntitlement" groups="pdk-fs" remote="e" />
   <project path="packages/apps/LineageParts" name="e/os/android_packages_apps_LineageParts" remote="e" />
   <project path="packages/apps/Settings" name="e/os/android_packages_apps_Settings" groups="pdk-fs" remote="e" />
@@ -79,7 +79,7 @@
   <project path="packages/apps/Trebuchet" name="e/os/BlissLauncher3" remote="e" />
   <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" />
   <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" remote="e" />
-  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="main" />
+  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="v3.5" />
   <project path="packages/modules/Bluetooth" name="e/os/android_packages_modules_Bluetooth" groups="pdk" remote="e" />
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
@@ -92,19 +92,19 @@
   <project path="vendor/qcom/opensource/commonsys/fm" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
 
   <!-- ih8sn -->
-  <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="master" />
+  <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="v3.5" />
 
   <!-- eLib -->
   <project path="packages/apps/elib" name="e/os/elib" remote="e" />
 
   <!-- SplitInstall -->
-  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
+  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="v3.5" />
 
   <!-- PreBuilts -->
-  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
+  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v3.5" />
 
   <!-- PicoTTS -->
-  <project path="external/svox" name="e/os/picotts" remote="e" revision="master" />
+  <project path="external/svox" name="e/os/picotts" remote="e" revision="v3.5" />
 
   <!-- vendor /e/os -->
   <project path="vendor/eos" name="e/os/android_vendor_eos" remote="e" />
