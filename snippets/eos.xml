@@ -77,7 +77,7 @@
   <project path="packages/apps/SetupWizard" name="e/os/android_packages_apps_SetupWizard" remote="e"/>
   <project path="packages/apps/ThemePicker" name="e/os/android_packages_apps_ThemePicker" groups="pdk-fs" remote="e" />
   <project path="packages/apps/Trebuchet" name="e/os/BlissLauncher3" remote="e" />
-  <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" />
+  <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" revision="main" />
   <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" remote="e" />
   <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="main" />
   <project path="packages/modules/Bluetooth" name="e/os/android_packages_modules_Bluetooth" groups="pdk" remote="e" />
