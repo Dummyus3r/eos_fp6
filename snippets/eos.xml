@@ -3,7 +3,7 @@
 
   <remote  name="e"
            fetch="https://gitlab.e.foundation"
-           revision="refs/heads/a16.2"/>
+           revision="refs/heads/epic234-a16-qpr2"/>
 
   <remote  name="e-priv"
            fetch="ssh://git@gitlab.e.foundation:2222"
@@ -47,7 +47,7 @@
   <remove-project path="vendor/qcom/opensource/commonsys/fm" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
 
   <!-- /e/OS additions -->
-  <project path="android" name="e/os/android" remote="e" />
+  <project path="android" name="e/os/android" remote="e" revision="v1-a16.2-qpr2" />
   <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
     <linkfile src="root.bp" dest="Android.bp" />
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
