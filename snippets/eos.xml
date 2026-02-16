@@ -51,6 +51,7 @@
   <remove-project path="vendor/apn" name="LineageOS/android_vendor_apn" />
   <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
   <remove-project path="vendor/qcom/opensource/commonsys/fm" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
+  <remove-project path="packages/apps/Seedvault" name="LineageOS/android_packages_apps_Seedvault" />
 
   <!-- /e/ OS additions -->
 
