@@ -88,7 +88,7 @@
   <project path="packages/apps/Trebuchet" name="e/os/android_packages_apps_Trebuchet" remote="e" />
   <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" />
   <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs" remote="e" />
-  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="main" />
+  <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="v3.6" />
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e" />
@@ -101,16 +101,16 @@
   <project path="vendor/qcom/opensource/fm-commonsys" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
 
   <!-- ih8sn -->
-  <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="master" />
+  <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="v3.6" />
 
   <!-- eLib -->
-  <project path="packages/apps/elib" name="e/os/elib" remote="e" revision="main" />
+  <project path="packages/apps/elib" name="e/os/elib" remote="e" revision="v3.6" />
 
   <!-- SplitInstall -->
-  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
+  <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="v3.6" />
 
   <!-- PreBuilts -->
-  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" >
+  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v3.6" >
     <linkfile src="Maps/Android13le_mk" dest="prebuilts/prebuiltapks/Maps/Android.mk" />
     <linkfile src="OpenKeychain/Android13le_mk" dest="prebuilts/prebuiltapks/OpenKeychain/Android.mk" />
   </project>
