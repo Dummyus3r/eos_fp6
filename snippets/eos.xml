@@ -50,8 +50,8 @@
 
   <!-- /e/OS additions -->
 
-  <project path="android" name="e/os/android" remote="e" />
-  <project path="build/make" name="e/os/android_build" groups="pdk" remote="e" >
+  <project path="android" name="e/os/android" remote="e" revision="4141-a15-march" />
+  <project path="build/make" name="e/os/android_build" groups="pdk" remote="e" revision="4141-a15-march">
     <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
     <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
     <linkfile src="core" dest="build/core" />
@@ -59,7 +59,7 @@
     <linkfile src="target" dest="build/target" />
     <linkfile src="tools" dest="build/tools" />
   </project>
-  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed,sysui-studio" remote="e" />
+  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed,sysui-studio" remote="e" revision="4141-a15-march"/>
   <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
     <linkfile src="root.bp" dest="Android.bp" />
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
@@ -67,25 +67,25 @@
   <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
   <project path="bootable/deprecated-ota" name="e/os/android_bootable_deprecated-ota" groups="pdk-cw" remote="e" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
-  <project path="external/dng_sdk" name="e/os/android_external_dng_sdk" groups="pdk" remote="e" />
-  <project path="external/sqlite" name="e/os/android_external_sqlite" groups="pdk" remote="e" />
-  <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk" remote="e" />
-  <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="external/dng_sdk" name="e/os/android_external_dng_sdk" groups="pdk" remote="e" revision="4141-a15-march"/>
+  <project path="external/sqlite" name="e/os/android_external_sqlite" groups="pdk" remote="e" revision="4141-a15-march"/>
+  <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk" remote="e" revision="4141-a15-march"/>
+  <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
   <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="frameworks/native" name="e/os/android_frameworks_native" groups="pdk" remote="e" />
+  <project path="frameworks/native" name="e/os/android_frameworks_native" groups="pdk" remote="e" revision="4141-a15-march"/>
   <project path="frameworks/opt/vcard" name="e/os/android_frameworks_opt_vcard" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="hardware/st/nfc" name="e/os/android_hardware_st_nfc" groups="pdk" remote="e" />
+  <project path="hardware/st/nfc" name="e/os/android_hardware_st_nfc" groups="pdk" remote="e" revision="4141-a15-march"/>
   <project path="lineage-sdk" name="e/os/android_lineage-sdk" remote="e" />
   <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" />
   <project path="packages/apps/Contacts" name="e/os/android_packages_apps_Contacts" groups="pdk-fs" remote="e" />
   <project path="packages/apps/Dialer" name="e/os/android_packages_apps_Dialer" groups="pdk-fs" remote="e" />
-  <project path="packages/apps/DocumentsUI" name="e/os/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/apps/DocumentsUI" name="e/os/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
   <project path="packages/apps/EmergencyInfo" name="e/os/android_packages_apps_EmergencyInfo" groups="pdk-fs" remote="e" />
   <project path="packages/apps/FMRadio" name="e/os/android_packages_apps_FMRadio" remote="e" />
   <project path="packages/apps/Gallery2" name="e/os/android_packages_apps_Gallery2" groups="pdk-fs" remote="e" revision="v3.6" />
   <project path="packages/apps/ImsServiceEntitlement" name="e/os/android_packages_apps_ImsServiceEntitlement" groups="pdk-fs" remote="e" />
   <project path="packages/apps/LineageParts" name="e/os/android_packages_apps_LineageParts" remote="e" />
-  <project path="packages/apps/Settings" name="e/os/android_packages_apps_Settings" groups="pdk-fs" remote="e" />
+  <project path="packages/apps/Settings" name="e/os/android_packages_apps_Settings" groups="pdk-fs" remote="e" revision="4141-a15-march"/>
   <project path="packages/apps/SettingsIntelligence" name="e/os/android_packages_apps_SettingsIntelligence" groups="pdk-fs" remote="e" />
   <project path="packages/apps/SetupWizard" name="e/os/android_packages_apps_SetupWizard" remote="e"/>
   <project path="packages/apps/ThemePicker" name="e/os/android_packages_apps_ThemePicker" groups="pdk-fs" remote="e" />
@@ -96,11 +96,11 @@
   <project path="packages/modules/Bluetooth" name="e/os/android_packages_modules_Bluetooth" groups="pdk" remote="e" />
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="packages/modules/Virtualization" name="e/os/android_packages_modules_Virtualization" groups="pdk" remote="e" />
-  <project path="packages/providers/MediaProvider" name="e/os/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="packages/providers/TelephonyProvider" name="e/os/android_packages_providers_TelephonyProvider" groups="pdk-cw-fs,pdk-fs" remote="e" />
-  <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
+  <project path="packages/modules/Virtualization" name="e/os/android_packages_modules_Virtualization" groups="pdk" remote="e" revision="4141-a15-march"/>
+  <project path="packages/providers/MediaProvider" name="e/os/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
+  <project path="packages/providers/TelephonyProvider" name="e/os/android_packages_providers_TelephonyProvider" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
+  <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" revision="4141-a15-march"/>
   <project path="packages/overlays/Lineage" name="e/os/android_packages_overlays_Lineage" remote="e" />
   <project path="system/core" name="e/os/android_system_core" groups="pdk" remote="e" />
   <project path="vendor/apn" name="e/os/android_vendor_apn" remote="e" revision="develop" />
