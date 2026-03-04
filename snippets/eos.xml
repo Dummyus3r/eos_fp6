@@ -11,13 +11,20 @@
 
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
+  <remove-project path="build/release" name="LineageOS/android_build_release" groups="pdk,tradefed,sysui-studio" />
   <remove-project path="build/soong" name="LineageOS/android_build_soong" groups="pdk,tradefed" />
   <remove-project path="bootable/recovery" name="LineageOS/android_bootable_recovery" groups="pdk" />
   <remove-project path="bootable/deprecated-ota" name="LineageOS/android_bootable_deprecated-ota" groups="pdk-cw" />
   <remove-project path="device/lineage/sepolicy" name="LineageOS/android_device_lineage_sepolicy" />
+  <remove-project path="external/dng_sdk" name="LineageOS/android_external_dng_sdk" groups="pdk" />
+  <remove-project path="external/libopenapv" name="platform/external/libopenapv" groups="pdk" />
+  <remove-project path="external/sqlite" name="LineageOS/android_external_sqlite" groups="pdk" />
+  <remove-project path="frameworks/av" name="LineageOS/android_frameworks_av" groups="pdk,sysui-studio" />
   <remove-project path="frameworks/base" name="LineageOS/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="frameworks/native" name="LineageOS/android_frameworks_native" groups="pdk" />
   <remove-project path="frameworks/libs/systemui" name="LineageOS/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="frameworks/opt/vcard" name="platform/frameworks/opt/vcard" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="hardware/st/nfc" name="LineageOS/android_hardware_st_nfc" groups="pdk" />
   <remove-project path="lineage-sdk" name="LineageOS/android_lineage-sdk" />
   <remove-project path="packages/apps/Backgrounds" name="LineageOS/android_packages_apps_Backgrounds" />
   <remove-project path="packages/apps/Contacts" name="LineageOS/android_packages_apps_Contacts" groups="pdk-fs" />
@@ -39,6 +46,10 @@
   <remove-project path="packages/modules/Connectivity" name="LineageOS/android_packages_modules_Connectivity" groups="pdk-fs" />
   <remove-project path="packages/modules/DnsResolver" name="platform/packages/modules/DnsResolver" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/modules/Permission" name="LineageOS/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/modules/Profiling" name="platform/packages/modules/Profiling" groups="pdk" />
+  <remove-project path="packages/modules/Virtualization" name="platform/packages/modules/Virtualization" groups="pdk" />
+  <remove-project path="packages/providers/MediaProvider" name="LineageOS/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="packages/providers/TelephonyProvider" name="LineageOS/android_packages_providers_TelephonyProvider" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/services/Telephony" name="LineageOS/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="packages/overlays/Lineage" name="LineageOS/android_packages_overlays_Lineage" />
   <remove-project path="system/core" name="LineageOS/android_system_core" groups="pdk" />
@@ -48,6 +59,7 @@
 
   <!-- /e/OS additions -->
   <project path="android" name="e/os/android" remote="e" />
+  <project path="build/release" name="e/os/android_build_release" groups="pdk,tradefed,sysui-studio" remote="e" />
   <project path="build/soong" name="e/os/android_build_soong" groups="pdk,tradefed" remote="e" >
     <linkfile src="root.bp" dest="Android.bp" />
     <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
@@ -55,9 +67,15 @@
   <project path="bootable/recovery" name="e/os/android_bootable_recovery" groups="pdk" remote="e" />
   <project path="bootable/deprecated-ota" name="e/os/android_bootable_deprecated-ota" groups="pdk-cw" remote="e" />
   <project path="device/lineage/sepolicy" name="e/os/android_device_lineage_sepolicy" remote="e" />
+  <project path="external/dng_sdk" name="e/os/android_external_dng_sdk" groups="pdk" remote="e" />
+  <project path="external/libopenapv" name="e/os/android_external_libopenapv" groups="pdk" remote="e" />
+  <project path="external/sqlite" name="e/os/android_external_sqlite" groups="pdk" remote="e" />
+  <project path="frameworks/av" name="e/os/android_frameworks_av" groups="pdk,sysui-studio" remote="e" />
   <project path="frameworks/base" name="e/os/android_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="frameworks/native" name="e/os/android_frameworks_native" groups="pdk" remote="e" />
   <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="frameworks/opt/vcard" name="e/os/android_frameworks_opt_vcard" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="hardware/st/nfc" name="e/os/android_hardware_st_nfc" groups="pdk" remote="e" />
   <project path="lineage-sdk" name="e/os/android_lineage-sdk" remote="e" />
   <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" />
   <project path="packages/apps/Contacts" name="e/os/android_packages_apps_Contacts" groups="pdk-fs" remote="e" />
@@ -79,6 +97,10 @@
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/modules/Profiling" name="e/os/android_packages_modules_Profiling" groups="pdk" remote="e" />
+  <project path="packages/modules/Virtualization" name="e/os/android_packages_modules_Virtualization" groups="pdk" remote="e" />
+  <project path="packages/providers/MediaProvider" name="e/os/android_packages_providers_MediaProvider" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="packages/providers/TelephonyProvider" name="e/os/android_packages_providers_TelephonyProvider" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/services/Telephony" name="e/os/android_packages_services_Telephony" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="packages/overlays/Lineage" name="e/os/android_packages_overlays_Lineage" remote="e" />
   <project path="system/core" name="e/os/android_system_core" groups="pdk" remote="e" />
