@@ -3,11 +3,11 @@
 
   <remote  name="e"
            fetch="https://gitlab.e.foundation"
-           revision="refs/heads/a16"/>
+           revision="refs/heads/v3.6-a16"/>
 
   <remote  name="e-priv"
            fetch="ssh://git@gitlab.e.foundation:2222"
-           revision="refs/heads/a16"/>
+           revision="refs/heads/v3.6-a16"/>
 
   <!-- Remove projects -->
   <remove-project path="android" name="LineageOS/android" />
