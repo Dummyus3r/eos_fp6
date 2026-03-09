@@ -70,7 +70,7 @@
   <project path="frameworks/opt/telephony" name="e/os/android_frameworks_opt_telephony" groups="pdk" remote="e" />
   <project path="frameworks/opt/vcard" name="e/os/android_frameworks_opt_vcard" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="lineage-sdk" name="e/os/android_lineage-sdk" remote="e" />
-  <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" />
+  <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" revision="main" />
   <project path="packages/apps/Contacts" name="e/os/android_packages_apps_Contacts" groups="pdk-fs" remote="e" />
   <project path="packages/apps/Dialer" name="e/os/android_packages_apps_Dialer" groups="pdk-fs" remote="e" />
   <project path="packages/apps/DocumentsUI" name="e/os/android_packages_apps_DocumentsUI" groups="pdk-cw-fs,pdk-fs" remote="e" />
