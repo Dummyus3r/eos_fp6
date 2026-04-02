@@ -15,6 +15,7 @@
   <remove-project path="frameworks/libs/systemui" name="LineageOS/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" />
   <remove-project path="frameworks/native" name="LineageOS/android_frameworks_native" groups="pdk" />
   <remove-project path="frameworks/opt/vcard" name="platform/frameworks/opt/vcard" groups="pdk-cw-fs,pdk-fs" />
+  <remove-project path="hardware/lineage/compat" name="LineageOS/android_hardware_lineage_compat" />
   <remove-project path="hardware/st/nfc" name="LineageOS/android_hardware_st_nfc" groups="pdk" />
   <remove-project path="lineage-sdk" name="LineageOS/android_lineage-sdk" />
   <remove-project path="packages/apps/Backgrounds" name="LineageOS/android_packages_apps_Backgrounds" />
@@ -74,6 +75,7 @@
   <project path="frameworks/libs/systemui" name="e/os/android_frameworks_libs_systemui" groups="pdk-cw-fs,pdk-fs" remote="e" />
   <project path="frameworks/native" name="e/os/android_frameworks_native" groups="pdk" remote="e" />
   <project path="frameworks/opt/vcard" name="e/os/android_frameworks_opt_vcard" groups="pdk-cw-fs,pdk-fs" remote="e" />
+  <project path="hardware/lineage/compat" name="e/os/android_hardware_lineage_compat" remote="e" />
   <project path="hardware/st/nfc" name="e/os/android_hardware_st_nfc" groups="pdk" remote="e" />
   <project path="lineage-sdk" name="e/os/android_lineage-sdk" remote="e" />
   <project path="packages/apps/Backgrounds" name="e/os/android_packages_apps_Backgrounds" remote="e" revision="main" />
