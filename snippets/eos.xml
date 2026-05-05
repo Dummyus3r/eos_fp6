@@ -36,6 +36,7 @@
   <remove-project path="packages/apps/Updater" name="LineageOS/android_packages_apps_Updater"/>
   <remove-project path="packages/apps/WallpaperPicker2" name="LineageOS/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio"/>
   <remove-project path="packages/inputmethods/LatinIME" name="LineageOS/android_packages_inputmethods_LatinIME" groups="pdk-fs"/>
+  <remove-project path="packages/modules/adb" name="LineageOS/android_packages_modules_adb" groups="pdk" />
   <remove-project path="packages/modules/Connectivity" name="LineageOS/android_packages_modules_Connectivity" groups="pdk-fs"/>
   <remove-project path="packages/modules/DnsResolver" name="platform/packages/modules/DnsResolver" groups="pdk-cw-fs,pdk-fs"/>
   <remove-project path="packages/modules/Permission" name="LineageOS/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs"/>
@@ -86,6 +87,7 @@
   <project path="packages/apps/Updater" name="e/os/android_packages_apps_Updater" remote="e" revision="v3.7"/>
   <project path="packages/apps/WallpaperPicker2" name="e/os/android_packages_apps_WallpaperPicker2" groups="pdk-fs,sysui-studio" remote="e"/>
   <project path="packages/inputmethods/LatinIME" name="e/os/android_packages_inputmethods_LatinIME" groups="pdk-fs" remote="e" revision="v3.7"/>
+  <project path="packages/modules/adb" name="e/os/android_packages_modules_adb" groups="pdk" remote="e" />
   <project path="packages/modules/Connectivity" name="e/os/android_packages_modules_Connectivity" groups="pdk-cw-fs,pdk-fs" remote="e"/>
   <project path="packages/modules/DnsResolver" name="e/os/android_packages_modules_DnsResolver" groups="pdk-cw-fs,pdk-fs" remote="e"/>
   <project path="packages/modules/Permission" name="e/os/android_packages_modules_Permission" groups="pdk-cw-fs,pdk-fs" remote="e"/>
