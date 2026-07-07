@@ -108,6 +108,7 @@
   <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v4.1">
     <linkfile src="Maps/Android13le_mk" dest="prebuilts/prebuiltapks/Maps/Android.mk"/>
     <linkfile src="OpenKeychain/Android13le_mk" dest="prebuilts/prebuiltapks/OpenKeychain/Android.mk"/>
+    <linkfile src="MurenaVoiceToTextOffline/Android13le_mk" dest="prebuilts/prebuiltapks/MurenaVoiceToTextOffline/Android.mk"/>
   </project>
   <!-- PicoTTS -->
   <project path="external/svox" name="e/os/picotts" remote="e"/>
