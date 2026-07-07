@@ -103,8 +103,9 @@
   <project path="packages/services/SplitInstallService" name="e/os/android_packages_services_SplitInstallService" remote="e" revision="main" />
 
   <!-- PreBuilts -->
-  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" />
-
+  <project path="prebuilts/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="main" >
+    <linkfile src="MurenaVoiceToTextOffline/Android13le_mk" dest="prebuilts/prebuiltapks/MurenaVoiceToTextOffline/Android.mk" />
+  </project>
   <!-- PicoTTS -->
   <project path="external/svox" name="e/os/picotts" remote="e" />
 
