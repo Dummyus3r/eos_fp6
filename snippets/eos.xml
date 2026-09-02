@@ -55,6 +55,7 @@
   <remove-project path="vendor/apn" name="LineageOS/android_vendor_apn" />
   <remove-project path="vendor/lineage" name="LineageOS/android_vendor_lineage" />
   <remove-project path="vendor/qcom/opensource/commonsys/fm" name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" />
+  <remove-project path="hardware/qcom-caf/thermal-legacy-um" name="LineageOS/android_hardware_qcom_thermal" groups="qcom,lanai-vendor" revision="lineage-22.2-legacy-um" />
 
   <!-- /e/OS additions -->
 
@@ -122,6 +123,7 @@
   <project path="vendor/apn" name="e/os/android_vendor_apn" remote="e" revision="develop" />
   <project path="vendor/lineage" name="e/os/android_vendor_lineage" remote="e" />
   <project path="vendor/qcom/opensource/commonsys/fm" name="e/os/android_vendor_qcom_opensource_fm-commonsys" groups="qcom,qssi" remote="e" />
+  <project path="hardware/qcom-caf/thermal-legacy-um" name="e/os/android_hardware_qcom_thermal" groups="qcom,lanai-vendor" remote="e" revision="a15-legacy-um" />
 
   <!-- ih8sn -->
   <project path="external/ih8sn" name="e/os/ih8sn" remote="e" revision="master" />
