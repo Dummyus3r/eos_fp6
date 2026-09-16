@@ -1,5 +1,10 @@
 # Coverage of the /e/OS forks
 
+Cross-checked against the Android 16 porting epic
+(https://gitlab.e.foundation/groups/e/os/-/work_items/211). Every area the epic
+lists is either specified here, recorded below as deliberately not forked, or
+listed in `TODO.md` as living outside this tree.
+
 Reference: the `v4.3-a16` manifest. The `a16` development manifest forks fewer
 projects — the extra forks on `v4.3-a16` exist to carry the monthly security
 patch — and adds `hardware/qcom-caf/thermal`, which is therefore not covered.
@@ -60,16 +65,24 @@ licence only, **P** covered in a prebuilt repository instead.
 | `packages/apps/elib` | new | F | apps/application-icons-and-theme |
 | `external/svox` (PicoTTS) | new | F | apps/preinstalled-applications |
 | `vendor/eos/flash` | new | F | device/flashing-package |
+| `.gitlab-ci.yml` in 83 forked projects | — | F | process/fork-maintenance |
+| `packages/apps/ImsServiceEntitlement` | 3 | F | privacy/degoogled-defaults |
+| `bootable/deprecated-ota` | 3 | F | device/recovery |
+| `external/prebuiltapks/Browser` | new | F | apps/browser-and-webview |
 
 `packages/apps/TV`, `packages/apps/TvSettings` and `packages/apps/Car/Settings`
 are forked but carry nothing on the /e/ side — there is no /e/OS TV or
 automotive product — so they are deliberately unspecified.
 
+`build/make` is deliberately **not** forked — /e/OS uses LineageOS's. The fork
+that once existed was dropped ("Remove unused build repo" in the manifest), so
+the epic's `android_build` item has no counterpart to specify.
+
 Projects not listed carry only Android Security Bulletin backports and/or
-CI/licence commits: `art`, `bionic`, `build/release`, `bootable/deprecated-ota`,
+CI/licence commits: `art`, `bionic`, `build/release`,
 `development`, `external/{dng_sdk,exfatprogs,freetype,libhevc,libopenapv,sqlite,wpa_supplicant_8}`,
 `hardware/{interfaces,nxp/nfc,nxp/secure_element,st/nfc}`,
-`packages/apps/{Car/Settings,CertInstaller,ImsServiceEntitlement,KeyChain,ManagedProvisioning,TV,TvSettings}`,
+`packages/apps/{Car/Settings,CertInstaller,KeyChain,ManagedProvisioning,TV,TvSettings}`,
 `packages/modules/{adb,DnsResolver*,IntentResolver,Profiling,Uwb,Virtualization,Wifi}`,
 `packages/providers/{ContactsProvider,DownloadProvider,TelephonyProvider}`,
 `packages/services/{BuiltInPrintService,Telecomm}`,

@@ -25,6 +25,27 @@ Recorded here so the next pass does not re-litigate them.
 | microG hiding — who owns the list | microG itself (`e/os/GmsCore`). The user-facing half is specified there. |
 | Android Auto | Relaxation stated explicitly, with the alternatives that were available written out in the file's header. |
 
+## Checked against the Android 16 porting epic
+
+Cross-checked against https://gitlab.e.foundation/groups/e/os/-/work_items/211.
+Added as a result: `process/fork-maintenance.feature`,
+`apps/browser-and-webview.feature`, the Firebase/IMS scenarios in
+`privacy/degoogled-defaults.feature`, the recovery-update rule in
+`device/recovery.feature`, the Blueprint scenario in
+`apps/prebuilt-maintenance.feature`, and the per-component signing scenario in
+`updates/release-types.feature`.
+
+Epic items that are **not** specified here, and why:
+
+| Epic item | Status |
+|---|---|
+| `android_build` (build/make) | The fork was dropped; /e/OS uses LineageOS's `build/make`. Nothing to specify. Recorded in `COVERAGE.md`. |
+| Build from pipelines, signing script, generated signatures, a16 branches | Build infrastructure that lives outside this tree. The parts with an observable consequence in the tree are specified: the branch model and the upstream merge in `process/fork-maintenance.feature`, the signing outcome in `updates/release-types.feature`. |
+| Upstream dashboard (e/os/backlog#3600) | Still open upstream; nothing in the tree to specify yet. |
+| Weblate for the forked projects (e/os/backlog#2955) | Still open upstream. Several files assert that /e/OS-specific strings are translated; the translation *process* is not specified because it is not in place. |
+| Community devices from LineageOS (e/os/backlog#3725) | Device trees are not in this manifest — only the generic and AOSP ones. The device catalogue lives elsewhere. |
+| UI updates for clock, calculator, glimpse, recorder, twelve | Prebuilt applications; out of scope by agreement. Their theming is covered at the system level by `apps/application-icons-and-theme.feature`. |
+
 ## Still open
 
 1. **`ih8sn` gating — still the one to confirm.** The makefile reads: a `user`

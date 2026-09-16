@@ -65,6 +65,7 @@ Feature: First-time setup wizard
 
   Scenario: The recovery update prompt is not shown
     Then the wizard never offers to update the recovery image
+    # Because /e/OS updates it unconditionally: device/recovery.feature
 
   Scenario: The wizard is usable on a tablet
     Given the device is a tablet

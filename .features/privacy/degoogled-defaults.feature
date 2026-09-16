@@ -12,6 +12,8 @@
 #   Contacts: Drop google maps web intent
 # Source: packages/apps/Settings
 #   Settings: Remove google animations and links
+# Source: packages/apps/ImsServiceEntitlement
+#   Delay FCM registration until it's actually required
 
 @vendor-eos @privacy @connectivity
 Feature: No Google server is contacted by default
@@ -66,3 +68,15 @@ Feature: No Google server is contacted by default
   Scenario: Settings contain no Google links
     When the user browses Settings
     Then no entry links to a Google support page or animation
+
+  Scenario: No Firebase registration unless the carrier needs it
+    Given the SIM's carrier does not require IMS service entitlement over Firebase
+    When the entitlement service starts
+    Then it does not register with Firebase
+    And no token is requested from Google
+    # LineageOS registers for every user on every carrier.
+
+  Scenario: A carrier that does need it still works
+    Given the SIM's carrier requires IMS service entitlement over Firebase
+    When the entitlement service starts
+    Then it registers for that subscription only

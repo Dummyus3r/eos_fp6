@@ -26,7 +26,7 @@ remote (see `snippets/eos.xml`).
 | Prebuilt applications (App Lounge, Advanced Privacy, /e/ Drive, Mail, Calendar, Camera, Browser, Notes, Tasks, Parental Control, Find My Device, …) | Each has its own repository; their features will be specified there. Only the *system-side integration* of those apps is described here. |
 | BlissLauncher3 (`packages/apps/Launcher3` → `e/os/BlissLauncher3`) | Own repository, own specification. Only the system hooks it needs are described here. |
 | Android Security Bulletin backports | /e/OS carries ASB patches ahead of LineageOS, but the individual CVE fixes are upstream AOSP work, not /e/OS features. The *policy* of shipping them is specified in `updates/`. |
-| CI / licensing / translation-import commits | Not user-facing behaviour. |
+| CI / licensing / translation-import commits | Not user-facing behaviour — but the *machinery* that keeps ~85 forks merged with LineageOS is a deliverable in its own right, and is specified in `process/fork-maintenance.feature`. |
 
 ## Layout
 
@@ -41,7 +41,8 @@ remote (see `snippets/eos.xml`).
 ├── apps/            preinstalled app set, permissions, default associations
 ├── connectivity/    DNS, APN, telephony defaults
 ├── system/          settings tree, system UI, parental control enforcement
-└── device/          recovery, hardware support, the flashing package
+├── device/          recovery, hardware support, the flashing package
+└── process/         how the fork itself is kept current
 ```
 
 ## Conventions

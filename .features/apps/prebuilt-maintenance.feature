@@ -35,6 +35,12 @@ Feature: Maintenance of the prebuilt applications
     Then the matching variant is selected
     And the current variant is selected for newer levels
 
+  Scenario: Prebuilts are declared in Blueprint
+    Then every prebuilt application is declared as a Blueprint module
+    And none relies on a legacy makefile
+    # Android 16 restricts what a makefile may do; the migration is what let the
+    # browser move to the standalone layout. See apps/browser-and-webview.feature
+
   Scenario: A build can ship a reduced set
     Given the build is configured as minimal
     Then the optional prebuilts are left out

@@ -136,3 +136,9 @@ Feature: Release types
       Given the build tree does not contain a release key pair
       Then the configured development certificate is used
       And an /e/OS official update is not installable on that build
+
+    Scenario: Every signable component has a key
+      Given the Android version introduces additional separately signed components
+      When a release is signed
+      Then a key exists for each of them
+      And no component is left signed with a test key
