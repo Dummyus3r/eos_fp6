@@ -46,6 +46,23 @@ Epic items that are **not** specified here, and why:
 | Community devices from LineageOS (e/os/backlog#3725) | Device trees are not in this manifest — only the generic and AOSP ones. The device catalogue lives elsewhere. |
 | UI updates for clock, calculator, glimpse, recorder, twelve | Prebuilt applications; out of scope by agreement. Their theming is covered at the system level by `apps/application-icons-and-theme.feature`. |
 
+## Found by sweeping the resource overlays
+
+Behaviour that lives only in a resource overlay has no commit message
+describing it, so it does not show up when reading history. A sweep of
+`vendor/eos/overlay`, `vendor/lineage/overlay`, `packages/overlays/Lineage` and
+`external/prebuiltapks/**/rro_overlays` produced
+`apps/default-app-associations.feature`: the autofill and credential provider
+roles, the system gallery role, the QR code handler, the calendar and clock
+dynamic icon targets, the launcher kept on managed devices, the splash screen
+exceptions, the maps application's naming, and the strings /e/OS supplies for
+Qualcomm vendor components. The Android Auto automotive-projection and
+companion-device pinning, and the lock screen wallet shortcut, came from the
+same sweep.
+
+Worth repeating on the next pass: an overlay can change behaviour silently, and
+no amount of commit reading finds it.
+
 ## Still open
 
 1. **`ih8sn` gating — still the one to confirm.** The makefile reads: a `user`

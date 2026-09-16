@@ -1,5 +1,12 @@
 # Coverage of the /e/OS forks
 
+Resource overlays are a coverage trap: behaviour that lives only in an RRO or
+an overlaid `config.xml` has no commit message describing it. The overlay
+surfaces were therefore swept exhaustively — `vendor/eos/overlay`,
+`vendor/lineage/overlay`, `packages/overlays/Lineage`,
+`external/prebuiltapks/**/rro_overlays` — and the role assignments they carry
+are specified in `apps/default-app-associations.feature`.
+
 Cross-checked against the Android 16 porting epic
 (https://gitlab.e.foundation/groups/e/os/-/work_items/211). Every area the epic
 lists is either specified here, recorded below as deliberately not forked, or
@@ -69,6 +76,8 @@ licence only, **P** covered in a prebuilt repository instead.
 | `packages/apps/ImsServiceEntitlement` | 3 | F | privacy/degoogled-defaults |
 | `bootable/deprecated-ota` | 3 | F | device/recovery |
 | `external/prebuiltapks/Browser` | new | F | apps/browser-and-webview |
+| `external/prebuiltapks/rro_overlays`, `Glimpse/rro_overlays`, `mapsOverlay` | new | F | apps/default-app-associations |
+| `vendor/eos/overlay/rro_overlays` | new | F | apps/default-app-associations |
 
 `packages/apps/TV`, `packages/apps/TvSettings` and `packages/apps/Car/Settings`
 are forked but carry nothing on the /e/ side — there is no /e/OS TV or

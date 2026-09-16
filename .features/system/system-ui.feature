@@ -3,6 +3,7 @@
 #   SettingsLib: Theme according to our palette / replace compose switch with our own
 #   Add e colors and e switch
 #   Remove wallet tile
+#   core/res config_keyguardQuickAffordanceDefault: bottom_end wallet -> none
 #   Remove partial screenshot from recents
 #   SystemUI: change intent for viewing screenshots
 #   keyguard: Keep SIM card name visible during PIN entry
@@ -52,6 +53,7 @@ Feature: System UI follows the /e/OS design
 
   Scenario: Google-specific surfaces are removed
     Then no wallet tile is offered in the quick settings
+    And the lock screen carries no wallet shortcut
     And private space is not offered
 
   Scenario: Screenshots open in the /e/OS gallery

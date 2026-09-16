@@ -49,6 +49,11 @@ Feature: The /e/OS application set
     Then the /e/OS camera application handles camera intents
     And the /e/OS calendar handles calendar intents
     And BlissLauncher is the default home application
+    # The full set of role assignments: apps/default-app-associations.feature
+
+  Scenario: No device management client is preinstalled
+    Then no MDM client ships with the device
+    # Enrolment installs the operator's own: setup/enterprise-provisioning.feature
 
   Scenario: LineageOS applications that /e/OS replaces are not shipped
     Then the LineageOS audio effects application is not included

@@ -7,6 +7,9 @@
 #     PERMISSIONS_ANDROID_AUTO (13 privileged permissions)
 # Source: packages/modules/Permission
 #   Android Auto: Support Android Auto as user app 2/2
+# Source: frameworks/base core/res config.xml
+#   config_systemAutomotiveProjection -> gearhead + the same certificate digest
+#   config_companionDevicePackages / config_companionDeviceCerts -> gearhead
 # Source: external/prebuiltapks AndroidAutoStub
 #
 # ---------------------------------------------------------------------------
@@ -83,7 +86,15 @@ Feature: Android Auto can be installed by the user
     Given the real Android Auto has been installed
     When the user connects the device to a compatible head unit
     Then Android Auto starts
-    And the roles it needs are grantable to it
+
+  Scenario: It holds the automotive projection role
+    Then the platform recognises it as the system automotive projection application
+    And that recognition is pinned to the same certificate digest as the installation
+
+  Scenario: It can manage its own companion device association
+    When it associates with a head unit
+    Then it is treated as an allowed companion device application
+    And that allowance is pinned to the same certificate
 
   Rule: The relaxation is pinned to one package and one signing certificate
 

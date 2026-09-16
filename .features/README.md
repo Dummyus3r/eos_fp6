@@ -38,7 +38,7 @@ remote (see `snippets/eos.xml`).
 ├── setup/           first-time wizard
 ├── updates/         release types, OTA and security-patch policy
 ├── compatibility/   microG, SafetyNet/Play Integrity, Android Auto, app links
-├── apps/            preinstalled app set, permissions, default associations
+├── apps/            preinstalled app set, permissions, role assignments
 ├── connectivity/    DNS, APN, telephony defaults
 ├── system/          settings tree, system UI, parental control enforcement
 ├── device/          recovery, hardware support, the flashing package
