@@ -16,7 +16,8 @@ Feature: Monthly security patch level
   all, and it is what the security indicator in the settings reflects.
 
   Background:
-    Given the device runs an official /e/OS build
+    Given the device runs an /e/OS build whose release type has a published channel
+    # Release types: updates/release-types.feature
 
   Scenario: The advertised patch level matches the bulletin that was merged
     When the user opens "About phone"
@@ -35,3 +36,9 @@ Feature: Monthly security patch level
     Given a monthly /e/OS release
     Then the fixes of that month's Android Security Bulletin are present in the forked projects
     And the security patch string is bumped in the same release
+
+  Scenario: The bulletin is the same across release types
+    Given an official build and a community build cut from the same release
+    Then both carry the same Android Security Bulletin backports
+    And both advertise the same security patch level
+    And they differ only in what the release type itself gates

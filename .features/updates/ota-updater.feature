@@ -38,6 +38,13 @@ Feature: /e/OS system updates
     And it identifies itself with the /e/OS user agent
     And the request carries an anonymous identifier rather than a device identifier
 
+  Scenario: The device is offered updates of its own release type only
+    When the updater checks for updates
+    Then the request carries the device's release type
+    And an update of a different release type is not offered
+    # The release types and what else depends on them:
+    # updates/release-types.feature
+
   Scenario: The system updates are reachable immediately
     When the user opens Settings
     Then the system update entry is near the top of the main page
@@ -105,6 +112,14 @@ Feature: /e/OS system updates
     Then it receives the state reported by the /e/OS updater
 
   Scenario: Testers can target the staging server
-    Given the user has enabled the staging OTA server in Settings
+    Given the user has enabled developer mode
+    And the user has enabled the staging OTA server in Settings
     When the updater checks for updates
     Then it queries the staging server instead of the production one
+    And this is independent of the release type of the build
+
+  Scenario: Developer mode relaxes the strictness of the query
+    Given the user has enabled developer mode
+    When the updater checks for updates
+    Then the query is not restricted to the single update the device should take
+    And all updates the server offers for that device and release type are listed

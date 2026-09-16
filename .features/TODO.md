@@ -20,19 +20,21 @@ Recorded here so the next pass does not re-litigate them.
 | Flashing scripts | In scope — users flashing by hand depend on them. `device/flashing-package.feature`. |
 | Prebuilt update policy | Manual, by hand. Recorded in `apps/prebuilt-maintenance.feature`. |
 | `packages/apps/TV`, `TvSettings`, `Car/Settings` | Nothing on the /e/ side. Not specified. |
+| Release-type-dependent behaviour | Made explicit wherever it exists, with `updates/release-types.feature` as the single model. Four surfaces found: the release-type vocabulary itself, the update channel, the integrity compatibility daemon, and the signing keys. |
 | Call recording | Unconditional. LineageOS ships the same dialer with it off and the microphone as source; /e/OS ships it on with the voice-call source. Verified in the tree. |
 | microG hiding — who owns the list | microG itself (`e/os/GmsCore`). The user-facing half is specified there. |
 | Android Auto | Relaxation stated explicitly, with the alternatives that were available written out in the file's header. |
 
 ## Still open
 
-1. **`ih8sn` gating.** The makefile reads: a `user` build never ships the
-   daemon (the `?=` on the user-variant branch wins), and a non-`user` build
-   ships it when the release type is official, community or partner. That means
-   an official build shipped as a `user` build does **not** carry it. Is that
-   the intent — i.e. is the daemon effectively community-only in practice? The
-   spec states the rule as the makefile implements it; confirm the intent
-   matches, because the two readings differ for official releases.
+1. **`ih8sn` gating — still the one to confirm.** The makefile reads: a `user`
+   build never ships the daemon (the `?=` on the user-variant branch wins), and
+   a non-`user` build ships it when the release type is official, community or
+   partner. So an official release cut as a `user` build does **not** carry it,
+   which makes the daemon community-only in practice. The specification states
+   the rule as implemented, in `updates/release-types.feature` and
+   `compatibility/play-integrity-compat.feature`. Confirm the intent matches —
+   the two readings differ for official releases.
 
 2. **Fake location without Advanced Privacy.** Left explicitly unspecified in
    `privacy/fake-location.feature`. If Advanced Privacy is removed, the code

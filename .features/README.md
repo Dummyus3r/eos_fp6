@@ -36,7 +36,7 @@ remote (see `snippets/eos.xml`).
 ├── privacy/         tracker blocking, location, microG hiding, telemetry
 ├── identity/        /e/ account integration
 ├── setup/           first-time wizard
-├── updates/         OTA and security-patch policy
+├── updates/         release types, OTA and security-patch policy
 ├── compatibility/   microG, SafetyNet/Play Integrity, Android Auto, app links
 ├── apps/            preinstalled app set, permissions, default associations
 ├── connectivity/    DNS, APN, telephony defaults
@@ -47,6 +47,10 @@ remote (see `snippets/eos.xml`).
 ## Conventions
 
 * One `Feature:` per file.
+* Behaviour that depends on the release type (official, community, partner,
+  test, unofficial) says so explicitly, and points at
+  `updates/release-types.feature`, which is the single place the release-type
+  model is specified.
 * Tags name the upstream project(s) the behaviour lives in, e.g.
   `@frameworks-base`, `@settings`, `@vendor-eos`.
 * `@prebuilt-boundary` marks a scenario whose *other half* is implemented in a

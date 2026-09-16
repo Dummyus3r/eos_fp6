@@ -35,6 +35,8 @@ Feature: The device presents itself as /e/OS
     When the user opens "About phone"
     Then the /e/OS version is shown
     And the build description names /e/OS
+    And the version string names the release type
+    # The release-type vocabulary: updates/release-types.feature
 
   Scenario: Wallpapers and sounds are /e/OS ones
     Given a freshly flashed device

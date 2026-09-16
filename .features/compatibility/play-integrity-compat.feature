@@ -48,9 +48,10 @@ Feature: Applications that check device integrity keep working
   Rule: The compatibility daemon is not shipped where it is counter-productive
 
     Some anti-tampering SDKs bundled in third-party applications detect the
-    daemon itself, which makes shipping it worse than not shipping it. The
-    build variant decides, and it decides first: a "user" build never gets the
-    daemon, whatever the release type.
+    daemon itself, which makes shipping it worse than not shipping it. Two
+    conditions gate it, and the build variant is tested first and wins: a
+    "user" build never gets the daemon, whatever the release type. The release
+    types themselves are specified in updates/release-types.feature.
 
     Scenario: A user build
       Given the build variant is "user"
@@ -76,9 +77,19 @@ Feature: Applications that check device integrity keep working
 
     The spoofed build fingerprint, the blocked key attestation and the green
     verified boot state are platform changes; they are present whatever the
-    build variant. Only the daemon is gated.
+    build variant and whatever the release type. Only the daemon is gated.
 
     Scenario: A user build still reports a stock build
       Given the build variant is "user"
       Then the reported build fingerprint, model, device and product are still those of a stock build
       And key attestation is still withheld from the integrity checker
+
+    Scenario: A community build reports the same as an official one
+      Given two builds of the same device differing only in release type
+      Then both report the same build fingerprint, model, device and product
+
+    Scenario: The displayed build variant never says "debug"
+      Given the build variant is "userdebug"
+      When an application reads the build description
+      Then it reads "user"
+      And an engineering build still reads "eng"

@@ -15,9 +15,9 @@ licence only, **P** covered in a prebuilt repository instead.
 | Project | Δ commits | Kind | Specified in |
 |---|---:|:--:|---|
 | `frameworks/base` | 185 | F+S | privacy/*, compatibility/*, system/system-ui, device/hardware-support |
-| `vendor/lineage` | 66 | F | branding/identity, updates/security-patches, system/lineage-features-removed |
+| `vendor/lineage` | 66 | F | updates/release-types, branding/identity, updates/security-patches, system/lineage-features-removed |
 | `packages/apps/Settings` | 62 | F | system/settings-organisation, system/advanced-privacy-entry, privacy/telemetry, identity/e-account |
-| `packages/apps/Updater` | 59 | F | updates/ota-updater |
+| `packages/apps/Updater` | 59 | F | updates/ota-updater, updates/release-types |
 | `packages/inputmethods/LatinIME` | 41 | F | system/keyboard |
 | `packages/apps/SetupWizard` | 29 | F | setup/* |
 | `vendor/apn` | 26 | F | connectivity/apn-database |
@@ -43,7 +43,7 @@ licence only, **P** covered in a prebuilt repository instead.
 | `packages/apps/ThemePicker` | 6 | F | system/lineage-features-removed |
 | `packages/modules/Connectivity` | 5 | F | connectivity/network-defaults |
 | `packages/apps/Dialer` | 5 | F | system/telephony-and-messaging |
-| `build/soong` | 5 | F | compatibility/play-integrity-compat, system/lineage-features-removed |
+| `build/soong` | 5 | F | updates/release-types, compatibility/play-integrity-compat, system/lineage-features-removed |
 | `frameworks/opt/telephony` | 5 | S | updates/security-patches |
 | `packages/overlays/Lineage` | 4 | F | apps/application-icons-and-theme |
 | `packages/apps/WallpaperPicker2` | 4 | B | apps/application-icons-and-theme |
