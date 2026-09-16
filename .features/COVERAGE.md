@@ -1,5 +1,12 @@
 # Coverage of the /e/OS forks
 
+Configuration files are a coverage trap alongside resource overlays: a default
+shipped as an XML map (`GmsCore/microg.xml`) or a privileged permission
+allowlist changes behaviour with no code and no descriptive commit. Those were
+swept too — `privapp-permissions-*`, `permissions_*`, `allowlist_*`,
+`whitelist_*`, `default-permissions_*`, `preinstalled-packages-*`,
+`initial-package-stopped-states-*`.
+
 Resource overlays are a coverage trap: behaviour that lives only in an RRO or
 an overlaid `config.xml` has no commit message describing it. The overlay
 surfaces were therefore swept exhaustively — `vendor/eos/overlay`,
@@ -77,6 +84,8 @@ licence only, **P** covered in a prebuilt repository instead.
 | `bootable/deprecated-ota` | 3 | F | device/recovery |
 | `external/prebuiltapks/Browser` | new | F | apps/browser-and-webview |
 | `external/prebuiltapks/rro_overlays`, `Glimpse/rro_overlays`, `mapsOverlay` | new | F | apps/default-app-associations |
+| `external/prebuiltapks/GmsCore/microg.xml` | new | F | compatibility/microg-configuration |
+| `external/prebuiltapks/*/privapp-permissions-*.xml` etc. (19 files) | new | F | apps/default-permissions |
 | `vendor/eos/overlay/rro_overlays` | new | F | apps/default-app-associations |
 
 `packages/apps/TV`, `packages/apps/TvSettings` and `packages/apps/Car/Settings`

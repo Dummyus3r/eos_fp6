@@ -8,6 +8,14 @@
 #   sepolicy: All platform app to create sockets
 #   sepolicy: allow platform_app access app_data_file
 #   sepolicy: allow platform_app rs_exec / named pipes
+#   allow netd platform_app:unix_stream_socket connectto (the tracker blocker)
+#   allow platform_app app_data_file:file execute
+# Source: external/prebuiltapks/*/privapp-permissions-*.xml, permissions_*.xml,
+#         allowlist_*.xml, whitelist_*.xml (19 files)
+#   privileged permission allowlists, power-save and hidden-API allowances
+# Source: external/prebuiltapks/*/preinstalled-packages-*.xml,
+#         initial-package-stopped-states-*.xml
+#   which user types receive which application
 
 @vendor-eos @frameworks-base @sepolicy @apps
 Feature: Preinstalled applications are usable without a permission gauntlet
@@ -62,3 +70,50 @@ Feature: Preinstalled applications are usable without a permission gauntlet
   Scenario: Platform applications can use the system integration points they need
     Then SELinux allows platform applications to read /e/OS custom properties
     And to create the sockets and pipes the /e/OS services rely on
+    And the network daemon may connect to the tracker blocker's socket
+
+  Rule: Privileged permissions are granted by an explicit, reviewable allowlist
+
+    Runtime permissions are what the user sees; privileged permissions are what
+    lets a preinstalled application do things a normal application cannot. They
+    are granted per package by a file in the build, not implicitly by being
+    preinstalled.
+
+    Scenario: A preinstalled application holds only what it is allowlisted for
+      Given a preinstalled application requests a privileged permission
+      When it is not on that package's allowlist
+      Then the permission is not granted
+
+    Scenario Outline: The allowlists match the application's job
+      Then <application> is allowlisted for <capability>
+
+      Examples:
+        | application            | capability                                          |
+        | the backup application | backing up, installing packages and reading logs     |
+        | the store stub         | installing and deleting packages, signature spoofing |
+        | the Android Auto stub  | in-call control, car mode and companion Wi-Fi        |
+        | microG                 | installing a location provider and modifying phone state |
+
+    Scenario: The backup transport is trusted by the platform
+      Then the backup application's transport service is allowlisted as a backup transport
+      And it is allowed to run in power save
+
+    Scenario: A relaxation that is worth knowing about
+      Then platform applications may execute files from application data
+      # Required by components that ship their own runtime; it widens what a
+      # compromised platform application could do.
+
+  Rule: Applications reach the user types they are meant for
+
+    Scenario: A work profile
+      Given a managed profile is created
+      Then the applications declared for profiles are installed in it
+
+    Scenario: A clone profile
+      Given a clone profile is created
+      Then applications that declare themselves unsuitable for cloning are not installed in it
+
+    Scenario: An application is not left stopped
+      Given a preinstalled application declares an initial running state
+      Then it is not in the stopped state after first boot
+      And it can receive the broadcasts it registers for

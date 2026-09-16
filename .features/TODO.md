@@ -60,8 +60,40 @@ Qualcomm vendor components. The Android Auto automotive-projection and
 companion-device pinning, and the lock screen wallet shortcut, came from the
 same sweep.
 
-Worth repeating on the next pass: an overlay can change behaviour silently, and
-no amount of commit reading finds it.
+A second sweep, of the configuration files, found two more surfaces:
+
+- `GmsCore/microg.xml` — the default microG configuration /e/OS ships. This is
+  the single most consequential undocumented file in the tree: it decides that
+  cloud messaging, device check-in and Google network access are on by default,
+  that location resolves against an open database instead, and that store
+  features such as billing and licensing work. Now
+  `compatibility/microg-configuration.feature`.
+- The 19 privileged-permission allowlists, power-save and hidden-API
+  allowances, and the per-user-type installation declarations. Now rules in
+  `apps/default-permissions.feature`.
+
+Worth repeating on the next pass: an overlay or a configuration file can change
+behaviour silently, and no amount of commit reading finds it. The surfaces to
+sweep are `**/rro_overlays`, `overlay/`, `privapp-permissions-*`,
+`permissions_*`, `allowlist_*`, `whitelist_*`, `default-permissions_*`,
+`preinstalled-packages-*`, `initial-package-stopped-states-*`, and any XML that
+is a settings map rather than a resource.
+
+## Surfaces swept, and what is left
+
+| Surface | Swept | Result |
+|---|---|---|
+| Commit history of all 84 forks vs LineageOS | yes | the bulk of the specification |
+| Release-type branching (`RELEASE_TYPE`, `LINEAGE_BUILDTYPE`, `ro.lineage.releasetype`) | yes | 4 surfaces, `updates/release-types.feature` |
+| Android 16 porting epic | yes | 6 gaps filled, 2 items no longer applicable |
+| Resource overlays (RRO and overlaid `config.xml`) | yes | `apps/default-app-associations.feature` |
+| Configuration files (permission allowlists, microG defaults, user types) | yes | `compatibility/microg-configuration.feature`, rules in `apps/default-permissions.feature` |
+| Product makefiles and system properties | yes | nothing further; the behavioural ones were already specified |
+| SELinux policy | yes | folded into `apps/default-permissions.feature` |
+| `default.xml` vs LineageOS's | yes | identical project list; /e/OS removes nothing extra |
+| Translations (`values-*`) | no | deliberate; Weblate is not in place (see above) |
+| Device trees and kernel | no | outside this manifest |
+| Prebuilt application internals | no | out of scope by agreement |
 
 ## Still open
 

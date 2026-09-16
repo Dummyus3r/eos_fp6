@@ -49,6 +49,10 @@ Feature: microG support out of the box
     Then it is allowed to leave the idle allowlist temporarily
     And it is exempted from power-save restrictions
 
+  Scenario: microG arrives preconfigured
+    Then the microG features /e/OS enables are already on
+    # Which ones, and what they imply: compatibility/microg-configuration.feature
+
   Scenario: The user can configure microG from the settings
     When the user opens the /e/OS settings
     Then an "App compatibility" entry leads to the microG settings
