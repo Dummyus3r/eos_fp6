@@ -1,5 +1,9 @@
 # Coverage of the /e/OS forks
 
+For the per-repository view of *what* /e/OS changes in each project, see
+[`BY-REPOSITORY.md`](BY-REPOSITORY.md). This file is the audit of *whether*
+every fork is covered at all.
+
 Configuration files are a coverage trap alongside resource overlays: a default
 shipped as an XML map (`GmsCore/microg.xml`) or a privileged permission
 allowlist changes behaviour with no code and no descriptive commit. Those were
