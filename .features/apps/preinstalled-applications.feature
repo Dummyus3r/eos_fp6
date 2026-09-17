@@ -9,13 +9,16 @@
 #       This file only specifies which applications the system ships and how it
 #       wires them together.
 
-@vendor-eos @prebuiltapks @apps @prebuilt-boundary
+@vendor-eos @prebuiltapks @apps @prebuilt-boundary @optional
 Feature: The /e/OS application set
 
   LineageOS ships a minimal set of AOSP-derived applications and leaves the user
   to install a store. /e/OS ships a complete, Google-free application set so the
   device is usable — mail, calendar, contacts, files, maps, browser, store —
   from the first boot.
+  Part of this is build-configurable: a minimal build drops the optional
+  applications, and the messaging set ships only on devices with telephony.
+
 
   Background:
     Given a freshly flashed /e/OS device

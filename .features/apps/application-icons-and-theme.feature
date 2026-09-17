@@ -4,6 +4,9 @@
 #   Change app icon to our custom icon / Update app icon according to new design
 #   Theme app according to our palette
 # Source: packages/apps/elib (shared /e/OS UI library)
+#   lib/src/main/res/values/colors.xml: e_accent_light #0086FF, e_accent_dark #5DB2FF
+# Source: frameworks/base core/res
+#   system_primary_light/dark and accent_material_light/dark -> e_accent_*
 # Source: vendor/eos overlay/no-rro/external/setupdesign
 # Source: packages/overlays/Lineage
 #   overlays: Add circle icon overlay
@@ -40,9 +43,19 @@ Feature: One visual identity across the system applications
     Then switches, colours and common icons come from the shared /e/OS UI library
     And the same component looks the same in every application
 
+  Scenario: The palette has concrete values
+    Then the accent is "#0086FF" in the light theme and "#5DB2FF" in the dark theme
+    And the inverse accent is "#5DB2FF" in the light theme and "#0086FF" in the dark theme
+    And every application resolves its accent from the shared library rather than redefining one
+
+  Scenario: The platform resolves to the same accent
+    Then the framework's primary and material accent colours point at the /e/OS accent
+    And an application using the platform theme is accented without doing anything
+
   Scenario: The setup screens use the /e/OS palette
     When any screen built on the setup design library is shown
     Then it uses the /e/OS colours in light and dark themes
 
   Scenario: Icon shape is consistent
-    Then adaptive icons are masked to the /e/OS shape
+    Then adaptive icons are masked to the /e/OS squircle
+    And round icons are not used

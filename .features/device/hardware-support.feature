@@ -42,13 +42,19 @@
 # Source: external/prebuiltapks RichTap
 # Source: build/soong, system/core — see compatibility/play-integrity-compat.feature
 
-@frameworks-base @frameworks-native @lineage-sdk @device
+@frameworks-base @frameworks-native @lineage-sdk @device @device-specific
 Feature: Hardware support for the devices /e/OS ships on
 
   /e/OS is sold preinstalled — Fairphone, Murena-branded devices, Gigaset — and
   supported for the commercial life of those devices. That means carrying
   platform patches for hardware LineageOS never had to support, including work
   contributed by the device makers themselves.
+
+  Every rule below is conditional. A scenario applies only to the devices whose
+  hardware it names, and carrying it to a new Android version is a decision
+  taken per item and per device, not an automatic consequence of the port. Read
+  each Given as the condition it is: where it does not hold, the scenario does
+  not apply.
 
   Background:
     Given the device runs /e/OS

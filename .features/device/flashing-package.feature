@@ -8,7 +8,7 @@
 #   axolotl, emerald, mimir, otter, panther, redfin, rigby, sapphire, shiba,
 #   tetris, two, zirconia
 
-@vendor-eos @device @flashing
+@vendor-eos @device @flashing @device-specific
 Feature: Self-contained flashing package for manual installation
 
   LineageOS expects the user to find the right fastboot, read a wiki page and
@@ -17,6 +17,9 @@ Feature: Self-contained flashing package for manual installation
   sequence is genuinely intricate. So an /e/OS build produces a single archive
   that carries the images, a script that knows the device's flashing sequence,
   and a fastboot binary for each desktop operating system.
+  A flashing package exists only for a device that has a flashing configuration,
+  and the sequence is that device's own.
+
 
   Background:
     Given an /e/OS build for a device that has a flashing configuration

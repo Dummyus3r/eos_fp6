@@ -48,12 +48,20 @@ remote (see `snippets/eos.xml`).
 ## Conventions
 
 * One `Feature:` per file.
+* Where a behaviour has a concrete value — a colour, a URL, a hostname, a sound —
+  the specification names it. "Follows the /e/OS palette" is not testable;
+  `#0086FF` is.
 * Behaviour that depends on the release type (official, community, partner,
   test, unofficial) says so explicitly, and points at
   `updates/release-types.feature`, which is the single place the release-type
   model is specified.
 * Tags name the upstream project(s) the behaviour lives in, e.g.
   `@frameworks-base`, `@settings`, `@vendor-eos`.
+* **`@device-specific`** marks a feature whose scenarios apply only to the
+  devices they name. Carrying one to a new Android version is a decision taken
+  per item and per device, not an automatic consequence of the port.
+* **`@optional`** marks a feature whose content depends on the build — build
+  variant, release type, minimal build, telephony or not.
 * `@prebuilt-boundary` marks a scenario whose *other half* is implemented in a
   prebuilt app repository — the scenario only asserts the system-side contract.
 * Comment blocks at the top of each file list the /e/OS commits the scenarios

@@ -41,7 +41,9 @@ Feature: The device presents itself as /e/OS
   Scenario: Wallpapers and sounds are /e/OS ones
     Given a freshly flashed device
     Then the default wallpaper is the /e/OS one
-    And the default ringtone, notification sound and alarm sound are the /e/OS ones
+    And the default ringtone is "Dione.ogg"
+    And the default notification sound is "Selenium.ogg"
+    And the default alarm sound is "Platinum-old.ogg"
     And the camera shutter and recording sounds are the /e/OS ones
 
   Scenario: Tablets get their own wallpapers

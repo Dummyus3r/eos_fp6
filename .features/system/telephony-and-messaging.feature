@@ -11,10 +11,13 @@
 # Source: vendor/lineage
 #   vendor/lineage: telephony: Default enable mobile data OOTB
 
-@dialer @contacts @telephony @system
+@dialer @contacts @telephony @system @device-specific
 Feature: Telephony and contacts behaviour
 
   Small but deliberate differences in the telephony applications /e/OS ships.
+  Call recording depends on the device supporting the voice-call audio source;
+  its legality is the user's responsibility, not the platform's.
+
 
   Background:
     Given the device runs /e/OS

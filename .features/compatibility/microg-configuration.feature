@@ -58,7 +58,7 @@ Feature: What microG does out of the box
 
     Scenario: Network location source
       Then Wi-Fi and cell positioning are enabled
-      And they resolve against the configured open location database
+      And they resolve against the "beacondb" open location database
       And not against Google's location service
 
     Scenario: Reverse geocoding

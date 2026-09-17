@@ -16,7 +16,7 @@
 #   PhoneStatusBarView: Pad statusbar with Launcher3 dock width
 #   fix: long pressing notifications crashing SystemUI
 #   fix color of emphasized notification / Update legacy autofill bottomsheet
-# Source: vendor/eos overlay (flag_monet=false, launcher_overlayable_package,
+# Source: vendor/eos overlay (flag_monet=false -> Material You / Monet off, launcher_overlayable_package,
 #   config_defaultListenerAccessPackages, config_longPressOnAppSwitchBehavior)
 # Source: packages/apps/LineageParts
 #   Remove split screen option from recents long press actions
@@ -34,8 +34,15 @@ Feature: System UI follows the /e/OS design
     Given the device runs /e/OS
 
   Scenario: Colours are the /e/OS palette, not the wallpaper's
-    Then dynamic wallpaper-based theming is disabled
+    Then Material You dynamic colour (Monet) is disabled
+    And the wallpaper does not influence the system colours
     And the quick settings, the shade, the power menu and the keyguard use the /e/OS palette
+
+  Scenario: The /e/OS accent is the system accent
+    Then the system primary and accent colours resolve to the /e/OS accent
+    And the accent is "#0086FF" in the light theme
+    And it is "#5DB2FF" in the dark theme
+    And an application that reads the platform accent gets the same value
 
   Scenario: Light and dark themes are both complete
     When the user switches between the light and the dark theme

@@ -9,13 +9,16 @@
 #   Spoof build variant by removing "debug" in Settings > About Phone
 #   Change build description in Settings > About Phone
 
-@frameworks-base @system-core @ih8sn @compatibility
+@frameworks-base @system-core @ih8sn @compatibility @optional
 Feature: Applications that check device integrity keep working
 
   Banking, transport and streaming applications refuse to run when they detect a
   custom ROM or an unlocked bootloader — which is the normal state of a
   LineageOS device. /e/OS presents the device as a stock, locked device to those
   checks, so those applications run without the user having to patch anything.
+  What ships is gated on the build variant and the release type, so not every
+  build carries every part of this.
+
 
   Background:
     Given the device runs /e/OS

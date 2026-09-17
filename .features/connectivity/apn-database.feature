@@ -6,13 +6,15 @@
 # Source: vendor/lineage
 #   vendor/lineage: Hookup TARGET_USES_MTK_APNS_CONF
 
-@vendor-apn @connectivity
+@vendor-apn @connectivity @device-specific
 Feature: Carrier APN database
 
   /e/OS maintains its own APN database rather than taking the LineageOS one as
   is, because /e/OS devices are sold directly to users in markets where the
   upstream entries are wrong or missing — which shows up as "no mobile data" or
   "MMS do not send" on a brand new phone.
+  The MediaTek database applies only to builds configured for it.
+
 
   Background:
     Given the device runs /e/OS

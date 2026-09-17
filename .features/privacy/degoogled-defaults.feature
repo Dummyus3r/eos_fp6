@@ -29,7 +29,8 @@ Feature: No Google server is contacted by default
 
   Scenario: Time synchronisation does not use Google
     When the device synchronises its clock
-    Then it contacts the NTP pool and not a Google time server
+    Then it contacts "ntp://pool.ntp.org"
+    And no Google time server is contacted
 
   Scenario: Default DNS is Quad9
     When the device needs a fallback DNS server
@@ -44,7 +45,9 @@ Feature: No Google server is contacted by default
 
   Scenario: Captive portal detection does not use Google
     When the device probes for a captive portal
-    Then the probe URLs point to /e/ infrastructure and not to Google
+    Then it probes "http://connectivity.murena.io" and "https://connectivity.murena.io"
+    And the fallback probes are "http://204.murena.io" and "http://murena.io/generate_204"
+    And no Google connectivity-check URL is used
 
   Scenario: Connectivity and entitlement checks do not use Google
     When the telephony stack performs an HTTP reachability check

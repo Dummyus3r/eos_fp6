@@ -34,7 +34,7 @@ Feature: /e/OS system updates
 
   Scenario: Updates come from /e/ infrastructure
     When the updater checks for updates
-    Then it queries the /e/OS OTA server
+    Then it queries "https://ota.ecloud.global"
     And it identifies itself with the /e/OS user agent
     And the request carries an anonymous identifier rather than a device identifier
 
@@ -115,7 +115,7 @@ Feature: /e/OS system updates
     Given the user has enabled developer mode
     And the user has enabled the staging OTA server in Settings
     When the updater checks for updates
-    Then it queries the staging server instead of the production one
+    Then it queries "https://test.ota.ecloud.global" instead of the production server
     And this is independent of the release type of the build
 
   Scenario: Developer mode relaxes the strictness of the query
