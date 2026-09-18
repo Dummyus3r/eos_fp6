@@ -1,14 +1,14 @@
 # What /e/OS adds or modifies, by repository
 
 Derived from the `# Source:` headers of the `.feature` files — **do not edit**.
-Regenerate with `python3 .features/tools/gen-by-repository.py` after changing a
+Regenerate with `python3 features/tools/gen-by-repository.py` after changing a
 specification.
 
 The specifications are organised by feature, because that is how the product is
 decided and how the backlog is planned. This index is the other way in: for a
 given repository, what /e/OS does there and which specification says so.
 
-49 repositories, generated 2026-09-17.
+49 repositories, generated 2026-09-18.
 
 ## Index
 

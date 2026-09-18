@@ -31,7 +31,7 @@ remote (see `snippets/eos.xml`).
 ## Layout
 
 ```
-.features/
+features/
 ├── branding/        visual & textual identity
 ├── privacy/         tracker blocking, location, microG hiding, telemetry
 ├── identity/        /e/ account integration
@@ -42,8 +42,19 @@ remote (see `snippets/eos.xml`).
 ├── connectivity/    DNS, APN, telephony defaults
 ├── system/          settings tree, system UI, parental control enforcement
 ├── device/          recovery, hardware support, the flashing package
-└── process/         how the fork itself is kept current
+├── process/         how the fork itself is kept current
+└── tools/           the generator for BY-REPOSITORY.md
 ```
+
+## Why `features/` and not `.features/`
+
+`features/` at the repository root is the convention every Gherkin tool uses —
+Cucumber, cucumber-js, behave and godog all look there by default, and
+Cucumber-JVM keeps the name under `src/test/resources/`. A dot-prefixed
+directory is reserved for tooling configuration (`.github/`, `.gitlab/`), and
+these files are content, not configuration. They should also be easy to find:
+the first review of this folder reported behaviour as missing that was in fact
+specified, simply because it was not where a reader looked.
 
 ## Conventions
 

@@ -4,7 +4,7 @@
 The feature files are the single source of truth. This index is derived from
 them, so it cannot drift: re-run it after changing any specification.
 
-    python3 .features/tools/gen-by-repository.py
+    python3 features/tools/gen-by-repository.py
 """
 import re, os, glob, collections, datetime
 
@@ -60,7 +60,7 @@ def main():
 
     out = ["# What /e/OS adds or modifies, by repository", "",
            "Derived from the `# Source:` headers of the `.feature` files — **do not edit**.",
-           "Regenerate with `python3 .features/tools/gen-by-repository.py` after changing a",
+           "Regenerate with `python3 features/tools/gen-by-repository.py` after changing a",
            "specification.", "",
            "The specifications are organised by feature, because that is how the product is",
            "decided and how the backlog is planned. This index is the other way in: for a",
