@@ -9,6 +9,10 @@
 #   - .gitlab-ci-auto-merge-main.yml
 #       branches matching /^v[0-9](\.[0-9]*){1,2}-(a16)$/ are merged into a16
 # Source: the manifest repository itself — snippets/eos.xml, default.xml
+# Source: the branch history of the forks
+#   a16 was cut at lineage-23.0, /e/OS work arrived above it through merge
+#   requests, and the CI re-merged lineage-23.0 afterwards — the base is
+#   upstream, not the previous /e/OS generation
 # Related: apps/prebuilt-maintenance.feature (the prebuilt applications, which
 #   are pinned by hand and deliberately not part of this automation)
 
@@ -47,6 +51,35 @@ Feature: Keeping the fork current with LineageOS
     Scenario: The pipeline only runs where it is meant to
       Given a pipeline is triggered by something other than the schedule
       Then the upstream merge does not run
+
+  Rule: A new Android generation starts from upstream, not from the previous one
+
+    The branch for a new generation is cut at that generation's upstream, and
+    the /e/OS work is re-applied on top. Cutting it from the previous /e/OS
+    branch instead would carry the whole previous Android version forward, and
+    turn every later upstream merge into a conflict resolution against stale
+    code.
+
+    Scenario: A project forked from LineageOS
+      Given a new Android generation
+      When its /e/OS development branch is created
+      Then it is cut at that generation's LineageOS branch
+      And it carries no /e/OS content at that point
+
+    Scenario: A project forked from AOSP rather than from LineageOS
+      Given the project has no LineageOS branch for that generation
+      When its /e/OS development branch is created
+      Then it is cut at the AOSP tag named in the manifest for that generation
+
+    Scenario: The /e/OS work is re-applied, not inherited
+      Given the branch has been cut at upstream
+      Then the /e/OS changes are brought in on top through merge requests
+      And nothing is merged from the previous generation's branch
+
+    Scenario: The delta stays legible
+      Given a generation's branch has been prepared
+      Then the difference between it and its upstream is exactly the /e/OS work
+      And a change that is not carried forward is visibly absent rather than silently inherited
 
   Rule: Each Android generation tracks its own upstream
 
