@@ -8,7 +8,7 @@ The specifications are organised by feature, because that is how the product is
 decided and how the backlog is planned. This index is the other way in: for a
 given repository, what /e/OS does there and which specification says so.
 
-49 repositories, generated 2026-09-18.
+50 repositories, generated 2026-09-18.
 
 ## Index
 
@@ -46,10 +46,10 @@ given repository, what /e/OS does there and which specification says so.
 - [`packages/apps/Updater`](#packagesappsupdater) — 2 feature(s)
 - [`packages/apps/elib`](#packagesappselib) — 1 feature(s)
 - [`packages/apps/{Contacts,Dialer,DocumentsUI,Settings,SettingsIntelligence`](#packagesapps{contacts,dialer,documentsui,settings,settingsintelligence) — 1 feature(s)
-- [`packages/inputmethods/LatinIME`](#packagesinputmethodslatinime) — 1 feature(s)
+- [`packages/inputmethods/LatinIME`](#packagesinputmethodslatinime) — 2 feature(s)
 - [`packages/modules/Connectivity`](#packagesmodulesconnectivity) — 1 feature(s)
 - [`packages/modules/DnsResolver`](#packagesmodulesdnsresolver) — 1 feature(s)
-- [`packages/modules/Permission`](#packagesmodulespermission) — 2 feature(s)
+- [`packages/modules/Permission`](#packagesmodulespermission) — 3 feature(s)
 - [`packages/overlays/Lineage`](#packagesoverlayslineage) — 1 feature(s)
 - [`packages/services/Telephony`](#packagesservicestelephony) — 1 feature(s)
 - [`system/core`](#systemcore) — 1 feature(s)
@@ -60,6 +60,7 @@ given repository, what /e/OS does there and which specification says so.
 - [`vendor/eos/flash`](#vendoreosflash) — 1 feature(s)
 - [`vendor/lineage`](#vendorlineage) — 11 feature(s)
 - [`vendor/lineage/config/version.mk`](#vendorlineageconfigversionmk) — 1 feature(s)
+- [`vendor/qcom/opensource/commonsys/fm`](#vendorqcomopensourcecommonsysfm) — 1 feature(s)
 - [`~40`](#~40) — 1 feature(s)
 
 ## `.gitlab-ci.yml`
@@ -677,13 +678,16 @@ given repository, what /e/OS does there and which specification says so.
 
 **One visual identity across the system applications** — [`apps/application-icons-and-theme.feature`](apps/application-icons-and-theme.feature)
 
-- FMRadio,Gallery2,ThemePicker,WallpaperPicker2,Updater,LatinIME,LineageParts,
-- Permission}
+- FMRadio,Gallery2,ThemePicker,WallpaperPicker2,Updater,LineageParts}
 - Change app icon to our custom icon / Update app icon according to new design
 - Theme app according to our palette
 
 
 ## `packages/inputmethods/LatinIME`
+
+**One visual identity across the system applications** — [`apps/application-icons-and-theme.feature`](apps/application-icons-and-theme.feature)
+
+- Retheme app according to new base
 
 **Keyboard with on-device speech to text** — [`system/keyboard.feature`](system/keyboard.feature)
 
@@ -717,6 +721,10 @@ given repository, what /e/OS does there and which specification says so.
 
 
 ## `packages/modules/Permission`
+
+**One visual identity across the system applications** — [`apps/application-icons-and-theme.feature`](apps/application-icons-and-theme.feature)
+
+- Theme app according to our palette
 
 **Android Auto can be installed by the user** — [`compatibility/android-auto.feature`](compatibility/android-auto.feature)
 
@@ -940,6 +948,13 @@ given repository, what /e/OS does there and which specification says so.
 - LINEAGE_VERSION_SUFFIX gains CI_PIPELINE_ID; ANDROID_LETTER, maintenance
 - and prerelease components are /e/OS additions
 - published as ro.lineage.releasetype / ro.lineage.version
+
+
+## `vendor/qcom/opensource/commonsys/fm`
+
+**One visual identity across the system applications** — [`apps/application-icons-and-theme.feature`](apps/application-icons-and-theme.feature)
+
+- Update app icon according to new design
 
 
 ## `~40`

@@ -1,8 +1,13 @@
 # Source: packages/apps/{Contacts,Dialer,DocumentsUI,Settings,SettingsIntelligence,
-#         FMRadio,Gallery2,ThemePicker,WallpaperPicker2,Updater,LatinIME,LineageParts,
-#         Permission}
+#         FMRadio,Gallery2,ThemePicker,WallpaperPicker2,Updater,LineageParts}
 #   Change app icon to our custom icon / Update app icon according to new design
 #   Theme app according to our palette
+# Source: packages/inputmethods/LatinIME
+#   Retheme app according to new base
+# Source: packages/modules/Permission
+#   Theme app according to our palette
+# Source: vendor/qcom/opensource/commonsys/fm
+#   Update app icon according to new design
 # Source: packages/apps/elib (shared /e/OS UI library)
 #   lib/src/main/res/values/colors.xml: e_accent_light #0086FF, e_accent_dark #5DB2FF
 # Source: frameworks/base core/res
