@@ -26,16 +26,16 @@ Feature: LineageOS-specific surfaces are replaced by /e/OS ones
   Background:
     Given the device runs /e/OS
 
-  Scenario: Updates are signed by /e/
+  Scenario: Updates are signed by /e/OS
     Then the LineageOS OTA certificate is not shipped
     And the /e/OS signing keys are used for the OTA certificates
 
-  Scenario: Support links point at /e/
+  Scenario: Support links point at /e/OS
     When the user opens the NFC or fingerprint help
     Then no LineageOS help page is offered
-    And the permission help links to the /e/ community
+    And the permission help links to the /e/OS community
 
-  Scenario: Contributors and legal notices name /e/
+  Scenario: Contributors and legal notices name /e/OS
     When the user opens the contributors list
     Then /e/OS contributors are listed
 

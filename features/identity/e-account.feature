@@ -17,39 +17,39 @@
 # Source: vendor/eos config/permissions (foundation.e.accountmanager, foundation.e.drive)
 
 @settings @contacts @frameworks-base @identity @prebuilt-boundary
-Feature: The /e/ account is the device's primary account
+Feature: The Murena Workspace account is the device's primary account
 
   On LineageOS the account list is an unopinionated AOSP list where a Google
-  account usually ends up first. On /e/OS the /e/ account is what synchronises
+  account usually ends up first. On /e/OS the Murena Workspace account is what synchronises
   contacts, calendar, tasks, mail and files, so the system treats it as the
-  primary one and routes account creation to the /e/ account manager.
+  primary one and routes account creation to the /e/OS Account Manager.
 
   Background:
     Given the device runs /e/OS
-    And the /e/ account manager and /e/ Drive are preinstalled
+    And the /e/OS Account Manager and eDrive are preinstalled
 
   Scenario: Accounts are reachable from the top of Settings
     When the user opens Settings
     Then the accounts entry is at the top level and not buried in a submenu
 
-  Scenario: The /e/ account is listed first
-    Given several accounts are registered, including an /e/ account
+  Scenario: The Murena Workspace account is listed first
+    Given several accounts are registered, including a Murena Workspace account
     When the user opens the account list
-    Then the /e/ account comes first
+    Then the Murena Workspace account comes first
 
-  Scenario: Adding an account goes through the /e/ account manager
+  Scenario: Adding an account goes through the /e/OS Account Manager
     When the user chooses to add an account from Contacts
-    Then the /e/ account manager is opened
+    Then the /e/OS Account Manager is opened
 
-  Scenario: /e/ Drive can sync files without asking for storage access
-    When /e/ Drive synchronises the user's files
+  Scenario: eDrive can sync files without asking for storage access
+    When eDrive synchronises the user's files
     Then it already holds the storage permission it needs
     And the user is not prompted
 
-  Scenario: Contacts default to the /e/ account
-    Given an /e/ account is registered
+  Scenario: Contacts default to the Murena Workspace account
+    Given a Murena Workspace account is registered
     When the user creates a contact
-    Then the /e/ account is preselected
+    Then the Murena Workspace account is preselected
 
   Scenario: Contacts without any account stay on the device
     Given no account is registered
@@ -58,7 +58,7 @@ Feature: The /e/ account is the device's primary account
     And no account selector is shown
 
   Scenario: Each address book appears once
-    Given an /e/ account with several address books
+    Given a Murena Workspace account with several address books
     When the user opens the contact list filter
     Then every address book is listed exactly once
 

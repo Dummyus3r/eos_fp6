@@ -11,7 +11,7 @@
 @setupwizard @setup @prebuilt-boundary
 Feature: Restoring a backup during first-time setup
 
-  LineageOS has no restore step. /e/OS lets a user who signs into their /e/
+  LineageOS has no restore step. /e/OS lets a user who signs into their /e/OS
   account pull a previous device's backup during setup, so a replacement phone
   comes back with its applications and settings without any Google backup
   involved.
@@ -23,19 +23,19 @@ Feature: Restoring a backup during first-time setup
     Given a device running /e/OS that has never been set up
 
   Scenario: The restore step is offered once an account is available
-    Given the user has signed into their /e/ account during setup
+    Given the user has signed into their Murena Workspace account during setup
     When the wizard continues
     Then a restore step is offered
     And the user can choose to restore a backup or to continue without one
 
   Scenario: The account is usable before the restore runs
-    Given the user has just signed into their /e/ account
+    Given the user has just signed into their Murena Workspace account
     When the restore step starts
     Then the account is already registered on the device
     And the restore can read the user's backups
 
   Scenario: The restore step is skipped without an account
-    Given the user skipped the /e/ account step
+    Given the user skipped the Murena Workspace account step
     When the wizard continues
     Then no restore step is offered
 

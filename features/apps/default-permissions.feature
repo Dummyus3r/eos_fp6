@@ -39,7 +39,7 @@ Feature: Preinstalled applications are usable without a permission gauntlet
       | the mail application   | reading contacts for address completion   |
       | the maps application   | location, and navigation audio            |
       | the camera             | camera and microphone                     |
-      | /e/ Drive              | reading and writing the user's files      |
+      | eDrive              | reading and writing the user's files      |
       | the account manager    | contacts, calendars and tasks             |
       | the SMS synchroniser   | reading SMS and contacts                  |
       | the screen reader      | accessibility, audio and bluetooth        |
@@ -55,7 +55,7 @@ Feature: Preinstalled applications are usable without a permission gauntlet
       And it is not silently granted again
 
     Scenario: One permission is fixed because the application cannot work without it
-      Then /e/ Drive's management of all files is granted as a fixed permission
+      Then eDrive's management of all files is granted as a fixed permission
 
   Scenario: Background-critical applications survive Doze
     Given the device is idle

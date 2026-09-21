@@ -23,7 +23,7 @@ remote (see `snippets/eos.xml`).
 
 | Excluded | Why |
 |---|---|
-| Prebuilt applications (App Lounge, Advanced Privacy, /e/ Drive, Mail, Calendar, Camera, Browser, Notes, Tasks, Parental Control, Find My Device, …) | Each has its own repository; their features will be specified there. Only the *system-side integration* of those apps is described here. |
+| Prebuilt applications (App Lounge, Advanced Privacy, eDrive, Mail, Calendar, Camera, Browser, Notes, Tasks, Parental Control, Find My Device, …) | Each has its own repository; their features will be specified there. Only the *system-side integration* of those apps is described here. |
 | BlissLauncher3 (`packages/apps/Launcher3` → `e/os/BlissLauncher3`) | Own repository, own specification. Only the system hooks it needs are described here. |
 | Android Security Bulletin backports | /e/OS carries ASB patches ahead of LineageOS, but the individual CVE fixes are upstream AOSP work, not /e/OS features. The *policy* of shipping them is specified in `updates/`. |
 | CI / licensing / translation-import commits | Not user-facing behaviour — but the *machinery* that keeps ~85 forks merged with LineageOS is a deliverable in its own right, and is specified in `process/fork-maintenance.feature`. |
@@ -34,7 +34,7 @@ remote (see `snippets/eos.xml`).
 features/
 ├── branding/        visual & textual identity
 ├── privacy/         tracker blocking, location, microG hiding, telemetry
-├── identity/        /e/ account integration
+├── identity/        Murena Workspace account integration
 ├── setup/           first-time wizard
 ├── updates/         release types, OTA and security-patch policy
 ├── compatibility/   microG, SafetyNet/Play Integrity, Android Auto, app links

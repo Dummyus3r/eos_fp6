@@ -25,14 +25,14 @@
 @updater @settings @updates
 Feature: /e/OS system updates
 
-  The updater is forked from LineageOS but points at /e/ infrastructure, checks
+  The updater is forked from LineageOS but points at /e/OS infrastructure, checks
   on its own schedule, and is reworked so that a non-technical user is guided
   through an update rather than left with a list of build files.
 
   Background:
     Given the device runs /e/OS
 
-  Scenario: Updates come from /e/ infrastructure
+  Scenario: Updates come from /e/OS infrastructure
     When the updater checks for updates
     Then it queries "https://ota.ecloud.global"
     And it identifies itself with the /e/OS user agent

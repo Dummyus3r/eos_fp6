@@ -102,7 +102,7 @@ delta to count.
 | `vendor/eos/overlay/rro_overlays` | new | F | apps/default-app-associations |
 
 `packages/apps/TV`, `packages/apps/TvSettings` and `packages/apps/Car/Settings`
-are forked but carry nothing on the /e/ side — there is no /e/OS TV or
+are forked but carry nothing on the /e/OS side — there is no /e/OS TV or
 automotive product — so they are deliberately unspecified.
 
 `build/make` is deliberately **not** forked — /e/OS uses LineageOS's. The fork

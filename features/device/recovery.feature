@@ -15,7 +15,7 @@ Feature: Recovery
   Background:
     Given the device runs the /e/OS recovery
 
-  Scenario: The recovery is /e/-branded
+  Scenario: The recovery is /e/OS-branded
     When the recovery starts
     Then the /e/OS logo and layout are shown
 

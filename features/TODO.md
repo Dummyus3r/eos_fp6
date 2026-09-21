@@ -19,7 +19,7 @@ Recorded here so the next pass does not re-litigate them.
 | Telemetry in developer options | Deliberate. |
 | Flashing scripts | In scope — users flashing by hand depend on them. `device/flashing-package.feature`. |
 | Prebuilt update policy | Manual, by hand. Recorded in `apps/prebuilt-maintenance.feature`. |
-| `packages/apps/TV`, `TvSettings`, `Car/Settings` | Nothing on the /e/ side. Not specified. |
+| `packages/apps/TV`, `TvSettings`, `Car/Settings` | Nothing on the /e/OS side. Not specified. |
 | Release-type-dependent behaviour | Made explicit wherever it exists, with `updates/release-types.feature` as the single model. Four surfaces found: the release-type vocabulary itself, the update channel, the integrity compatibility daemon, and the signing keys. |
 | Call recording | Unconditional. LineageOS ships the same dialer with it off and the microphone as source; /e/OS ships it on with the voice-call source. Verified in the tree. |
 | microG hiding — who owns the list | microG itself (`e/os/GmsCore`). The user-facing half is specified there. |

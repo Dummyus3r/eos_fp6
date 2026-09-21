@@ -23,7 +23,7 @@ Feature: Monthly security patch level
     When the user opens "About phone"
     Then the Android security patch level is the month whose bulletin has been merged into the build
 
-  Scenario: The security indicator is /e/-branded
+  Scenario: The security indicator is /e/OS-branded
     When the user opens the security patch information dialog
     Then it refers to /e/OS and not to LineageOS
 

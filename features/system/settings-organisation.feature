@@ -52,9 +52,9 @@ Feature: The Settings home page is organised around /e/OS
     When the user opens the legal information
     Then the /e/OS licence and legal notices are listed
 
-  Scenario: Feedback goes to /e/
+  Scenario: Feedback goes to /e/OS
     When the user sends feedback from Settings
-    Then it is addressed to the /e/ contact address
+    Then it is addressed to the /e/OS contact address
 
   Scenario: The homepage icons follow the /e/OS style
     Then the homepage entry icons are rendered with the /e/OS treatment

@@ -121,7 +121,7 @@ Feature: Release types
 
   Rule: Signing follows the release, not the release type directly
 
-    /e/OS official images are signed with /e/'s own release keys, supplied to
+    /e/OS official images are signed with /e/OS’s own release keys, supplied to
     the build as a key directory. A build without that directory — a community
     or local build — falls back to the configured development certificate. The
     correlation with the release type is a property of how builds are produced,
