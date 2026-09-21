@@ -32,8 +32,17 @@ counterpart (`lineage-23` checkout, same path). Since /e/OS merges LineageOS
 regularly, the LineageOS HEAD is an ancestor of the /e/OS HEAD for most
 projects, so `git log <lineage-head>..HEAD` yields exactly the /e/OS delta.
 
+A project with no LineageOS counterpart — `vendor/eos`, `external/prebuiltapks`
+and the others marked `new` below — has no base to diff against: its entire
+content is the /e/OS delta. Such a project therefore yields no commit list, and
+anything derived from this document that expects one (a "commits to port"
+section, for instance) comes out empty for it. That emptiness means
+*everything*, not *nothing*.
+
 Legend — **F** feature-bearing, **S** security backports only, **B** build/CI/
-licence only, **P** covered in a prebuilt repository instead.
+licence only, **P** covered in a prebuilt repository instead. `new` in the
+Δ commits column — the project has no LineageOS counterpart, so there is no
+delta to count.
 
 | Project | Δ commits | Kind | Specified in |
 |---|---:|:--:|---|
