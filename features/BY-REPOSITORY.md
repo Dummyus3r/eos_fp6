@@ -8,7 +8,7 @@ The specifications are organised by feature, because that is how the product is
 decided and how the backlog is planned. This index is the other way in: for a
 given repository, what /e/OS does there and which specification says so.
 
-50 repositories, generated 2026-09-18.
+50 repositories, generated 2026-09-21.
 
 ## Index
 
@@ -53,7 +53,7 @@ given repository, what /e/OS does there and which specification says so.
 - [`packages/overlays/Lineage`](#packagesoverlayslineage) — 1 feature(s)
 - [`packages/services/Telephony`](#packagesservicestelephony) — 1 feature(s)
 - [`system/core`](#systemcore) — 1 feature(s)
-- [`the`](#the) — 1 feature(s)
+- [`the`](#the) — 2 feature(s)
 - [`vendor/apn`](#vendorapn) — 1 feature(s)
 - [`vendor/eos`](#vendoreos) — 16 feature(s)
 - [`vendor/eos/config/common.mk`](#vendoreosconfigcommonmk) — 1 feature(s)
@@ -760,6 +760,13 @@ given repository, what /e/OS does there and which specification says so.
 
 **Keeping the fork current with LineageOS** — [`process/fork-maintenance.feature`](process/fork-maintenance.feature)
 
+- branch history of the forks
+- a16 was cut at lineage-23.0, /e/OS work arrived above it through merge
+- requests, and the CI re-merged lineage-23.0 afterwards — the base is
+- upstream, not the previous /e/OS generation
+
+**Keeping the fork current with LineageOS** — [`process/fork-maintenance.feature`](process/fork-maintenance.feature)
+
 - manifest repository itself — snippets/eos.xml, default.xml
 
 
@@ -805,6 +812,7 @@ given repository, what /e/OS does there and which specification says so.
 
 - config/common_mobile.mk, config/telephony.mk
 - default notification, alarm and ringtone sounds
+- products/e_sdk_phone_x86_64.mk: e_sdk_phone_x86_64 emulator product
 
 **App Lounge behaves as the device's application store** — [`compatibility/app-lounge-as-installer.feature`](compatibility/app-lounge-as-installer.feature)
 
@@ -896,6 +904,7 @@ given repository, what /e/OS does there and which specification says so.
 - Add tablet package for wallpapers / overlay: Update wallpapers for tablet product
 - vendor/lineage: Change emulator name
 - vendor: config: Include configuration for eos
+- build/envsetup.sh: derive LINEAGE_BUILD from e_ prefixed products too
 
 **Carrier APN database** — [`connectivity/apn-database.feature`](connectivity/apn-database.feature)
 

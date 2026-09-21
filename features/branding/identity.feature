@@ -6,10 +6,12 @@
 #   Add tablet package for wallpapers / overlay: Update wallpapers for tablet product
 #   vendor/lineage: Change emulator name
 #   vendor: config: Include configuration for eos
+#   build/envsetup.sh: derive LINEAGE_BUILD from e_ prefixed products too
 # Source: packages/apps/Backgrounds
 #   Add phone wallpapers / Add tablet wallpapers / Convert wallpapers to webp
 # Source: vendor/eos config/common_mobile.mk, config/telephony.mk
 #   default notification, alarm and ringtone sounds
+#   products/e_sdk_phone_x86_64.mk: e_sdk_phone_x86_64 emulator product
 # Source: frameworks/base
 #   base: sounds: Change camera click/stop/record sounds
 # Source: build/soong
@@ -52,6 +54,27 @@ Feature: The device presents itself as /e/OS
 
   Scenario: Wallpapers do not bloat the image
     Then the shipped wallpapers are stored in a compressed format
+
+  Scenario: The emulator build identifies itself as /e/OS
+    Given the build target is the /e/OS emulator product
+    When the product is selected with lunch
+    Then the product name is "e_sdk_phone_x86_64"
+    And the product model is "/e/OS emulator x86_64"
+    And the version string keeps its device suffix
+    # A product name that does not start with "lineage_" must still yield a
+    # non-empty LINEAGE_BUILD: an empty one drops the device suffix from
+    # LINEAGE_VERSION and from ro.lineage.device, and the envsetup guards of
+    # the form `getprop ro.lineage.device | grep -q "$LINEAGE_BUILD"` then
+    # match any device.
+
+  Scenario: A running /e/OS emulator is distinguishable from a LineageOS one
+    Given an /e/OS emulator and a LineageOS emulator are running side by side
+    When the host lists the attached devices
+    Then each reports its own product name
+    And the /e/OS one reports "e_sdk_phone_x86_64"
+    # The reported device stays "emu64x" on both: it comes from PRODUCT_DEVICE
+    # in device/generic/goldfish, which /e/OS consumes from LineageOS rather
+    # than forks.
 
   Scenario: No LineageOS string is left in the user interface
     When the user browses the system applications
