@@ -323,7 +323,7 @@ given repository, what /e/OS does there and which specification says so.
 - SNHooks: Set Build.TYPE to userdebug for dockmanager
 - PhoneStatusBarView: Pad statusbar with Launcher3 dock width
 
-**The Murena Workspace account is the device's primary account** — [`identity/e-account.feature`](identity/e-account.feature)
+**The Murena Workspace account is the device's primary account** — [`identity/murena-workspace-account.feature`](identity/murena-workspace-account.feature)
 
 - base: Grant /e/ Drive storage permission
 
@@ -415,7 +415,7 @@ given repository, what /e/OS does there and which specification says so.
 
 ## `packages/apps/Contacts`
 
-**The Murena Workspace account is the device's primary account** — [`identity/e-account.feature`](identity/e-account.feature)
+**The Murena Workspace account is the device's primary account** — [`identity/murena-workspace-account.feature`](identity/murena-workspace-account.feature)
 
 - 709-s-Open_accountManager_onClick_add_account
 - Contacts: Sort /e/ account with first priority and allow user to modify
@@ -506,7 +506,7 @@ given repository, what /e/OS does there and which specification says so.
 - Settings: Add Google's custom sfps resumeEnroll() / Guard Google SFPS extension
 - Settings: Add summary for disabled content-based refresh rate
 
-**The Murena Workspace account is the device's primary account** — [`identity/e-account.feature`](identity/e-account.feature)
+**The Murena Workspace account is the device's primary account** — [`identity/murena-workspace-account.feature`](identity/murena-workspace-account.feature)
 
 - Settings: mark eDrive as safe to be opened by accountManager
 - 697-s-Recalculate_accountType_sorting
@@ -829,7 +829,7 @@ given repository, what /e/OS does there and which specification says so.
 
 - overlay (SettingsLib wifi_dns hints, wifi scan throttle exceptions)
 
-**The Murena Workspace account is the device's primary account** — [`identity/e-account.feature`](identity/e-account.feature)
+**The Murena Workspace account is the device's primary account** — [`identity/murena-workspace-account.feature`](identity/murena-workspace-account.feature)
 
 - config/permissions (foundation.e.accountmanager, foundation.e.drive)
 

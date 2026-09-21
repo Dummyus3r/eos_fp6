@@ -48,7 +48,7 @@ delta to count.
 |---|---:|:--:|---|
 | `frameworks/base` | 185 | F+S | privacy/*, compatibility/*, system/system-ui, device/hardware-support |
 | `vendor/lineage` | 66 | F | updates/release-types, branding/identity, updates/security-patches, system/lineage-features-removed |
-| `packages/apps/Settings` | 62 | F | system/settings-organisation, system/advanced-privacy-entry, privacy/telemetry, identity/e-account |
+| `packages/apps/Settings` | 62 | F | system/settings-organisation, system/advanced-privacy-entry, privacy/telemetry, identity/murena-workspace-account |
 | `packages/apps/Updater` | 59 | F | updates/ota-updater, updates/release-types |
 | `packages/inputmethods/LatinIME` | 41 | F | system/keyboard |
 | `packages/apps/SetupWizard` | 29 | F | setup/* |
@@ -60,7 +60,7 @@ delta to count.
 | `packages/providers/MediaProvider` | 17 | S | updates/security-patches |
 | `packages/modules/Permission` | 16 | F+S | compatibility/android-auto, device/hardware-support |
 | `packages/apps/LineageParts` | 16 | F | system/lineage-features-removed, system/parental-control |
-| `packages/apps/Contacts` | 13 | F | identity/e-account, system/telephony-and-messaging |
+| `packages/apps/Contacts` | 13 | F | identity/murena-workspace-account, system/telephony-and-messaging |
 | `frameworks/av` | 12 | F+S | device/hardware-support |
 | `packages/apps/Backgrounds` | 10 | F | branding/identity |
 | `device/lineage/sepolicy` | 9 | F | privacy/tracker-blocking-dns, apps/default-permissions |
