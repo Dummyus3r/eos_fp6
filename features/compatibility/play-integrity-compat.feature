@@ -59,16 +59,16 @@ Feature: Applications that check device integrity keep working
     Scenario: A user build
       Given the build variant is "user"
       Then the integrity compatibility daemon is not included in the image
-      And this holds even for an official, community or partner release
+      And this holds even for an official or community release
 
-    Scenario: A community, official or partner build that is not a user build
+    Scenario: A community or official build that is not a user build
       Given the build variant is not "user"
-      And the release type is official, community or partner
+      And the release type is official or community
       Then the integrity compatibility daemon is included in the image
 
     Scenario: Any other build
       Given the build variant is not "user"
-      And the release type is not official, community or partner
+      And the release type is not official or community
       Then the integrity compatibility daemon is not included in the image
 
     Scenario: The daemon is configured per device

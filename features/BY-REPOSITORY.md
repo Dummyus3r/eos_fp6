@@ -952,7 +952,9 @@ given repository, what /e/OS does there and which specification says so.
 **Release types** — [`updates/release-types.feature`](updates/release-types.feature)
 
 - LineageOS accepts   RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL
-- /e/OS accepts       test community official partner
+- /e/OS accepts       test community official
+- the filter in version.mk still lists `partner` as a fourth accepted
+- type, but it has not been used for two years and is not specified here
 - anything else falls back to UNOFFICIAL
 - LINEAGE_VERSION_SUFFIX gains CI_PIPELINE_ID; ANDROID_LETTER, maintenance
 - and prerelease components are /e/OS additions

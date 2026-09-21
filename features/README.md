@@ -62,8 +62,8 @@ specified, simply because it was not where a reader looked.
 * Where a behaviour has a concrete value — a colour, a URL, a hostname, a sound —
   the specification names it. "Follows the /e/OS palette" is not testable;
   `#0086FF` is.
-* Behaviour that depends on the release type (official, community, partner,
-  test, unofficial) says so explicitly, and points at
+* Behaviour that depends on the release type (official, community, test,
+  unofficial) says so explicitly, and points at
   `updates/release-types.feature`, which is the single place the release-type
   model is specified.
 * Tags name the upstream project(s) the behaviour lives in, e.g.

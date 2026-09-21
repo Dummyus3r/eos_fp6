@@ -99,8 +99,8 @@ is a settings map rather than a resource.
 
 1. **`ih8sn` gating — still the one to confirm.** The makefile reads: a `user`
    build never ships the daemon (the `?=` on the user-variant branch wins), and
-   a non-`user` build ships it when the release type is official, community or
-   partner. So an official release cut as a `user` build does **not** carry it,
+   a non-`user` build ships it when the release type is official or
+   community. So an official release cut as a `user` build does **not** carry it,
    which makes the daemon community-only in practice. The specification states
    the rule as implemented, in `updates/release-types.feature` and
    `compatibility/play-integrity-compat.feature`. Confirm the intent matches —

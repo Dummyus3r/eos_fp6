@@ -1,6 +1,8 @@
 # Source: vendor/lineage/config/version.mk
 #   LineageOS accepts   RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL
-#   /e/OS accepts       test community official partner
+#   /e/OS accepts       test community official
+#   the filter in version.mk still lists `partner` as a fourth accepted
+#   type, but it has not been used for two years and is not specified here
 #   anything else falls back to UNOFFICIAL
 #   LINEAGE_VERSION_SUFFIX gains CI_PIPELINE_ID; ANDROID_LETTER, maintenance
 #   and prerelease components are /e/OS additions
@@ -23,7 +25,7 @@ Feature: Release types
   LineageOS classifies builds as RELEASE, NIGHTLY, SNAPSHOT or EXPERIMENTAL —
   a vocabulary about build cadence. /e/OS replaces it with one about who the
   build is for: a device sold with /e/OS preinstalled, a device flashed by an
-  enthusiast, a partner's device, or an internal test. Several behaviours differ
+  enthusiast, or an internal test. Several behaviours differ
   along that line, and the release type is also what pins a device to an update
   channel, so a community device is never offered an official build.
 
@@ -41,7 +43,6 @@ Feature: Release types
         | type      |
         | official  |
         | community |
-        | partner   |
         | test      |
 
     Scenario: An unrecognised release type falls back
@@ -100,12 +101,11 @@ Feature: Release types
         | type      |
         | official  |
         | community |
-        | partner   |
 
   Rule: What is shipped differs by release type
 
     Scenario: The integrity compatibility daemon
-      Given the release type is official, community or partner
+      Given the release type is official or community
       And the build variant is not "user"
       Then the integrity compatibility daemon is included in the image
       # The build variant is tested first and wins: see
