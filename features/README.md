@@ -55,5 +55,5 @@ features/
 
 First pass, derived by diffing every project of `snippets/eos.xml` (reference:
 the `v4.3-a16` manifest) against its LineageOS counterpart. `COVERAGE.md` maps
-every forked project to the file that specifies it; `TODO.md` records the
-decisions taken and the questions still open.
+every forked project to the file that specifies it; `TODO.md` records how
+that pass was done and the decisions taken along the way.
