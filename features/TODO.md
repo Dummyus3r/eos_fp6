@@ -24,6 +24,10 @@ Recorded here so the next pass does not re-litigate them.
 | Call recording | Unconditional. LineageOS ships the same dialer with it off and the microphone as source; /e/OS ships it on with the voice-call source. Verified in the tree. |
 | microG hiding — who owns the list | microG itself (`e/os/GmsCore`). The user-facing half is specified there. |
 | Android Auto | Relaxation stated explicitly, with the alternatives that were available written out in the file's header. |
+| `ih8sn` gating for an official `user` build | Deliberate: the daemon is community-only in practice, as implemented. |
+| Fake location without Advanced Privacy | Moot: Advanced Privacy is a system app and cannot be uninstalled, so the fall-through to the real location is unreachable. |
+| Where these files live long term | `COVERAGE.md`, in this repository, stays the index for now. |
+| Review cadence (CI drift check) | Needed eventually, deferred for now — doing without it in the meantime. |
 
 ## Checked against the Android 16 porting epic
 
@@ -97,29 +101,8 @@ is a settings map rather than a resource.
 
 ## Still open
 
-1. **`ih8sn` gating — still the one to confirm.** The makefile reads: a `user`
-   build never ships the daemon (the `?=` on the user-variant branch wins), and
-   a non-`user` build ships it when the release type is official or
-   community. So an official release cut as a `user` build does **not** carry it,
-   which makes the daemon community-only in practice. The specification states
-   the rule as implemented, in `updates/release-types.feature` and
-   `compatibility/play-integrity-compat.feature`. Confirm the intent matches —
-   the two readings differ for official releases.
-
-2. **Fake location without Advanced Privacy.** Left explicitly unspecified in
-   `privacy/fake-location.feature`. If Advanced Privacy is removed, the code
-   falls through to the real location. Is that the behaviour you want to commit
-   to, or should the feature be considered unavailable? Worth deciding before
-   someone relies on the fall-through.
-
-3. **`hardware/qcom-caf/thermal`** is forked on `a16` but not on `v4.3-a16`, so
+1. **`hardware/qcom-caf/thermal`** is forked on `a16` but not on `v4.3-a16`, so
    it is not covered by this pass. Does it carry behaviour worth specifying?
-
-4. **Where these files live long term.** They are in the manifest repository,
-   which is the only place that sees the whole product. If the per-application
-   specifications land in the application repositories, is there an index to
-   build, or does `COVERAGE.md` stay the index?
-
-5. **Review cadence.** These specifications will drift the moment a fork gains
-   a commit. Is it worth a CI job on this repository that re-runs the diff and
-   flags projects whose delta changed since the last pass?
+   Possibly related: e/os/backlog#4622 (App Lounge refusing to install an app
+   over a false "device too hot" reading) — not confirmed, worth checking
+   whether that bug traces back to this fork before deciding.

@@ -54,6 +54,7 @@ Feature: Per-application fake location
     When any application requests the current location
     Then it receives the real device location
 
-  # NOT SPECIFIED: what should happen if Advanced Privacy is removed from the
-  # device. The code falls through to the real location, but that is the
-  # consequence of the implementation, not a decided behaviour. See TODO.md.
+  Scenario: Advanced Privacy is a system application and cannot be removed
+    Then the "no override configured" behaviour above is the only fallback
+    this device can ever be in — Advanced Privacy is a system app, not
+    something the user can uninstall
