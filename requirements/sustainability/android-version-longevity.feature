@@ -28,18 +28,20 @@ Feature: A device is kept secure and current for as long as reasonably possible
       Then /e/OS may still deliver it, on a best-effort basis
       And this is not represented as an ongoing guarantee
 
-  Rule: Official devices are migrated beyond the EU legal minimum, as far as technically possible
+  Rule: Official devices are migrated beyond the EU legal minimum, as far as technically possible, delivered over the air
 
     For officially supported devices, /e/OS commits to going beyond the
     minimum device-support duration required by EU regulation (see the EU
     Ecodesign requirements for smartphones — exact figures not verified
     here). An official device is migrated to newer Android versions for as
     long as no technical obstacle prevents it, not just for the legally
-    required minimum.
+    required minimum — and that migration is delivered as an OTA update, not
+    something the user has to flash manually.
 
     Scenario: A newer Android version is technically portable
       Given an officially supported device with no technical obstacle to a newer Android version
       Then /e/OS ports it to that newer version
+      And the port is delivered to the device as an OTA update
 
     Scenario: A technical obstacle appears
       Given an officially supported device that cannot technically be ported further
@@ -50,7 +52,11 @@ Feature: A device is kept secure and current for as long as reasonably possible
 
     Two related decisions are still open and unresolved as of this writing;
     until they are decided, this file makes no promise about community
-    devices beyond what the two rules above already say in general terms:
+    devices beyond what the two rules above already say in general terms.
+    One thing is already settled, though, and is not part of the pending
+    decisions: community devices do not receive Android-version upgrades
+    over the air — the OTA-delivery commitment above is specific to official
+    devices, and a community-device user migrates manually.
 
     - How long a community device with **no** newer Android version
       available keeps receiving builds/patches:
