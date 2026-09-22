@@ -17,6 +17,14 @@ repo sync
 Please see the [/e/ documentation](https://doc.e.foundation/how-tos/#build-e-for-a-device) for building instructions, by device.
 
 
+Specifications
+--------------
+
+Two folders describe what /e/OS does, and what it must always do:
+
+- [`features/`](features/README.md) — what /e/OS adds on top of LineageOS, derived from the code.
+- [`requirements/`](requirements/README.md) — product-level promises, written independently of the code, and checked against `features/`.
+
 Submitting patches
 ------------------
 Patches are always welcome! Please submit your patches by opening a Merge Request on the project repository you want to contribute!
