@@ -1,6 +1,7 @@
-# Proven by: (none yet — related but distinct: features/compatibility/*.feature specify
-#            today's mechanisms (microG, Play Integrity compat, Android Auto); this
-#            promise is the outcome — ordinary Android apps work — not the mechanism)
+# Proven by: (none yet)
+# Related, not proving: features/compatibility/*.feature specify today's
+# mechanisms (microG, Play Integrity compat, Android Auto); this promise is
+# the outcome — ordinary Android apps work — not the mechanism.
 
 @user-experience @requirement
 Feature: Ordinary Android applications work as expected

@@ -1,6 +1,7 @@
-# Proven by: (none yet — related but distinct: features/apps/preinstalled-applications.feature
-#            and features/apps/default-app-associations.feature specify today's
-#            wiring, not the product promise that the set stays coherent and usable)
+# Proven by: (none yet)
+# Related, not proving: features/apps/preinstalled-applications.feature and
+# features/apps/default-app-associations.feature specify today's wiring, not
+# the product promise that the set stays coherent and usable.
 
 @user-experience @requirement
 Feature: The default set of applications is coherent and usable out of the box

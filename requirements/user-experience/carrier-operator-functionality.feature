@@ -1,6 +1,7 @@
-# Proven by: (none yet — related but distinct: features/connectivity/*.feature specify
-#            default APN/network values, not the promise that carrier-provided
-#            services keep working)
+# Proven by: (none yet)
+# Related, not proving: features/connectivity/*.feature specify default
+# APN/network values, not the promise that carrier-provided services keep
+# working.
 
 @user-experience @requirement
 Feature: Carrier and operator services keep working
