@@ -1,9 +1,7 @@
 # /e/OS feature specifications
 
 This folder holds executable-style specifications (Gherkin / Cucumber)
-describing **what /e/OS adds on top of LineageOS** — /e/OS forks ~85
-projects, and the commit history was the only record of that delta until
-this folder existed.
+describing **what /e/OS adds on top of LineageOS**.
 
 ## Scope
 
