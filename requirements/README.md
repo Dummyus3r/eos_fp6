@@ -2,21 +2,8 @@
 
 This folder holds product-level **requirements**: promises /e/OS makes that
 must hold regardless of which commit is being reviewed, written **top-down**
-by a human, independently of any single feature or issue.
-
-## How this differs from `features/`
-
-`features/` is descriptive and **bottom-up**: it captures what the code does
-today, derived by diffing /e/OS against LineageOS. It answers "what has been
-built and specified so far?" — it has no way to say "what is not yet covered",
-because the list of what *should* exist only exists as the sum of what has
-been done.
-
-`requirements/` is normative and **top-down**: each file states a promise
-that must always hold, written before — and independently of — any code that
-proves it. A requirement can (and, for a new one, will) exist with no
-scenario proving it yet; that gap is the point — it is what a coverage
-report can flag, which a purely bottom-up `features/` folder cannot.
+by a human, independently of any single feature or issue — checked against
+[`features/`](../features/README.md), not derived from it.
 
 ## Convention
 
