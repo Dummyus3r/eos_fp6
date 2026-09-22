@@ -4,7 +4,7 @@
 # factory reset, used only to count installs. Whether this is compatible with
 # the GDPR audience-measurement exemption (which requires clear user
 # information and an opt-out, neither of which exists today) is an open
-# question — not decided here. See requirements/TODO.md.
+# question — not decided here.
 
 @privacy @requirement
 Feature: No telemetry is ever sent without the user's consent
