@@ -99,10 +99,12 @@ is a settings map rather than a resource.
 | Device trees and kernel | no | outside this manifest |
 | Prebuilt application internals | no | out of scope by agreement |
 
-## Still open
+## Nothing left open
 
-1. **`hardware/qcom-caf/thermal`** is forked on `a16` but not on `v4.3-a16`, so
-   it is not covered by this pass. Does it carry behaviour worth specifying?
-   Possibly related: e/os/backlog#4622 (App Lounge refusing to install an app
-   over a false "device too hot" reading) — not confirmed, worth checking
-   whether that bug traces back to this fork before deciding.
+`hardware/qcom-caf/thermal` (forked on `a16`, not on the `v4.3-a16` reference
+branch, so missed by the diff this pass ran) confirmed worth specifying:
+commit `4026baa9b2` relaxes the "volcano" platform's skin-temperature
+thresholds, fixing e/os/backlog#4622 (App Lounge refusing installs on a
+device that wasn't actually hot — traced to `PowerManager.THERMAL_STATUS`
+tripping on the too-conservative upstream default). Added to
+`device/hardware-support.feature`.

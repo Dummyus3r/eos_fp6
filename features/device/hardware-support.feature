@@ -41,6 +41,9 @@
 #   emulator arm64: update partition size to make it same as x86_64
 # Source: external/prebuiltapks RichTap
 # Source: build/soong, system/core — see compatibility/play-integrity-compat.feature
+# Source: hardware/qcom-caf/thermal (forked on `a16`, not on the `v4.3-a16`
+#         reference branch — added after investigating e/os/backlog#4622)
+#   thermal-hal: Relax LIGHT and MODERATE skin limits for volcano
 
 @frameworks-base @frameworks-native @lineage-sdk @device @device-specific
 Feature: Hardware support for the devices /e/OS ships on
@@ -176,6 +179,20 @@ Feature: Hardware support for the devices /e/OS ships on
     Scenario: Audio playback capture
       Given an application requests to capture playback audio
       Then the platform does not refuse it on the grounds of the target SDK alone
+
+    Scenario Outline: Skin temperature thresholds on the volcano platform
+      Given a device on the volcano thermal platform
+      When the "skin" sensor reads a temperature at or above <threshold> milli-degrees
+      Then the thermal status becomes <status>
+      # Upstream shipped 36500/40000; too low for this platform, which made
+      # PowerManager report THERMAL_STATUS_MODERATE on a device that wasn't
+      # actually hot — App Lounge then refused to install anything
+      # (e/os/backlog#4622). /e/OS raises both thresholds.
+
+      Examples:
+        | threshold | status   |
+        | 40000     | LIGHT    |
+        | 48000     | MODERATE |
 
   Rule: The emulator is a supported target
 
