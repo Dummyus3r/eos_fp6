@@ -1,5 +1,8 @@
 # Proven by: features/privacy/degoogled-defaults.feature,
 #            features/compatibility/microg-configuration.feature
+# The third-party-app push registration rule below is verified directly
+# against e/os/GmsCore source (PushRegisterService.kt, GcmPrefs.kt), not yet
+# captured in any features/ file.
 
 @privacy @requirement
 Feature: A freshly flashed device contacts no Google server by default
@@ -42,8 +45,29 @@ Feature: A freshly flashed device contacts no Google server by default
       When an address is resolved from coordinates
       Then it goes through an open geocoding service
 
-  Rule: Push registration only happens when actually required
+  Rule: IMS service entitlement registration only happens when the carrier requires it
+
+    This is the system's own Firebase registration, for carrier IMS
+    entitlement checks — distinct from the rule below, which is about
+    third-party applications.
 
     Scenario: No carrier requirement
       Given the SIM's carrier does not require IMS service entitlement over Firebase
       Then no token is requested from Google
+
+  Rule: A third-party app's push registration only happens because that app asked for it
+
+    microG never registers an application for push notifications on its own;
+    registration is per calling package, triggered only by that package's own
+    request. By default, a new app is registered without a confirmation
+    prompt — the user can turn on a per-app confirmation step in microG's
+    advanced settings, but it is off by default.
+
+    Scenario: An installed application asks for push notifications
+      Given a third-party application calls the push-registration API
+      Then microG registers that application specifically
+      And no other application is registered as a side effect
+
+    Scenario: Nothing asks for it
+      Given no application has requested push registration
+      Then microG registers nothing on its own
