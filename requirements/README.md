@@ -44,5 +44,5 @@ file's `# Proven by:` line); every other pillar is declared but not yet
 proven — no `features/` file specifies them yet. Run
 `python3 requirements/tools/gen-coverage.py` to regenerate `COVERAGE.md`,
 which lists every requirement as proven, not yet proven, or citing a
-`features/` file that does not exist. `TODO.md` records the decisions taken
-along the way.
+`features/` file that does not exist. `DECISIONS.md` records the decisions
+taken along the way.
