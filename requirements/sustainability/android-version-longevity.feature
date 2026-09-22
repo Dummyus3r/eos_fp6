@@ -1,5 +1,7 @@
 # Proven by: (none yet)
-# Community-device policy: pending decisions, see below — not yet a promise.
+# Community-device policy stated here per e/devices/backlog#2036 and #2037 —
+# those tickets are still open in GitLab as of writing; if this is the final
+# call, close them accordingly so the record matches.
 
 @sustainability @requirement
 Feature: A device is kept secure and current for as long as reasonably possible
@@ -48,23 +50,34 @@ Feature: A device is kept secure and current for as long as reasonably possible
       Then migration stops there
       And the device falls back to the security-patch rule above
 
-  Rule: Community-device policy — decision pending, not yet a promise
+  Rule: A community device without a newer Android version keeps getting OTA updates for as long as its version is supported
 
-    Two related decisions are still open and unresolved as of this writing;
-    until they are decided, this file makes no promise about community
-    devices beyond what the two rules above already say in general terms.
-    One thing is already settled, though, and is not part of the pending
-    decisions: community devices do not receive Android-version upgrades
-    over the air — the OTA-delivery commitment above is specific to official
-    devices, and a community-device user migrates manually.
+    A community device with no upgrade path stays on its Android version and
+    keeps receiving regular OTA updates on it for exactly as long as /e/OS
+    supports that Android version — the same duration as the general rule
+    above, not a separate, shorter community cutoff.
+    (https://gitlab.e.foundation/e/devices/backlog/-/work_items/2036)
 
-    - How long a community device with **no** newer Android version
-      available keeps receiving builds/patches:
-      https://gitlab.e.foundation/e/devices/backlog/-/work_items/2036
-    - How long a community device **with** a newer Android version available
-      keeps receiving builds on its current version before migration is
-      required:
-      https://gitlab.e.foundation/e/devices/backlog/-/work_items/2037
+    Scenario: No newer Android version exists for this model
+      Given a community device model with no newer Android version available
+      Then it keeps receiving OTA updates for as long as /e/OS supports its
+      Android version, per the rule above
 
-    Once decided, this rule should be replaced by the actual commitment, not
-    merely annotated.
+  Rule: When a newer Android version becomes available for a community device, the old one is retired after a transition period
+
+    Community devices do not receive an Android-version upgrade over the
+    air — the user migrates manually, unlike an official device. Once a
+    newer Android version is supported for a given model, /e/OS makes that
+    build available; the previous version's builds are not stopped
+    immediately, but after a transition period long enough for users to
+    make that manual move.
+    (https://gitlab.e.foundation/e/devices/backlog/-/work_items/2037)
+
+    Scenario: A newer Android version becomes available
+      Given a community device model that gains support for a newer Android version
+      Then a build of that newer version is made available for the model
+      And the previous version's builds keep being published, for now
+
+    Scenario: The transition period ends
+      Given a community device model whose newer Android version has been available for the length of the transition period
+      Then builds of the previous Android version stop for that model
