@@ -1,7 +1,4 @@
 # Proven by: (none yet)
-# Community-device policy stated here per e/devices/backlog#2036 and #2037 —
-# those tickets are still open in GitLab as of writing; if this is the final
-# call, close them accordingly so the record matches.
 
 @sustainability @requirement
 Feature: A device is kept secure and current for as long as reasonably possible
@@ -56,7 +53,6 @@ Feature: A device is kept secure and current for as long as reasonably possible
     keeps receiving regular OTA updates on it for exactly as long as /e/OS
     supports that Android version — the same duration as the general rule
     above, not a separate, shorter community cutoff.
-    (https://gitlab.e.foundation/e/devices/backlog/-/work_items/2036)
 
     Scenario: No newer Android version exists for this model
       Given a community device model with no newer Android version available
@@ -71,7 +67,6 @@ Feature: A device is kept secure and current for as long as reasonably possible
     build available; the previous version's builds are not stopped
     immediately, but after a transition period long enough for users to
     make that manual move.
-    (https://gitlab.e.foundation/e/devices/backlog/-/work_items/2037)
 
     Scenario: A newer Android version becomes available
       Given a community device model that gains support for a newer Android version
