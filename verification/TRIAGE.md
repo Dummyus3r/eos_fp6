@@ -15,63 +15,63 @@ Deciding what could ever prove a scenario is a judgement, worth making once.
 
 | scenario | level | note |
 |---|---|---|
-| `@APP-1` | unreviewed |  |
-| `@APP-2` | unreviewed |  |
-| `@APP-3` | unreviewed |  |
-| `@APP-4` | unreviewed |  |
-| `@APP-5` | unreviewed |  |
-| `@APP-6` | unreviewed |  |
-| `@APP-7` | unreviewed |  |
-| `@APP-8` | unreviewed |  |
-| `@APP-9` | unreviewed |  |
-| `@APP-10` | unreviewed |  |
-| `@APP-11` | unreviewed |  |
-| `@APP-12` | unreviewed |  |
-| `@APP-13` | unreviewed |  |
-| `@APP-14` | unreviewed |  |
-| `@APP-15` | unreviewed |  |
-| `@APP-16` | unreviewed |  |
-| `@APP-17` | unreviewed |  |
-| `@APP-18` | unreviewed |  |
-| `@APP-19` | unreviewed |  |
-| `@APP-20` | unreviewed |  |
-| `@APP-21` | unreviewed |  |
-| `@APP-22` | unreviewed |  |
-| `@APP-23` | unreviewed |  |
-| `@APP-24` | unreviewed |  |
-| `@APP-25` | unreviewed |  |
-| `@APP-26` | unreviewed |  |
-| `@APP-27` | unreviewed |  |
-| `@APP-28` | unreviewed |  |
-| `@APP-29` | unreviewed |  |
-| `@APP-30` | unreviewed |  |
-| `@APP-31` | unreviewed |  |
-| `@APP-32` | unreviewed |  |
-| `@APP-33` | unreviewed |  |
-| `@APP-34` | unreviewed |  |
-| `@APP-35` | unreviewed |  |
-| `@APP-36` | unreviewed |  |
-| `@APP-37` | unreviewed |  |
-| `@APP-38` | unreviewed |  |
-| `@APP-39` | unreviewed |  |
-| `@APP-40` | unreviewed |  |
-| `@APP-41` | unreviewed |  |
-| `@APP-42` | unreviewed |  |
-| `@APP-43` | unreviewed |  |
-| `@APP-44` | unreviewed |  |
-| `@APP-45` | unreviewed |  |
-| `@APP-46` | unreviewed |  |
-| `@APP-47` | unreviewed |  |
-| `@APP-48` | unreviewed |  |
-| `@APP-49` | unreviewed |  |
-| `@APP-50` | unreviewed |  |
-| `@APP-51` | unreviewed |  |
-| `@APP-52` | unreviewed |  |
-| `@APP-53` | unreviewed |  |
-| `@APP-54` | unreviewed |  |
-| `@APP-55` | unreviewed |  |
-| `@APP-56` | unreviewed |  |
-| `@APP-57` | unreviewed |  |
+| `@APP-1` | measured | colours in both themes need the screens rendered |
+| `@APP-2` | inspected | which library the applications link against is a build fact |
+| `@APP-3` | inspected | the palette values are resources in the image |
+| `@APP-4` | observed | the resolved framework accent is readable from the running system |
+| `@APP-5` | measured | the setup screens have to be reached |
+| `@APP-6` | inspected | the adaptive icon mask is a resource |
+| `@APP-7` | observed | two packages, queryable |
+| `@APP-8` | measured | an update has to be installed for this to mean anything |
+| `@APP-9` | observed | the WebView provider is queryable |
+| `@APP-10` | observed | absence of the other browsers |
+| `@APP-11` | inspected | which architecture's APK ships is a build fact |
+| `@APP-12` | inspected | each carrying its own copy is a property of the image |
+| `@APP-13` | measured | the offer only appears on a login form |
+| `@APP-14` | measured | the passkey flow has to run |
+| `@APP-15` | measured | same, with the key held elsewhere |
+| `@APP-16` | measured | the user changes it, then it is honoured |
+| `@APP-17` | observed | role assignments are queryable |
+| `@APP-18` | measured | how the permission is shown is a settings screen |
+| `@APP-19` | measured | the icon is rendered from the calendar's data |
+| `@APP-20` | inspected | the required-application list is build configuration |
+| `@APP-21` | inspected | same |
+| `@APP-22` | observed | the application label is readable |
+| `@APP-23` | inspected | the strings are resources in the image |
+| `@APP-24` | measured | the absence of a splash screen is a launch behaviour |
+| `@APP-25` | measured | which picker opens is a navigation result |
+| `@APP-26` | observed | absence of a management client |
+| `@APP-27` | measured | needs an enrolment to have happened |
+| `@APP-28` | observed | granted permissions are queryable per package |
+| `@APP-29` | measured | the revocation has to be performed, then honoured |
+| `@APP-30` | observed | a fixed permission is visible in the package dump |
+| `@APP-31` | observed | the battery-optimisation allowlist is queryable |
+| `@APP-32` | observed | network permission on system applications |
+| `@APP-33` | inspected | the SELinux rule is a policy file in the image |
+| `@APP-34` | observed | the absence of a grant is queryable |
+| `@APP-35` | inspected | the allowlists are XML files in the image |
+| `@APP-36` | inspected | same |
+| `@APP-37` | inspected | the relaxation is in the policy |
+| `@APP-38` | measured | a work profile has to be created |
+| `@APP-39` | measured | a clone profile has to be created |
+| `@APP-40` | observed | the stopped state is queryable after first boot |
+| `@APP-41` | repository | the committed version versus the shipped one |
+| `@APP-42` | repository | how a prebuilt is updated is a repository practice |
+| `@APP-43` | repository | LFS storage is a repository fact |
+| `@APP-44` | repository | the per-version pinning is in the build files |
+| `@APP-45` | repository | Blueprint declarations are build files |
+| `@APP-46` | inspected | which prebuilts a reduced build ships |
+| `@APP-47` | observed | the application set is queryable |
+| `@APP-48` | observed | package names answering, queryable |
+| `@APP-49` | observed | conditional on telephony, still a package query |
+| `@APP-50` | inspected | what a minimal build leaves out is a build fact |
+| `@APP-51` | observed | the screen reader package and its default role |
+| `@APP-52` | observed | intent handlers are queryable |
+| `@APP-53` | observed | absence of an MDM client |
+| `@APP-54` | observed | absence of the LineageOS applications |
+| `@APP-55` | inspected | package absence in the built image, per device tree |
+| `@APP-56` | inspected | same |
+| `@APP-57` | inspected | same |
 | `@BRAND-1` | measured | the boot animation only exists while booting; a capture is the evidence |
 | `@BRAND-2` | observed | version, description and release type are properties |
 | `@BRAND-3` | observed | sounds are properties; the wallpaper needs the resolved resource |
@@ -258,72 +258,72 @@ Deciding what could ever prove a scenario is a judgement, worth making once.
 | `@SETUP-19` | measured | that a step is never offered can only be seen by walking |
 | `@SETUP-20` | measured | layout in two orientations needs the screen rendered |
 | `@SETUP-21` | inspected | the translated strings are resources in the image |
-| `@SYS-1` | unreviewed |  |
-| `@SYS-2` | unreviewed |  |
-| `@SYS-3` | unreviewed |  |
-| `@SYS-4` | unreviewed |  |
-| `@SYS-5` | unreviewed |  |
-| `@SYS-6` | unreviewed |  |
-| `@SYS-7` | unreviewed |  |
-| `@SYS-8` | unreviewed |  |
-| `@SYS-9` | unreviewed |  |
-| `@SYS-10` | unreviewed |  |
-| `@SYS-11` | unreviewed |  |
-| `@SYS-12` | unreviewed |  |
-| `@SYS-13` | unreviewed |  |
-| `@SYS-14` | unreviewed |  |
-| `@SYS-15` | unreviewed |  |
-| `@SYS-16` | unreviewed |  |
-| `@SYS-17` | unreviewed |  |
-| `@SYS-18` | unreviewed |  |
-| `@SYS-19` | unreviewed |  |
-| `@SYS-20` | unreviewed |  |
-| `@SYS-21` | unreviewed |  |
-| `@SYS-22` | unreviewed |  |
-| `@SYS-23` | unreviewed |  |
-| `@SYS-24` | unreviewed |  |
-| `@SYS-25` | unreviewed |  |
-| `@SYS-26` | unreviewed |  |
-| `@SYS-27` | unreviewed |  |
-| `@SYS-28` | unreviewed |  |
-| `@SYS-29` | unreviewed |  |
-| `@SYS-30` | unreviewed |  |
-| `@SYS-31` | unreviewed |  |
-| `@SYS-32` | unreviewed |  |
-| `@SYS-33` | unreviewed |  |
-| `@SYS-34` | unreviewed |  |
-| `@SYS-35` | unreviewed |  |
-| `@SYS-36` | unreviewed |  |
-| `@SYS-37` | unreviewed |  |
-| `@SYS-38` | unreviewed |  |
-| `@SYS-39` | unreviewed |  |
-| `@SYS-40` | unreviewed |  |
-| `@SYS-41` | unreviewed |  |
-| `@SYS-42` | unreviewed |  |
-| `@SYS-43` | unreviewed |  |
-| `@SYS-44` | unreviewed |  |
-| `@SYS-45` | unreviewed |  |
-| `@SYS-46` | unreviewed |  |
-| `@SYS-47` | unreviewed |  |
-| `@SYS-48` | unreviewed |  |
-| `@SYS-49` | unreviewed |  |
-| `@SYS-50` | unreviewed |  |
-| `@SYS-51` | unreviewed |  |
-| `@SYS-52` | unreviewed |  |
-| `@SYS-53` | unreviewed |  |
-| `@SYS-54` | unreviewed |  |
-| `@SYS-55` | unreviewed |  |
-| `@SYS-56` | unreviewed |  |
-| `@SYS-57` | unreviewed |  |
-| `@SYS-58` | unreviewed |  |
-| `@SYS-59` | unreviewed |  |
-| `@SYS-60` | unreviewed |  |
-| `@SYS-61` | unreviewed |  |
-| `@SYS-62` | unreviewed |  |
-| `@SYS-63` | unreviewed |  |
-| `@SYS-64` | unreviewed |  |
-| `@SYS-65` | unreviewed |  |
-| `@SYS-66` | unreviewed |  |
+| `@SYS-1` | observed | the entry's presence is in the settings hierarchy |
+| `@SYS-2` | measured | what opens is a navigation result |
+| `@SYS-3` | measured | search results only exist when searched |
+| `@SYS-4` | observed | entry presence |
+| `@SYS-5` | observed | absence of the Google entry |
+| `@SYS-6` | measured | the wizard step has to be reached |
+| `@SYS-7` | observed | granted permissions are queryable |
+| `@SYS-8` | inspected | the translated strings are resources |
+| `@SYS-9` | measured | dictation has to be invoked |
+| `@SYS-10` | measured | the absence of a paywall is a launch behaviour |
+| `@SYS-11` | observed | the key's default state is a setting |
+| `@SYS-12` | measured | the button is on the suggestion strip, rendered |
+| `@SYS-13` | observed | the emoji key default is a setting |
+| `@SYS-14` | measured | re-theming on a configuration change has to be triggered |
+| `@SYS-15` | observed | granted permissions |
+| `@SYS-16` | inspected | which OTA certificate ships is a build fact |
+| `@SYS-17` | measured | what a help link points at needs the screen |
+| `@SYS-18` | measured | the contributors screen has to be opened |
+| `@SYS-19` | measured | the dialog has to be raised |
+| `@SYS-20` | measured | the entry label is on a settings screen |
+| `@SYS-21` | observed | the package's presence and its settings entry |
+| `@SYS-22` | inspected | addon.d scripts are files in the image |
+| `@SYS-23` | repository | which makefiles the build inherits |
+| `@SYS-24` | measured | the absence of an option in the picker |
+| `@SYS-25` | measured | the badge is drawn; only rendering shows its shape |
+| `@SYS-26` | measured | same |
+| `@SYS-27` | measured | same, with the abbreviated text |
+| `@SYS-28` | measured | the shadow is a rendering property |
+| `@SYS-29` | measured | sizing per form factor, rendered |
+| `@SYS-30` | measured | the taskbar dot is drawn |
+| `@SYS-31` | measured | the absence of a count is a rendering fact |
+| `@SYS-32` | measured | the composed icon is drawn from the date |
+| `@SYS-33` | measured | enabling it is an action that is accepted |
+| `@SYS-34` | measured | the refusal happens at the attempt |
+| `@SYS-35` | observed | entry presence |
+| `@SYS-36` | measured | the explanation is shown when the restriction bites |
+| `@SYS-37` | measured | the absence of the options in the power menu |
+| `@SYS-38` | measured | the wizard step has to be reached |
+| `@SYS-39` | observed | granted permissions |
+| `@SYS-40` | observed | entry order in the settings hierarchy |
+| `@SYS-41` | measured | the absence of a card is a rendering fact |
+| `@SYS-42` | measured | same for placeholders |
+| `@SYS-43` | measured | the title is on the settings screen |
+| `@SYS-44` | measured | the legal screen has to be opened |
+| `@SYS-45` | measured | where feedback is addressed needs the flow |
+| `@SYS-46` | measured | icon rendering |
+| `@SYS-47` | measured | what is visible without scrolling, on a tablet |
+| `@SYS-48` | observed | whether Monet is disabled is a setting or a resolved resource |
+| `@SYS-49` | observed | the resolved system accent |
+| `@SYS-50` | measured | completeness of both themes across surfaces, rendered |
+| `@SYS-51` | measured | survival across a configuration change |
+| `@SYS-52` | observed | the initial theme mode is a setting |
+| `@SYS-53` | measured | absence of a quick settings tile |
+| `@SYS-54` | measured | which application opens a screenshot |
+| `@SYS-55` | measured | absence of an action in the screenshot UI |
+| `@SYS-56` | observed | notification listener access is queryable |
+| `@SYS-57` | measured | the key long-press behaviour |
+| `@SYS-58` | measured | the SIM name on the keyguard, rendered |
+| `@SYS-59` | observed | mobile data enabled is a setting on first boot |
+| `@SYS-60` | observed | the call recording default is a resource value |
+| `@SYS-61` | inspected | which audio source is used is a configuration value |
+| `@SYS-62` | measured | absence of a dialer button |
+| `@SYS-63` | measured | the export flow offers the choice |
+| `@SYS-64` | measured | the exported file has to be produced and read |
+| `@SYS-65` | measured | labels rendered on the contact screen |
+| `@SYS-66` | measured | the unlock prompt happens on access |
 | `@UPD-1` | measured | the query only happens when the updater runs |
 | `@UPD-2` | measured | what the request carries is observable only when it is sent |
 | `@UPD-3` | observed | the entry's position is in the settings hierarchy |
