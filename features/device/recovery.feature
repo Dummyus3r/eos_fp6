@@ -15,14 +15,17 @@ Feature: Recovery
   Background:
     Given the device runs the /e/OS recovery
 
+  @DEV-35
   Scenario: The recovery is /e/OS-branded
     When the recovery starts
     Then the /e/OS logo and layout are shown
 
+  @DEV-36
   Scenario: The recovery does not display the device's IP address
     When the recovery is shown
     Then no IP address is displayed
 
+  @DEV-37
   Scenario: Consecutive sideloads on an A/B device
     Given an update has just been applied on an A/B device
     When the user sideloads another package
@@ -35,12 +38,14 @@ Feature: Recovery
     setup. A device whose recovery is older than its system cannot be recovered
     reliably, so /e/OS removes the choice and keeps them in step.
 
+    @DEV-38
     Scenario: The recovery is refreshed on boot
       Given the device uses the legacy recovery update path
       When the device boots after a system update
       Then the recovery image is updated
       And it does not depend on a property being set
 
+    @DEV-39
     Scenario: The user is not asked
       When the user goes through the first-time setup wizard
       Then no recovery update option is offered

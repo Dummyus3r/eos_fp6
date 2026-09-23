@@ -28,11 +28,13 @@ Feature: The device presents itself as /e/OS
   Background:
     Given the device runs /e/OS
 
+  @BRAND-1
   Scenario: Boot
     When the device boots
     Then the /e/OS boot animation is shown
     And no LineageOS animation is shown
 
+  @BRAND-2
   Scenario: The build identifies itself as /e/OS
     When the user opens "About phone"
     Then the /e/OS version is shown
@@ -40,6 +42,7 @@ Feature: The device presents itself as /e/OS
     And the version string names the release type
     # The release-type vocabulary: updates/release-types.feature
 
+  @BRAND-3
   Scenario: Wallpapers and sounds are /e/OS ones
     Given a freshly flashed device
     Then the default wallpaper is the /e/OS one
@@ -48,13 +51,16 @@ Feature: The device presents itself as /e/OS
     And the default alarm sound is "Platinum-old.ogg"
     And the camera shutter and recording sounds are the /e/OS ones
 
+  @BRAND-4
   Scenario: Tablets get their own wallpapers
     Given the device is a tablet
     Then the wallpaper set shipped is the tablet one
 
+  @BRAND-5
   Scenario: Wallpapers do not bloat the image
     Then the shipped wallpapers are stored in a compressed format
 
+  @BRAND-6
   Scenario: The emulator build identifies itself as /e/OS
     Given the build target is the /e/OS emulator product
     When the product is selected with lunch
@@ -67,6 +73,7 @@ Feature: The device presents itself as /e/OS
     # the form `getprop ro.lineage.device | grep -q "$LINEAGE_BUILD"` then
     # match any device.
 
+  @BRAND-7
   Scenario: A running /e/OS emulator is distinguishable from a LineageOS one
     Given an /e/OS emulator and a LineageOS emulator are running side by side
     When the host lists the attached devices
@@ -76,6 +83,7 @@ Feature: The device presents itself as /e/OS
     # in device/generic/goldfish, which /e/OS consumes from LineageOS rather
     # than forks.
 
+  @BRAND-8
   Scenario: No LineageOS string is left in the user interface
     When the user browses the system applications
     Then no screen shows the LineageOS name or logo

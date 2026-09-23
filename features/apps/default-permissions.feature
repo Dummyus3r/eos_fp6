@@ -28,6 +28,7 @@ Feature: Preinstalled applications are usable without a permission gauntlet
   Background:
     Given a freshly flashed /e/OS device
 
+  @APP-28
   Scenario Outline: Preinstalled applications hold the permissions they need
     When the user opens <application> for the first time
     Then it already holds the permissions required for <purpose>
@@ -48,25 +49,30 @@ Feature: Preinstalled applications are usable without a permission gauntlet
 
   Rule: Pre-granted permissions stay under the user's control
 
+    @APP-29
     Scenario: The user revokes a pre-granted permission
       Given a preinstalled application holds a pre-granted permission
       When the user revokes it
       Then the revocation is honoured
       And it is not silently granted again
 
+    @APP-30
     Scenario: One permission is fixed because the application cannot work without it
       Then eDrive's management of all files is granted as a fixed permission
 
+  @APP-31
   Scenario: Background-critical applications survive Doze
     Given the device is idle
     Then the account manager, the privacy dashboard, the store, the calendar, the notification relay and the updater are allowed to run in power save
 
+  @APP-32
   Scenario: System applications keep network access after an update
     Given a system application is updated
     When it restarts
     Then it still has network access
     And the user does not have to re-authorise it
 
+  @APP-33
   Scenario: Platform applications can use the system integration points they need
     Then SELinux allows platform applications to read /e/OS custom properties
     And to create the sockets and pipes the /e/OS services rely on
@@ -79,11 +85,13 @@ Feature: Preinstalled applications are usable without a permission gauntlet
     are granted per package by a file in the build, not implicitly by being
     preinstalled.
 
+    @APP-34
     Scenario: A preinstalled application holds only what it is allowlisted for
       Given a preinstalled application requests a privileged permission
       When it is not on that package's allowlist
       Then the permission is not granted
 
+    @APP-35
     Scenario Outline: The allowlists match the application's job
       Then <application> is allowlisted for <capability>
 
@@ -94,10 +102,12 @@ Feature: Preinstalled applications are usable without a permission gauntlet
         | the Android Auto stub  | in-call control, car mode and companion Wi-Fi        |
         | microG                 | installing a location provider and modifying phone state |
 
+    @APP-36
     Scenario: The backup transport is trusted by the platform
       Then the backup application's transport service is allowlisted as a backup transport
       And it is allowed to run in power save
 
+    @APP-37
     Scenario: A relaxation that is worth knowing about
       Then platform applications may execute files from application data
       # Required by components that ship their own runtime; it widens what a
@@ -105,14 +115,17 @@ Feature: Preinstalled applications are usable without a permission gauntlet
 
   Rule: Applications reach the user types they are meant for
 
+    @APP-38
     Scenario: A work profile
       Given a managed profile is created
       Then the applications declared for profiles are installed in it
 
+    @APP-39
     Scenario: A clone profile
       Given a clone profile is created
       Then applications that declare themselves unsuitable for cloning are not installed in it
 
+    @APP-40
     Scenario: An application is not left stopped
       Given a preinstalled application declares an initial running state
       Then it is not in the stopped state after first boot

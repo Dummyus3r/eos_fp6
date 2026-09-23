@@ -19,24 +19,29 @@ Feature: Monthly security patch level
     Given the device runs an /e/OS build whose release type has a published channel
     # Release types: updates/release-types.feature
 
+  @UPD-35
   Scenario: The advertised patch level matches the bulletin that was merged
     When the user opens "About phone"
     Then the Android security patch level is the month whose bulletin has been merged into the build
 
+  @UPD-36
   Scenario: The security indicator is /e/OS-branded
     When the user opens the security patch information dialog
     Then it refers to /e/OS and not to LineageOS
 
+  @UPD-37
   Scenario: The /e/OS version is shown alongside the Android version
     When the user opens "About phone"
     Then the /e/OS version is displayed
     And the underlying Android version is displayed
 
+  @UPD-38
   Scenario: A monthly release carries the month's bulletin
     Given a monthly /e/OS release
     Then the fixes of that month's Android Security Bulletin are present in the forked projects
     And the security patch string is bumped in the same release
 
+  @UPD-39
   Scenario: The bulletin is the same across release types
     Given an official build and a community build cut from the same release
     Then both carry the same Android Security Bulletin backports

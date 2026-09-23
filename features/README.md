@@ -27,6 +27,16 @@ remote (see `snippets/eos.xml`).
   palette" — the first is testable, the second isn't.
 * Release-type-dependent behaviour points at `updates/release-types.feature`,
   the single place that model is specified, rather than restating it.
+* Every scenario carries a permanent identifier, `@PREFIX-n`, where the prefix
+  names the area (`APP`, `BRAND`, `COMPAT`, `NET`, `DEV`, `ID`, `PRIV`, `PROC`,
+  `SETUP`, `SYS`, `UPD`). It is what a test, a merge request or a verdict cites,
+  so it has to survive the scenario being renamed or moved — a path and a title
+  do neither, and three titles already collide across the corpus. The number is
+  **never reused**, even after the scenario it named is deleted, so that an old
+  citation keeps resolving to what it meant. `features/tools/assign-ids.py`
+  assigns one to scenarios that have none and never renumbers;
+  `features/tools/check-ids.py` refuses a missing, duplicated or unregistered
+  identifier and runs as a CI gate. The registry is `features/IDS.md`.
 * Tags name the upstream project(s), e.g. `@frameworks-base`, `@vendor-eos`;
   `@device-specific`, `@optional`, and `@prebuilt-boundary` mark real
   exceptions — see them in context for what each means.
