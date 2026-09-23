@@ -120,6 +120,28 @@ python3 verification/tools/negative-control.py emulator-5558   # a LineageOS bui
 Checks whose fixtures are not supplied skip rather than fail, so the artefact
 pass runs without a device and the device pass runs without a reference.
 
+## In CI
+
+`verification/.gitlab-ci.yml` declares two jobs, because their requirements
+differ sharply:
+
+* **`verification:coverage`** needs nothing but Python. It regenerates the
+  report and fails when a check names a scenario that no longer exists, or when
+  `COVERAGE.md` is stale — the drift worth catching on every change to
+  `features/`.
+* **`verification:device`** needs a runner with a booted /e/OS emulator, so it
+  is tagged and gated on the serial being set.
+
+The device job publishes a JUnit report, which GitLab renders in the merge
+request. Checks are reported under the **scenario they verify** rather than
+under their Python function name, so what a reviewer reads there is the
+sentence from the specification:
+
+```
+verification.checks.test_branding :: The build identifies itself as /e/OS
+verification.checks.test_release_types :: An unofficial build can still be identified
+```
+
 ## Layout
 
 ```

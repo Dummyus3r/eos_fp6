@@ -1,0 +1,42 @@
+# Verification jobs. Included from the repository's .gitlab-ci.yml.
+#
+# Two jobs, because they have very different requirements:
+#
+#   * `verification:coverage` needs nothing but Python. It regenerates the
+#     coverage report and fails when a check names a scenario that no longer
+#     exists, which is the drift worth catching on every change to features/.
+#   * `verification:device` needs a runner with a booted /e/OS emulator, so it
+#     is tagged and does not block a merge on its own.
+
+.verification:
+  image: python:3.12-slim
+  stage: test
+
+verification:coverage:
+  extends: .verification
+  script:
+    - python3 verification/tools/gen-coverage.py
+    - git diff --exit-code verification/COVERAGE.md
+      || (echo "COVERAGE.md is stale - re-run verification/tools/gen-coverage.py"; exit 1)
+  rules:
+    - changes:
+        - features/**/*
+        - verification/**/*
+
+verification:device:
+  extends: .verification
+  tags: [android-emulator]
+  script:
+    - pip install --quiet pytest
+    - pytest verification/checks
+        --device "$EOS_DEVICE_SERIAL"
+        --reference "$EOS_REFERENCE_SERIAL"
+        --junit-xml=verification-report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: verification-report.xml
+    expire_in: 1 week
+  allow_failure: false
+  rules:
+    - if: $EOS_DEVICE_SERIAL

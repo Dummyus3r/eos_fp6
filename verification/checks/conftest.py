@@ -47,6 +47,23 @@ def pytest_configure(config):
         "markers", "delta: asserts /e/OS content, so it must fail on a LineageOS build")
 
 
+def pytest_collection_modifyitems(items):
+    """Report a check under the scenario it verifies, not under its function name.
+
+    The JUnit report is what a reviewer reads in CI, and `test_build_identifies_as_eos`
+    says less there than the sentence from the specification. The function name
+    stays available as the node id suffix, so `pytest -k` still works on it.
+    """
+    for item in items:
+        marker = item.get_closest_marker("scenario")
+        if not marker or not marker.args:
+            continue
+        key = marker.args[0]
+        title = key.split("::", 1)[-1]
+        params = item.name[len(item.originalname):] if hasattr(item, "originalname") else ""
+        item._nodeid = f"{item.nodeid.split('::')[0]}::{title}{params}"
+
+
 def _serial(request, option: str, why: str) -> str:
     serial = request.config.getoption(option)
     if not serial:
