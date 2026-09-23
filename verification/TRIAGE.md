@@ -7,11 +7,12 @@ Deciding what could ever prove a scenario is a judgement, worth making once.
 
 | level | meaning | scenarios |
 |---|---|---|
-| `measured` | only playing the scenario on the running application shows it | 0 |
-| `observed` | querying the booted system is enough | 0 |
-| `inspected` | reading the built image is enough | 0 |
-| `unverifiable` | no device-level evidence exists for it | 0 |
-| `unreviewed` | no judgement made yet | 348 |
+| `measured` | only playing the scenario on the running application shows it | 164 |
+| `observed` | querying the booted system is enough | 69 |
+| `inspected` | reading the built image is enough | 56 |
+| `repository` | provable against the repositories and the manifest, not the device | 25 |
+| `unverifiable` | nothing can decide it mechanically | 34 |
+| `unreviewed` | no judgement made yet | 0 |
 
 | scenario | level | note |
 |---|---|---|
@@ -80,149 +81,149 @@ Deciding what could ever prove a scenario is a judgement, worth making once.
 | `@BRAND-6` | observed | product name and model are properties |
 | `@BRAND-7` | observed | two devices queried side by side |
 | `@BRAND-8` | measured | only browsing the screens shows what text they carry |
-| `@COMPAT-1` | unreviewed |  |
-| `@COMPAT-2` | unreviewed |  |
-| `@COMPAT-3` | unreviewed |  |
-| `@COMPAT-4` | unreviewed |  |
-| `@COMPAT-5` | unreviewed |  |
-| `@COMPAT-6` | unreviewed |  |
-| `@COMPAT-7` | unreviewed |  |
-| `@COMPAT-8` | unreviewed |  |
-| `@COMPAT-9` | unreviewed |  |
-| `@COMPAT-10` | unreviewed |  |
-| `@COMPAT-11` | unreviewed |  |
-| `@COMPAT-12` | unreviewed |  |
-| `@COMPAT-13` | unreviewed |  |
-| `@COMPAT-14` | unreviewed |  |
-| `@COMPAT-15` | unreviewed |  |
-| `@COMPAT-16` | unreviewed |  |
-| `@COMPAT-17` | unreviewed |  |
-| `@COMPAT-18` | unreviewed |  |
-| `@COMPAT-19` | unreviewed |  |
-| `@COMPAT-20` | unreviewed |  |
-| `@COMPAT-21` | unreviewed |  |
-| `@COMPAT-22` | unreviewed |  |
-| `@COMPAT-23` | unreviewed |  |
-| `@COMPAT-24` | unreviewed |  |
-| `@COMPAT-25` | unreviewed |  |
-| `@COMPAT-26` | unreviewed |  |
-| `@COMPAT-27` | unreviewed |  |
-| `@COMPAT-28` | unreviewed |  |
-| `@COMPAT-29` | unreviewed |  |
-| `@COMPAT-30` | unreviewed |  |
-| `@COMPAT-31` | unreviewed |  |
-| `@COMPAT-32` | unreviewed |  |
-| `@COMPAT-33` | unreviewed |  |
-| `@COMPAT-34` | unreviewed |  |
-| `@COMPAT-35` | unreviewed |  |
-| `@COMPAT-36` | unreviewed |  |
-| `@COMPAT-37` | unreviewed |  |
-| `@COMPAT-38` | unreviewed |  |
-| `@COMPAT-39` | unreviewed |  |
-| `@COMPAT-40` | unreviewed |  |
-| `@COMPAT-41` | unreviewed |  |
-| `@COMPAT-42` | unreviewed |  |
-| `@COMPAT-43` | unreviewed |  |
-| `@COMPAT-44` | unreviewed |  |
-| `@COMPAT-45` | unreviewed |  |
-| `@COMPAT-46` | unreviewed |  |
-| `@DEV-1` | unreviewed |  |
-| `@DEV-2` | unreviewed |  |
-| `@DEV-3` | unreviewed |  |
-| `@DEV-4` | unreviewed |  |
-| `@DEV-5` | unreviewed |  |
-| `@DEV-6` | unreviewed |  |
-| `@DEV-7` | unreviewed |  |
-| `@DEV-8` | unreviewed |  |
-| `@DEV-9` | unreviewed |  |
-| `@DEV-10` | unreviewed |  |
-| `@DEV-11` | unreviewed |  |
-| `@DEV-12` | unreviewed |  |
-| `@DEV-13` | unreviewed |  |
-| `@DEV-14` | unreviewed |  |
-| `@DEV-15` | unreviewed |  |
-| `@DEV-16` | unreviewed |  |
-| `@DEV-17` | unreviewed |  |
-| `@DEV-18` | unreviewed |  |
-| `@DEV-19` | unreviewed |  |
-| `@DEV-20` | unreviewed |  |
-| `@DEV-21` | unreviewed |  |
-| `@DEV-22` | unreviewed |  |
-| `@DEV-23` | unreviewed |  |
-| `@DEV-24` | unreviewed |  |
-| `@DEV-25` | unreviewed |  |
-| `@DEV-26` | unreviewed |  |
-| `@DEV-27` | unreviewed |  |
-| `@DEV-28` | unreviewed |  |
-| `@DEV-29` | unreviewed |  |
-| `@DEV-30` | unreviewed |  |
-| `@DEV-31` | unreviewed |  |
-| `@DEV-32` | unreviewed |  |
-| `@DEV-33` | unreviewed |  |
-| `@DEV-34` | unreviewed |  |
-| `@DEV-35` | unreviewed |  |
-| `@DEV-36` | unreviewed |  |
-| `@DEV-37` | unreviewed |  |
-| `@DEV-38` | unreviewed |  |
-| `@DEV-39` | unreviewed |  |
-| `@ID-1` | unreviewed |  |
-| `@ID-2` | unreviewed |  |
-| `@ID-3` | unreviewed |  |
-| `@ID-4` | unreviewed |  |
-| `@ID-5` | unreviewed |  |
-| `@ID-6` | unreviewed |  |
-| `@ID-7` | unreviewed |  |
-| `@ID-8` | unreviewed |  |
-| `@ID-9` | unreviewed |  |
-| `@NET-1` | unreviewed |  |
-| `@NET-2` | unreviewed |  |
-| `@NET-3` | unreviewed |  |
-| `@NET-4` | unreviewed |  |
-| `@NET-5` | unreviewed |  |
-| `@NET-6` | unreviewed |  |
-| `@NET-7` | unreviewed |  |
-| `@NET-8` | unreviewed |  |
-| `@NET-9` | unreviewed |  |
-| `@NET-10` | unreviewed |  |
-| `@PRIV-1` | unreviewed |  |
-| `@PRIV-2` | unreviewed |  |
-| `@PRIV-3` | unreviewed |  |
-| `@PRIV-4` | unreviewed |  |
-| `@PRIV-5` | unreviewed |  |
-| `@PRIV-6` | unreviewed |  |
-| `@PRIV-7` | unreviewed |  |
-| `@PRIV-8` | unreviewed |  |
-| `@PRIV-9` | unreviewed |  |
-| `@PRIV-10` | unreviewed |  |
-| `@PRIV-11` | unreviewed |  |
-| `@PRIV-12` | unreviewed |  |
-| `@PRIV-13` | unreviewed |  |
-| `@PRIV-14` | unreviewed |  |
-| `@PRIV-15` | unreviewed |  |
-| `@PRIV-16` | unreviewed |  |
-| `@PRIV-17` | unreviewed |  |
-| `@PRIV-18` | unreviewed |  |
-| `@PRIV-19` | unreviewed |  |
-| `@PRIV-20` | unreviewed |  |
-| `@PRIV-21` | unreviewed |  |
-| `@PRIV-22` | unreviewed |  |
-| `@PRIV-23` | unreviewed |  |
-| `@PRIV-24` | unreviewed |  |
-| `@PRIV-25` | unreviewed |  |
-| `@PRIV-26` | unreviewed |  |
-| `@PRIV-27` | unreviewed |  |
-| `@PRIV-28` | unreviewed |  |
-| `@PRIV-29` | unreviewed |  |
-| `@PRIV-30` | unreviewed |  |
-| `@PRIV-31` | unreviewed |  |
-| `@PRIV-32` | unreviewed |  |
-| `@PRIV-33` | unreviewed |  |
-| `@PRIV-34` | unreviewed |  |
-| `@PRIV-35` | unreviewed |  |
-| `@PRIV-36` | unreviewed |  |
-| `@PRIV-37` | unreviewed |  |
-| `@PRIV-38` | unreviewed |  |
-| `@PRIV-39` | unreviewed |  |
+| `@COMPAT-1` | measured | an APK has to be installed for the check to run |
+| `@COMPAT-2` | measured | the grant only exists once installed |
+| `@COMPAT-3` | measured | same, for the permission not granted |
+| `@COMPAT-4` | measured | Android Auto has to start |
+| `@COMPAT-5` | observed | the automotive role is queryable |
+| `@COMPAT-6` | observed | the companion device allowlist is queryable |
+| `@COMPAT-7` | measured | the refusal happens at install time |
+| `@COMPAT-8` | measured | same |
+| `@COMPAT-9` | measured | same |
+| `@COMPAT-10` | measured | verification is a runtime fetch |
+| `@COMPAT-11` | measured | opening a link is a navigation result |
+| `@COMPAT-12` | measured | same, for a site that opts out |
+| `@COMPAT-13` | measured | installer attribution only exists after an install |
+| `@COMPAT-14` | measured | the absence of per-app confirmation is a flow |
+| `@COMPAT-15` | measured | link handling without a disambiguation dialog |
+| `@COMPAT-16` | measured | attribution for another installer |
+| `@COMPAT-17` | inspected | microG feature flags are in microg.xml in the image |
+| `@COMPAT-18` | inspected | same |
+| `@COMPAT-19` | inspected | same |
+| `@COMPAT-20` | inspected | same |
+| `@COMPAT-21` | inspected | same |
+| `@COMPAT-22` | inspected | same |
+| `@COMPAT-23` | inspected | same |
+| `@COMPAT-24` | inspected | same |
+| `@COMPAT-25` | inspected | same |
+| `@COMPAT-26` | inspected | the allowlist is an XML file in the image |
+| `@COMPAT-27` | inspected | same, for the narrower store stub set |
+| `@COMPAT-28` | measured | signature spoofing only happens at query time |
+| `@COMPAT-29` | measured | the refusal for a third party is runtime |
+| `@COMPAT-30` | inspected | the allowed list is a configuration file |
+| `@COMPAT-31` | observed | the accepted location provider is queryable |
+| `@COMPAT-32` | measured | Doze behaviour needs the device idle |
+| `@COMPAT-33` | observed | the enabled microG features are readable once running |
+| `@COMPAT-34` | measured | the settings entry leads somewhere |
+| `@COMPAT-35` | observed | the reported fingerprint and model are properties |
+| `@COMPAT-36` | measured | attestation has to be requested |
+| `@COMPAT-37` | measured | a legitimate attestation has to be served |
+| `@COMPAT-38` | observed | the verified boot state is a property |
+| `@COMPAT-39` | observed | the build number is a property |
+| `@COMPAT-40` | inspected | whether the daemon ships is a build fact |
+| `@COMPAT-41` | inspected | same |
+| `@COMPAT-42` | inspected | same |
+| `@COMPAT-43` | inspected | the per-device configuration is a file in the image |
+| `@COMPAT-44` | observed | the reported values are properties |
+| `@COMPAT-45` | observed | comparing two builds' properties |
+| `@COMPAT-46` | observed | the displayed variant is a property |
+| `@DEV-1` | inspected | the archive is produced by the build |
+| `@DEV-2` | inspected | its contents are readable |
+| `@DEV-3` | inspected | which fastboot is bundled |
+| `@DEV-4` | unverifiable | requires a real device in fastboot; no emulator equivalent |
+| `@DEV-5` | unverifiable | requires a locked bootloader |
+| `@DEV-6` | unverifiable | same |
+| `@DEV-7` | unverifiable | requires a flash to fail on hardware |
+| `@DEV-8` | unverifiable | requires the device's own flashing sequence |
+| `@DEV-9` | unverifiable | requires a real flash |
+| `@DEV-10` | unverifiable | requires the rollback index on hardware |
+| `@DEV-11` | unverifiable | requires a real device to reboot |
+| `@DEV-12` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-13` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-14` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-15` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-16` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-17` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-18` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-19` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-20` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-21` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-22` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-23` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-24` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-25` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-26` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-27` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-28` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-29` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-30` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-31` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-32` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-33` | unverifiable | needs the hardware this describes; no emulator equivalent |
+| `@DEV-34` | inspected | the emulator's partition sizes are a build fact |
+| `@DEV-35` | unverifiable | the recovery is a separate image, not reachable from Android |
+| `@DEV-36` | unverifiable | same |
+| `@DEV-37` | unverifiable | same |
+| `@DEV-38` | unverifiable | same |
+| `@DEV-39` | measured | that the wizard never offers it is part of the walk |
+| `@ID-1` | observed | entry position in the settings hierarchy |
+| `@ID-2` | measured | ordering in the accounts list needs the screen |
+| `@ID-3` | measured | which application opens is a navigation result |
+| `@ID-4` | observed | granted permissions |
+| `@ID-5` | measured | preselection is visible in the editor |
+| `@ID-6` | measured | the saved contact has to be created and read back |
+| `@ID-7` | measured | duplicate address books show on the screen |
+| `@ID-8` | measured | the dialog text has to be raised |
+| `@ID-9` | measured | the description is on a settings screen |
+| `@NET-1` | measured | APN selection happens against a carrier |
+| `@NET-2` | inspected | the MVNO entry exists in the shipped database |
+| `@NET-3` | repository | whether /e/OS carries the correction is a repository fact |
+| `@NET-4` | inspected | which database ships is a build fact |
+| `@NET-5` | repository | schema validation is a CI step on the database |
+| `@NET-6` | measured | what the picker offers needs the screen |
+| `@NET-7` | measured | what tethered clients receive is runtime |
+| `@NET-8` | measured | the diagnostic target is only visible when it runs |
+| `@NET-9` | measured | the suggested value is on a screen |
+| `@NET-10` | observed | the scan exemption is queryable |
+| `@PRIV-1` | inspected | the NTP host is a configuration value in the image |
+| `@PRIV-2` | inspected | the default DNS is a configuration value |
+| `@PRIV-3` | measured | what the private DNS picker offers needs the screen |
+| `@PRIV-4` | inspected | the captive portal URLs are configuration values |
+| `@PRIV-5` | inspected | the entitlement host is a configuration value |
+| `@PRIV-6` | observed | which provider is registered is queryable |
+| `@PRIV-7` | measured | the privacy indicator appears while locating |
+| `@PRIV-8` | measured | the address lookup flow has to run |
+| `@PRIV-9` | measured | the absence of a link needs the screens browsed |
+| `@PRIV-10` | measured | registration only happens at runtime |
+| `@PRIV-11` | measured | same, for a carrier that needs it |
+| `@PRIV-12` | measured | the faked coordinates only exist at request time |
+| `@PRIV-13` | measured | same, for an unaffected application |
+| `@PRIV-14` | measured | updates have to be delivered |
+| `@PRIV-15` | measured | the geofence has to be evaluated |
+| `@PRIV-16` | measured | the per-caller resolution happens at request time |
+| `@PRIV-17` | measured | the fallback to the real location |
+| `@PRIV-18` | observed | that Advanced Privacy is a system application is queryable |
+| `@PRIV-19` | measured | the package query result depends on the caller |
+| `@PRIV-20` | measured | same |
+| `@PRIV-21` | measured | same, with several applications |
+| `@PRIV-22` | measured | taking effect without a reboot is a runtime property |
+| `@PRIV-23` | measured | per-user behaviour needs two users |
+| `@PRIV-24` | observed | the setting's visibility is queryable |
+| `@PRIV-25` | measured | an empty list hiding nothing is a runtime result |
+| `@PRIV-26` | measured | the absence of a setup screen is the walk |
+| `@PRIV-27` | measured | the absence of a settings entry |
+| `@PRIV-28` | observed | the default switch state is a setting |
+| `@PRIV-29` | measured | the choice has to be made, then stored |
+| `@PRIV-30` | measured | the identifier is displayed on a screen |
+| `@PRIV-31` | measured | stability across reboots needs two reboots |
+| `@PRIV-32` | measured | the grouping is a developer options screen |
+| `@PRIV-33` | measured | the resolver's interaction with the blocker is runtime |
+| `@PRIV-34` | measured | same |
+| `@PRIV-35` | measured | per-application decisions at resolution time |
+| `@PRIV-36` | measured | behaviour when the blocker is absent |
+| `@PRIV-37` | measured | behaviour when it does not answer |
+| `@PRIV-38` | measured | early boot resolution |
+| `@PRIV-39` | inspected | the SELinux rule is a policy file |
 | `@PROC-1` | repository | the upstream merge is visible in the branch history |
 | `@PROC-2` | repository | the AOSP tag is read from the manifest of the branch |
 | `@PROC-3` | repository | a failed merge leaves the branch on its last good state |
@@ -237,16 +238,16 @@ Deciding what could ever prove a scenario is a judgement, worth making once.
 | `@PROC-12` | repository | which branches carry a fork is readable from the manifests |
 | `@PROC-13` | repository | same, for the release branch |
 | `@PROC-14` | repository | comparing the fork counts of two manifests |
-| `@SETUP-1` | unreviewed |  |
-| `@SETUP-2` | unreviewed |  |
-| `@SETUP-3` | unreviewed |  |
-| `@SETUP-4` | unreviewed |  |
-| `@SETUP-5` | unreviewed |  |
-| `@SETUP-6` | unreviewed |  |
-| `@SETUP-7` | unreviewed |  |
-| `@SETUP-8` | unreviewed |  |
-| `@SETUP-9` | unreviewed |  |
-| `@SETUP-10` | unreviewed |  |
+| `@SETUP-1` | measured | the step is offered only once an account exists |
+| `@SETUP-2` | measured | the account has to be registered before the restore |
+| `@SETUP-3` | measured | the absence of the step without an account |
+| `@SETUP-4` | measured | the short-circuit is a traversal difference |
+| `@SETUP-5` | measured | declining keeps the normal sequence |
+| `@SETUP-6` | measured | the toggle state after the wizard, on a locked device |
+| `@SETUP-7` | measured | same, left alone when unlocked |
+| `@SETUP-8` | measured | enrolment from a QR code is a flow |
+| `@SETUP-9` | measured | the signature check happens during provisioning |
+| `@SETUP-10` | measured | an already provisioned device not starting again |
 | `@SETUP-11` | measured | the welcome screen has to be reached and read |
 | `@SETUP-12` | measured | the order is the sequence the walk traverses |
 | `@SETUP-13` | measured | the two options only exist on the screen |
