@@ -21,9 +21,20 @@ it. The identifier goes on the `Feature:`: "this merge request serves R6" is
 what someone writes, and citing a facet would say less than citing what it is a
 facet of.
 
-Numbering is flat, `@R-n`, not prefixed per area. There are sixteen
-requirements; a short number is easier to say out loud, and the areas are
-already visible in the folder.
+Numbering is flat, `@R-n`, where `features/` prefixes by area. The reason is
+not that there are only sixteen — that argument ages badly, and it would apply
+to `features/` too. It is that the two corpora are cited side by side: a
+`# Proven by:` line puts scenario identifiers under a requirement, and a merge
+request writes "serves R6, proven by PRIV-33". Prefixing requirements by area
+would put `privacy` on both sides of that sentence — `@PRIV-3` could be either,
+and `@RPRIV-3` differs from `@PRIV-3` by one character, which is a source of
+error rather than a help. A flat `@R-n` is recognisable at a glance.
+
+The trade-off is that a requirement number carries no hint of where it lives.
+That is affordable at this size and would stop being so somewhere past fifty
+requirements — at which point it could no longer be changed, since the numbers
+would be cited. If the register ever approaches that, the question to settle is
+not the prefix but whether `requirements/` has become a second `features/`.
 
 ## One word for one thing: requirement, not promise
 
