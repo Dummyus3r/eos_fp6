@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@localization @requirement
+@localization @requirement @P-3
 Feature: The system is usable in at least English, French, Spanish, German, and Italian
 
   The system UI and every preinstalled application are fully translated in

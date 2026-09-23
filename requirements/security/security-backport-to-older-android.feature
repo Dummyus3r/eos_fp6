@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@security @requirement
+@security @requirement @P-8
 Feature: Security fixes are backported to older Android versions as soon as possible
 
   A device running an older Android version /e/OS still supports must not be

@@ -1,6 +1,7 @@
-# Proven by: features/privacy/tracker-blocking-dns.feature
+# Proven by: @PRIV-33, @PRIV-34, @PRIV-35, @PRIV-36, @PRIV-37, @PRIV-38,
+#            @PRIV-39
 
-@privacy @requirement
+@privacy @requirement @P-6
 Feature: A blocked tracker never reaches the network
 
   When the tracker blocker has decided to block a hostname for an

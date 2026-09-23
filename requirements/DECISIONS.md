@@ -13,3 +13,26 @@ Recorded here so the next pass does not re-litigate them.
 | Android-version support duration for official devices | Beyond the EU legal minimum, as far as technically possible, delivered via OTA update. |
 | Community devices without a newer Android version | Same duration as the general Android-version support rule — OTA updates for as long as /e/OS supports that version, no separate community cutoff. |
 | Community devices with a newer Android version available | The new version is made available (no OTA version-upgrade — migration stays manual); the previous version's builds stop after a transition period. |
+
+## The promise is the citable unit, not its scenarios
+
+A requirement file holds one `Feature:` — the promise — and scenarios that
+illustrate facets of it. The identifier goes on the promise: "this merge request
+serves P6" is what someone writes, and citing a facet would say less than citing
+what it is a facet of.
+
+Numbering is flat, `@P-n`, not prefixed per area. There are sixteen promises; a
+short number is easier to say out loud, and the areas are already visible in the
+folder.
+
+## Citations move from paths to identifiers, gradually
+
+`# Proven by:` originally named `features/` files. A file holds many scenarios
+and usually only some of them prove the promise, so the path says less than it
+appears to — and it breaks when the file is renamed.
+
+Citing scenarios by identifier fixes both. Converting the existing citations is
+editorial work, though: it takes deciding which scenarios actually prove a
+promise, which is a judgement, not a transformation. So the generator accepts
+both forms and reports the ones still at file granularity rather than guessing
+at the narrowing.

@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@user-experience @requirement
+@user-experience @requirement @P-15
 Feature: The UI and UX are reworked to be usable by a mainstream audience
 
   /e/OS is not just LineageOS with different defaults: its interface and
