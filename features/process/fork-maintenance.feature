@@ -31,23 +31,27 @@ Feature: Keeping the fork current with LineageOS
 
   Rule: Every fork is merged from its upstream on a schedule
 
+    @PROC-1
     Scenario: A project forked from LineageOS
       Given the project has a LineageOS counterpart on the matching branch
       When the scheduled pipeline runs on the development branch
       Then the LineageOS branch is merged into the /e/OS development branch
       And the result is pushed without a human intervening
 
+    @PROC-2
     Scenario: A project forked from AOSP rather than from LineageOS
       Given the project has no LineageOS counterpart branch
       When the scheduled pipeline runs
       Then the AOSP tag declared in the manifest is merged instead
       And the tag is read from the manifest of the branch being updated, not hardcoded
 
+    @PROC-3
     Scenario: The merge conflicts
       Given the upstream merge does not apply cleanly
       Then the pipeline fails
       And the project stays on its last good state until someone resolves it
 
+    @PROC-4
     Scenario: The pipeline only runs where it is meant to
       Given a pipeline is triggered by something other than the schedule
       Then the upstream merge does not run
@@ -60,22 +64,26 @@ Feature: Keeping the fork current with LineageOS
     turn every later upstream merge into a conflict resolution against stale
     code.
 
+    @PROC-5
     Scenario: A project forked from LineageOS
       Given a new Android generation
       When its /e/OS development branch is created
       Then it is cut at that generation's LineageOS branch
       And it carries no /e/OS content at that point
 
+    @PROC-6
     Scenario: A project forked from AOSP rather than from LineageOS
       Given the project has no LineageOS branch for that generation
       When its /e/OS development branch is created
       Then it is cut at the AOSP tag named in the manifest for that generation
 
+    @PROC-7
     Scenario: The /e/OS work is re-applied, not inherited
       Given the branch has been cut at upstream
       Then the /e/OS changes are brought in on top through merge requests
       And nothing is merged from the previous generation's branch
 
+    @PROC-8
     Scenario: The delta stays legible
       Given a generation's branch has been prepared
       Then the difference between it and its upstream is exactly the /e/OS work
@@ -83,6 +91,7 @@ Feature: Keeping the fork current with LineageOS
 
   Rule: Each Android generation tracks its own upstream
 
+    @PROC-9
     Scenario Outline: A development branch is bound to one LineageOS branch
       Given the /e/OS development branch is "<local>"
       Then it is merged from the LineageOS branch "<upstream>"
@@ -98,10 +107,12 @@ Feature: Keeping the fork current with LineageOS
     Release work happens on a release branch, cut from the development branch.
     Without this, a fix shipped in a release would be lost at the next one.
 
+    @PROC-10
     Scenario: A commit pushed to a release branch
       Given a commit is pushed to a release branch of an Android generation
       Then it is merged back into that generation's development branch automatically
 
+    @PROC-11
     Scenario: A branch that is not a release branch
       Given a commit is pushed to a branch that is not named as a release branch
       Then nothing is merged back automatically
@@ -113,16 +124,19 @@ Feature: Keeping the fork current with LineageOS
     patch can be carried ahead of LineageOS. The second kind is created on the
     release branch and has no reason to exist on the development branch.
 
+    @PROC-12
     Scenario: A project forked to carry /e/OS changes
       Given a project /e/OS modifies
       Then it is forked on both the development branch and the release branches
 
+    @PROC-13
     Scenario: A project forked only to carry a security patch
       Given a project /e/OS does not otherwise modify
       And a security bulletin fix has to be carried ahead of LineageOS
       Then it is forked on the release branch
       And it need not be forked on the development branch
 
+    @PROC-14
     Scenario: Reading the manifest
       Given a reader compares the development and release manifests
       Then the difference in the number of forks is explained by the security patch forks

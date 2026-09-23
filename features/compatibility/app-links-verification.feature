@@ -14,18 +14,21 @@ Feature: App links are verified right after installation
   Background:
     Given the device runs /e/OS
 
+  @COMPAT-10
   Scenario: Verification happens on battery
     Given the device is not plugged in
     When the user installs an application that declares verified web links
     Then the platform fetches the site's digital asset links file
     And the links are marked as verified
 
+  @COMPAT-11
   Scenario: The verified application opens its own links
     Given an application's web links have been verified
     When the user opens one of those links
     Then the application opens it directly
     And no disambiguation dialog is shown
 
+  @COMPAT-12
   Scenario: Verification still respects the site
     Given a site does not list the application in its digital asset links file
     When the application is installed

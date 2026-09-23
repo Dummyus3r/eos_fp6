@@ -22,6 +22,7 @@ Feature: System-wide tracker blocking at DNS resolution
     Given the device runs /e/OS
     And the tracker-blocker service listens on the abstract unix socket "foundation.e.advancedprivacy"
 
+  @PRIV-33
   Scenario: A blocked hostname never reaches a DNS server
     Given the tracker blocker is configured to block "tracker.example.com" for the calling application
     When the application resolves "tracker.example.com"
@@ -30,12 +31,14 @@ Feature: System-wide tracker blocking at DNS resolution
     And the resolution is rewritten to "localhost"
     And no DNS query for "tracker.example.com" leaves the device
 
+  @PRIV-34
   Scenario: An allowed hostname resolves normally
     Given the tracker blocker is configured to allow "api.example.com" for the calling application
     When the application resolves "api.example.com"
     Then the tracker blocker answers "pass"
     And the resolution proceeds against the configured DNS servers
 
+  @PRIV-35
   Scenario: Blocking is decided per application
     Given the tracker blocker blocks "metrics.example.com" for application "com.example.one"
     And the tracker blocker allows "metrics.example.com" for application "com.example.two"
@@ -50,23 +53,27 @@ Feature: System-wide tracker blocking at DNS resolution
     blocker that is absent, starting, crashed or uninstalled must degrade to
     "allow", never to "no connectivity".
 
+    @PRIV-36
     Scenario: The tracker blocker is not running
       Given nothing is listening on the tracker-blocker socket
       When an application resolves any hostname
       Then the resolver does not block the resolution
       And connectivity check probes succeed
 
+    @PRIV-37
     Scenario: The tracker blocker does not answer
       Given the tracker-blocker socket accepts the connection but sends no reply
       When an application resolves any hostname
       Then the resolver does not block the resolution
 
+    @PRIV-38
     Scenario: Resolution during early boot
       Given the device has just booted and the tracker blocker has not started yet
       When the connectivity service resolves the captive portal URL
       Then the resolution succeeds
       And the resolver configuration is applied without error
 
+  @PRIV-39
   Scenario: The blocker is reachable from a sandboxed platform app
     Given the tracker blocker runs as a platform application
     Then SELinux allows it to create and listen on the unix socket used by the resolver

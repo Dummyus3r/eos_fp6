@@ -26,6 +26,7 @@ Feature: The Settings home page is organised around /e/OS
   Background:
     Given the device runs /e/OS
 
+  @SYS-40
   Scenario: The /e/OS entries are at the top of the settings home page
     When the user opens Settings
     Then the accounts entry is at the top level
@@ -35,30 +36,37 @@ Feature: The Settings home page is organised around /e/OS
     And the parental control entry is at the top level
     And the Find My Device entry is at the top level
 
+  @SYS-41
   Scenario: Google-oriented suggestion cards are gone
     When the user opens Settings
     Then no smart cleanup card is shown
     And no contextual suggestion card is shown
 
+  @SYS-42
   Scenario: Placeholders are removed
     When the user opens the security settings
     Then no empty placeholder entry is shown
 
+  @SYS-43
   Scenario: The version entry names /e/OS
     When the user opens "About phone"
     Then the system version entry is titled with the /e/OS name
 
+  @SYS-44
   Scenario: /e/OS legal information is available
     When the user opens the legal information
     Then the /e/OS licence and legal notices are listed
 
+  @SYS-45
   Scenario: Feedback goes to /e/OS
     When the user sends feedback from Settings
     Then it is addressed to the /e/OS contact address
 
+  @SYS-46
   Scenario: The homepage icons follow the /e/OS style
     Then the homepage entry icons are rendered with the /e/OS treatment
 
+  @SYS-47
   Scenario: The settings tree is usable on a tablet
     Given the device is a tablet
     When the user opens Settings

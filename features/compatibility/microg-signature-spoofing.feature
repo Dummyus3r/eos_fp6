@@ -22,6 +22,7 @@ Feature: microG support out of the box
     Given the device runs /e/OS
     And microG and the FakeStore are preinstalled as system applications
 
+  @COMPAT-28
   Scenario: microG reports itself as Play services
     When an application queries the signature of the Play services package
     Then it is given the signature microG declares
@@ -29,30 +30,36 @@ Feature: microG support out of the box
 
   Rule: Signature spoofing is restricted to system applications
 
+    @COMPAT-29
     Scenario: A third-party application cannot spoof a signature
       Given a third-party application declares the fake-signature permission
       When it is installed
       Then the permission is not granted
       And it reports its own signature
 
+    @COMPAT-30
     Scenario: Only explicitly allowed system packages spoof
       When the list of packages granted the fake-signature permission is inspected
       Then it contains only microG and the FakeStore
 
+  @COMPAT-31
   Scenario: microG can act as a location provider
     When microG registers a network location provider
     Then the platform accepts it
 
+  @COMPAT-32
   Scenario: microG keeps working under Doze
     Given the device is idle
     When microG needs to deliver a push message
     Then it is allowed to leave the idle allowlist temporarily
     And it is exempted from power-save restrictions
 
+  @COMPAT-33
   Scenario: microG arrives preconfigured
     Then the microG features /e/OS enables are already on
     # Which ones, and what they imply: compatibility/microg-configuration.feature
 
+  @COMPAT-34
   Scenario: The user can configure microG from the settings
     When the user opens the /e/OS settings
     Then an "App compatibility" entry leads to the microG settings

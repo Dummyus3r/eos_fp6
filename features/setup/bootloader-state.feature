@@ -9,12 +9,14 @@ Feature: OEM unlocking is turned off once the device is secured
   enabled can be unlocked and wiped by anyone holding it. /e/OS closes that gap
   during setup.
 
+  @SETUP-6
   Scenario: The toggle is turned off on a locked device
     Given the device bootloader is locked
     And OEM unlocking is enabled
     When the first-time setup wizard runs
     Then OEM unlocking is turned off
 
+  @SETUP-7
   Scenario: An unlocked device is left alone
     Given the device bootloader is unlocked
     When the first-time setup wizard runs

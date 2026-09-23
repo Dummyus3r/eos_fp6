@@ -22,23 +22,27 @@ Feature: Restoring a backup during first-time setup
   Background:
     Given a device running /e/OS that has never been set up
 
+  @SETUP-1
   Scenario: The restore step is offered once an account is available
     Given the user has signed into their Murena Workspace account during setup
     When the wizard continues
     Then a restore step is offered
     And the user can choose to restore a backup or to continue without one
 
+  @SETUP-2
   Scenario: The account is usable before the restore runs
     Given the user has just signed into their Murena Workspace account
     When the restore step starts
     Then the account is already registered on the device
     And the restore can read the user's backups
 
+  @SETUP-3
   Scenario: The restore step is skipped without an account
     Given the user skipped the Murena Workspace account step
     When the wizard continues
     Then no restore step is offered
 
+  @SETUP-4
   Scenario: A completed restore short-circuits the remaining preference steps
     Given the user has restored a backup
     When the wizard continues
@@ -47,6 +51,7 @@ Feature: Restoring a backup during first-time setup
     And the navigation settings step is skipped
     And the restored values are kept
 
+  @SETUP-5
   Scenario: Declining the restore keeps the normal flow
     Given the user chose not to restore
     Then the theme, Find My Device and navigation steps are shown as usual

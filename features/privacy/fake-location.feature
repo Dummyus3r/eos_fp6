@@ -21,39 +21,47 @@ Feature: Per-application fake location
     Given the device runs /e/OS
     And Advanced Privacy exposes the content provider "content://foundation.e.advancedprivacy.fakelocations"
 
+  @PRIV-12
   Scenario: A single application gets the faked coordinates
     Given the user has set a fake location for application "com.example.social"
     When "com.example.social" requests the current location
     Then the latitude and longitude it receives are the ones configured by the user
     And the location is reported as coming from the fused provider
 
+  @PRIV-13
   Scenario: Other applications are unaffected
     Given the user has set a fake location for application "com.example.social"
     When application "com.example.maps" requests the current location
     Then it receives the real device location
 
+  @PRIV-14
   Scenario: Location updates are faked too
     Given the user has set a fake location for application "com.example.social"
     And "com.example.social" has registered for location updates
     When the device moves
     Then every update delivered to "com.example.social" carries the configured coordinates
 
+  @PRIV-15
   Scenario: Geofences follow the faked location
     Given the user has set a fake location for application "com.example.social"
     When "com.example.social" registers a geofence around its faked position
     Then the geofence is evaluated against the faked position
 
+  @PRIV-16
   Scenario: The override is resolved per calling application, not per process
     Given two applications share a UID
     And a fake location is configured only for the first one
     When the second one requests the current location
     Then it receives the real device location
 
+  @PRIV-17
   Scenario: No override configured
     Given no fake location is configured for any application
     When any application requests the current location
     Then it receives the real device location
 
-  # NOT SPECIFIED: what should happen if Advanced Privacy is removed from the
-  # device. The code falls through to the real location, but that is the
-  # consequence of the implementation, not a decided behaviour. See TODO.md.
+  @PRIV-18
+  Scenario: Advanced Privacy is a system application and cannot be removed
+    Then the "no override configured" behaviour above is the only fallback
+    this device can ever be in — Advanced Privacy is a system app, not
+    something the user can uninstall

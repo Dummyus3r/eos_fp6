@@ -16,21 +16,25 @@ Feature: App Lounge behaves as the device's application store
     Given the device runs /e/OS
     And App Lounge is the preinstalled application store
 
+  @COMPAT-13
   Scenario: The install source is self-consistent
     Given an application was installed through App Lounge
     When that application queries its own install source
     Then the initiating package and the installing package are the same
     And an anti-tampering SDK that compares them finds them consistent
 
+  @COMPAT-14
   Scenario: Installing from App Lounge does not prompt for every application
     Given the user has allowed App Lounge to install applications
     When App Lounge installs or updates an application
     Then the user is not asked to confirm each individual installation
 
+  @COMPAT-15
   Scenario: App Lounge handles its own links
     When a link that belongs to App Lounge is opened
     Then App Lounge handles it without a disambiguation dialog
 
+  @COMPAT-16
   Scenario: Other installers are unaffected
     Given the user installs an APK from a file manager
     When the installed application queries its install source

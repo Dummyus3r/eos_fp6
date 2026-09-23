@@ -27,51 +27,61 @@ Feature: No Google server is contacted by default
     Given a freshly flashed /e/OS device
     And the user has not installed any additional application
 
+  @PRIV-1
   Scenario: Time synchronisation does not use Google
     When the device synchronises its clock
     Then it contacts "ntp://pool.ntp.org"
     And no Google time server is contacted
 
+  @PRIV-2
   Scenario: Default DNS is Quad9
     When the device needs a fallback DNS server
     Then it uses 9.9.9.9
     And the hint shown when entering a DNS server manually is 9.9.9.9
 
+  @PRIV-3
   Scenario: Private DNS offers a privacy-respecting provider
     Given LineageOS offers Cloudflare as its one-tap private DNS provider
     When the user opens the private DNS settings on /e/OS
     Then Quad9 is offered in its place
     And selecting it sets the private DNS hostname to "dns.quad9.net"
 
+  @PRIV-4
   Scenario: Captive portal detection does not use Google
     When the device probes for a captive portal
     Then it probes "http://connectivity.murena.io" and "https://connectivity.murena.io"
     And the fallback probes are "http://204.murena.io" and "http://murena.io/generate_204"
     And no Google connectivity-check URL is used
 
+  @PRIV-5
   Scenario: Connectivity and entitlement checks do not use Google
     When the telephony stack performs an HTTP reachability check
     Then it targets a non-Google host
 
+  @PRIV-6
   Scenario: Network and fused location providers can be supplied by microG
     When the system looks for a network location provider
     Then a signature-matching provider such as microG's may be installed at runtime
     And the same applies to the fused location provider
 
+  @PRIV-7
   Scenario: Location backends do not trip the privacy indicators
     Given the ichnaea and nominatim location backends are installed
     When they resolve a position on behalf of another application
     Then they do not raise a separate location indicator of their own
 
+  @PRIV-8
   Scenario: Address lookup does not fall back to Google Maps
     When the user taps a postal address in a contact
     Then the device offers the installed maps application
     And it does not open a Google Maps web page
 
+  @PRIV-9
   Scenario: Settings contain no Google links
     When the user browses Settings
     Then no entry links to a Google support page or animation
 
+  @PRIV-10
   Scenario: No Firebase registration unless the carrier needs it
     Given the SIM's carrier does not require IMS service entitlement over Firebase
     When the entitlement service starts
@@ -79,6 +89,7 @@ Feature: No Google server is contacted by default
     And no token is requested from Google
     # LineageOS registers for every user on every carrier.
 
+  @PRIV-11
   Scenario: A carrier that does need it still works
     Given the SIM's carrier requires IMS service entitlement over Firebase
     When the entitlement service starts

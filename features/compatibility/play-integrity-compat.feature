@@ -24,25 +24,30 @@ Feature: Applications that check device integrity keep working
     Given the device runs /e/OS
     And the build ships the integrity compatibility daemon
 
+  @COMPAT-35
   Scenario: Basic integrity checks pass
     When an application runs a device-integrity check
     Then the reported build fingerprint, model, device and product are those of a stock build
     And the build type and tags are those of a release build
 
+  @COMPAT-36
   Scenario: Hardware-backed attestation is not used against the device
     When the integrity check opportunistically requests a hardware key attestation
     Then the platform reports that key attestation is unavailable
     And the check falls back to its basic path
 
+  @COMPAT-37
   Scenario: Legitimate uses of key attestation still work
     Given an application other than the integrity checker requests a key attestation
     When the request is made
     Then it is served normally
 
+  @COMPAT-38
   Scenario: Verified boot reports a green state
     When an application reads the verified boot state
     Then it reads "green" rather than "yellow"
 
+  @COMPAT-39
   Scenario: The build does not advertise itself as a debug build
     When the user opens "About phone"
     Then the build number does not contain "debug"
@@ -56,21 +61,25 @@ Feature: Applications that check device integrity keep working
     "user" build never gets the daemon, whatever the release type. The release
     types themselves are specified in updates/release-types.feature.
 
+    @COMPAT-40
     Scenario: A user build
       Given the build variant is "user"
       Then the integrity compatibility daemon is not included in the image
       And this holds even for an official or community release
 
+    @COMPAT-41
     Scenario: A community or official build that is not a user build
       Given the build variant is not "user"
       And the release type is official or community
       Then the integrity compatibility daemon is included in the image
 
+    @COMPAT-42
     Scenario: Any other build
       Given the build variant is not "user"
       And the release type is not official or community
       Then the integrity compatibility daemon is not included in the image
 
+    @COMPAT-43
     Scenario: The daemon is configured per device
       Given the integrity compatibility daemon is included
       Then a device-specific configuration is installed when one exists
@@ -82,15 +91,18 @@ Feature: Applications that check device integrity keep working
     verified boot state are platform changes; they are present whatever the
     build variant and whatever the release type. Only the daemon is gated.
 
+    @COMPAT-44
     Scenario: A user build still reports a stock build
       Given the build variant is "user"
       Then the reported build fingerprint, model, device and product are still those of a stock build
       And key attestation is still withheld from the integrity checker
 
+    @COMPAT-45
     Scenario: A community build reports the same as an official one
       Given two builds of the same device differing only in release type
       Then both report the same build fingerprint, model, device and product
 
+    @COMPAT-46
     Scenario: The displayed build variant never says "debug"
       Given the build variant is "userdebug"
       When an application reads the build description

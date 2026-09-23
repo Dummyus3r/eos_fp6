@@ -18,11 +18,6 @@ surfaces were therefore swept exhaustively — `vendor/eos/overlay`,
 `external/prebuiltapks/**/rro_overlays` — and the role assignments they carry
 are specified in `apps/default-app-associations.feature`.
 
-Cross-checked against the Android 16 porting epic
-(https://gitlab.e.foundation/groups/e/os/-/work_items/211). Every area the epic
-lists is either specified here, recorded below as deliberately not forked, or
-listed in `TODO.md` as living outside this tree.
-
 Reference: the `v4.3-a16` manifest. The `a16` development manifest forks fewer
 projects — the extra forks on `v4.3-a16` exist to carry the monthly security
 patch — and adds `hardware/qcom-caf/thermal`, which is therefore not covered.
