@@ -22,17 +22,40 @@ The link lives in the check, as a marker:
 
 ```python
 @delta
-@scenario("features/branding/identity.feature::The build identifies itself as /e/OS")
+@evidence("observed")
+@scenario("@BRAND-2")
 def test_build_identifies_as_eos(device):
     assert re.match(r"^\d+\.\d+.*-a17-", prop("ro.lineage.version", device))
 ```
+
+The identifier, not a path and a title: it survives the scenario being renamed
+or moved, which a path does not, and three scenario titles collide across the
+corpus.
 
 Nothing else records the link — no mapping file to keep in sync, and no test
 identifier injected into the specification, which stays a deliverable of its
 own.
 
-Scenario titles are **not unique** across the corpus (three collide today), so
-the key is always `<path>::<title>`.
+## Checked is not proven
+
+`@evidence(...)` says how strongly a check proves its scenario:
+
+| level | meaning |
+|---|---|
+| `measured` | the scenario was played on the running application |
+| `observed` | the running system was queried, the scenario was not played |
+| `inspected` | the build was read, nothing ran |
+
+**Only `measured` counts as proven.** A patch can be green at build time and
+have no effect at runtime, and that is exactly what the weaker levels miss:
+reading `ro.config.ringtone` says the value is in the image, not that a ringtone
+plays. The weaker levels are useful feedback and they are kept, counted apart
+rather than folded into one number — a coverage figure that mixes them says less
+than it appears to.
+
+Today that means **0 of 344 proven** and 12 checked: everything written so far
+queries a booted system without playing a scenario. The journeys are what will
+move scenarios into `measured`.
 
 `verification/tools/gen-coverage.py` reads those markers and reports both
 directions, because both are defects:

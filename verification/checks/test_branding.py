@@ -15,13 +15,14 @@ import re
 import pytest
 
 from probes import packages, prop
-from conftest import delta, scenario
+from conftest import delta, evidence, scenario
 
 FEATURE = "features/branding/identity.feature"
 
 
 @delta
-@scenario("features/branding/identity.feature::The build identifies itself as /e/OS")
+@evidence("observed")
+@scenario("@BRAND-2")
 def test_build_identifies_as_eos(device):
     assert re.match(r"^\d+\.\d+.*-a17-", prop("ro.lineage.version", device)), \
         "the version string should name the /e/OS release and the Android generation"
@@ -32,7 +33,8 @@ def test_build_identifies_as_eos(device):
 
 
 @delta
-@scenario("features/branding/identity.feature::Wallpapers and sounds are /e/OS ones")
+@evidence("observed")
+@scenario("@BRAND-3")
 @pytest.mark.parametrize("key, expected", [
     ("ro.config.ringtone", "Dione.ogg"),
     ("ro.config.notification_sound", "Selenium.ogg"),
@@ -42,7 +44,8 @@ def test_default_sounds(device, key, expected):
     assert prop(key, device) == expected
 
 
-@scenario("features/branding/identity.feature::Wallpapers and sounds are /e/OS ones")
+@evidence("observed")
+@scenario("@BRAND-3")
 @pytest.mark.parametrize("key", [
     "ro.config.ringtone",
     "ro.config.notification_sound",
@@ -59,7 +62,8 @@ def test_default_sounds_survived_the_port(device, reference, key):
 
 
 @delta
-@scenario("features/branding/identity.feature::The emulator build identifies itself as /e/OS")
+@evidence("observed")
+@scenario("@BRAND-6")
 def test_emulator_product_identity(device):
     assert prop("ro.product.name", device) == "e_sdk_phone_x86_64"
     assert prop("ro.product.model", device) == "/e/OS emulator x86_64"
@@ -72,7 +76,8 @@ def test_emulator_product_identity(device):
 
 
 @delta
-@scenario("features/branding/identity.feature::A running /e/OS emulator is distinguishable from a LineageOS one")
+@evidence("observed")
+@scenario("@BRAND-7")
 def test_emulator_is_distinguishable(device, reference):
     assert prop("ro.product.name", device) == "e_sdk_phone_x86_64"
     assert prop("ro.product.name", device) != prop("ro.product.name", reference) \
@@ -84,7 +89,8 @@ def test_emulator_is_distinguishable(device, reference):
 
 
 @delta
-@scenario("features/branding/identity.feature::Boot")
+@evidence("observed")
+@scenario("@BRAND-1")
 def test_eos_applications_are_installed(device):
     """Partial: the boot animation itself needs a capture, but a device that
     booted /e/OS carries the /e/OS application set."""

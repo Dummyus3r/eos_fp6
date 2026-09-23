@@ -45,23 +45,54 @@ def pytest_configure(config):
         "markers", "scenario(key): the features/ scenario this check verifies")
     config.addinivalue_line(
         "markers", "delta: asserts /e/OS content, so it must fail on a LineageOS build")
+    config.addinivalue_line(
+        "markers", "evidence(level): measured, observed or inspected")
+
+
+def _scenario_titles() -> dict[str, str]:
+    """identifier -> scenario title, read from features/ at collection time."""
+    import glob
+    import re
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    scenario_re = re.compile(r"^\s*Scenario(?: Outline)?:\s*(.+?)\s*$")
+    tag_re = re.compile(r"^\s*@[\w@ -]+\s*$")
+    id_re = re.compile(r"@[A-Z]+-\d+\b")
+    titles = {}
+    for path in glob.glob(os.path.join(root, "features", "**", "*.feature"), recursive=True):
+        lines = open(path, errors="ignore").read().splitlines()
+        for i, line in enumerate(lines):
+            m = scenario_re.match(line)
+            if not m:
+                continue
+            j, key = i - 1, None
+            while j >= 0 and tag_re.match(lines[j]):
+                found = id_re.search(lines[j])
+                if found:
+                    key = found.group(0)
+                j -= 1
+            if key:
+                titles[key] = m.group(1)
+    return titles
 
 
 def pytest_collection_modifyitems(items):
     """Report a check under the scenario it verifies, not under its function name.
 
-    The JUnit report is what a reviewer reads in CI, and `test_build_identifies_as_eos`
-    says less there than the sentence from the specification. The function name
-    stays available as the node id suffix, so `pytest -k` still works on it.
+    The JUnit report is what a reviewer reads in CI, and
+    `test_build_identifies_as_eos` says less there than the identifier and the
+    sentence from the specification. Both are shown: the identifier is what one
+    cites, the title is what makes the report readable without opening
+    `features/`.
     """
+    titles = _scenario_titles()
     for item in items:
         marker = item.get_closest_marker("scenario")
         if not marker or not marker.args:
             continue
         key = marker.args[0]
-        title = key.split("::", 1)[-1]
+        label = f"{key} {titles[key]}" if key in titles else key
         params = item.name[len(item.originalname):] if hasattr(item, "originalname") else ""
-        item._nodeid = f"{item.nodeid.split('::')[0]}::{title}{params}"
+        item._nodeid = f"{item.nodeid.split('::')[0]}::{label}{params}"
 
 
 def _serial(request, option: str, why: str) -> str:
@@ -90,8 +121,33 @@ def product_out(request):
 
 
 def scenario(key: str):
-    """Mark a check as verifying `<features path>::<Scenario title>`."""
+    """Mark a check as verifying the scenario with this identifier, e.g. `@BRAND-2`.
+
+    The identifier, not the path and title: it survives the scenario being
+    renamed or moved, which a path does not, and three scenario titles collide
+    across the corpus.
+    """
     return pytest.mark.scenario(key)
+
+
+def evidence(level: str):
+    """How strongly this check proves its scenario.
+
+    * `measured`  — the scenario was played on the running application. This is
+      what proves it: a patch can be green at build time and have no effect at
+      runtime, and that is exactly what the other two levels miss.
+    * `observed`  — the running system was queried, but the scenario was not
+      played. Reading `ro.config.ringtone` says the value is in the image; it
+      does not say a ringtone plays.
+    * `inspected` — the build was read, nothing ran. Fast feedback, weakest
+      evidence.
+
+    Only `measured` counts as proven in COVERAGE.md. The other two are reported
+    so that the difference between "checked" and "proven" stays visible instead
+    of being flattened into one number.
+    """
+    assert level in {"measured", "observed", "inspected"}, level
+    return pytest.mark.evidence(level)
 
 
 #: Marks a check that asserts /e/OS content rather than a property Android

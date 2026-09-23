@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
 """Generate verification/COVERAGE.md by crossing features/ scenarios with the checks.
 
-The link between a check and the scenario it verifies lives in the check, as a
-`@scenario("<file>::<Scenario title>")` marker. Nothing else records it: no
-mapping file to keep in sync, no identifier injected into the specification.
+A check names the scenario it verifies by its permanent identifier, in a
+`@scenario("@BRAND-2")` marker, and says how strongly it proves it in an
+`@evidence(...)` one. Nothing else records the link: no mapping file to keep in
+sync, no test identifier injected into the specification.
 
-The report is bidirectional on purpose, because both directions are defects:
+**Only `measured` counts as proven.** A patch can be green at build time and
+have no effect at runtime; a scenario is proven when it has been played on the
+running application, not when a property read agrees with it. The weaker levels
+are reported rather than hidden, because they are useful feedback — they are
+just not proof.
 
-* a scenario no check names is **unverified** — the specification promises
-  something nothing looks at;
-* a check naming a scenario that no longer exists is **orphaned** — the
-  specification moved and the check silently stopped meaning anything.
+The report is bidirectional, because both directions are defects:
 
-Scenario titles are not unique across the corpus (three collide today), so the
-key is always `<path>::<title>`, never the title alone.
+* a scenario no check names is unverified;
+* a check naming an identifier no scenario carries is orphaned — either a typo,
+  or a scenario that was deleted while the check was left behind.
 
     python3 verification/tools/gen-coverage.py
 
-Exits non-zero when a check is orphaned, so this runs as a CI gate and not
-only as a report.
+Exits non-zero on an orphaned check or an unreadable marker, so this runs as a
+CI gate and not only as a report.
 """
 from __future__ import annotations
 
@@ -31,54 +34,57 @@ import sys
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REPO_ROOT = os.path.dirname(BASE)
 
-SCENARIO_RE = re.compile(r"^\s*Scenario(?: Outline)?:\s*(.+?)\s*$")
-FEATURE_RE = re.compile(r"^\s*Feature:\s*(.+?)\s*$")
-MARKER_RE = re.compile(r'@scenario\(\s*["\'](?P<key>[^"\']+)["\']')
-ANY_MARKER_RE = re.compile(r'@scenario\(')
+SCENARIO_RE = re.compile(r"^(\s*)Scenario(?: Outline)?:\s*(.+?)\s*$")
+TAG_LINE = re.compile(r"^\s*@[\w@ -]+\s*$")
+ID_TAG = re.compile(r"@[A-Z]+-\d+\b")
+MARKER_RE = re.compile(r'@scenario\(\s*["\'](?P<key>@[A-Z]+-\d+)["\']')
+ANY_MARKER_RE = re.compile(r"@scenario\(")
+EVIDENCE_RE = re.compile(r'@evidence\(\s*["\'](?P<level>\w+)["\']')
+
+LEVELS = ("measured", "observed", "inspected")
 
 
-def scenarios() -> dict[str, str]:
-    """Every scenario in features/, as `<relative path>::<title>` -> feature title."""
+def scenarios() -> dict[str, tuple[str, str]]:
+    """identifier -> (features path, scenario title)."""
     found = {}
     pattern = os.path.join(REPO_ROOT, "features", "**", "*.feature")
     for path in sorted(glob.glob(pattern, recursive=True)):
         rel = os.path.relpath(path, REPO_ROOT)
-        feature = ""
-        with open(path, errors="ignore") as fh:
-            for line in fh:
-                m = FEATURE_RE.match(line)
-                if m:
-                    feature = m.group(1)
-                m = SCENARIO_RE.match(line)
-                if m:
-                    found[f"{rel}::{m.group(1)}"] = feature
+        lines = open(path, errors="ignore").read().splitlines()
+        for i, line in enumerate(lines):
+            m = SCENARIO_RE.match(line)
+            if not m:
+                continue
+            j, key = i - 1, None
+            while j >= 0 and TAG_LINE.match(lines[j]):
+                tag = ID_TAG.search(lines[j])
+                if tag:
+                    key = tag.group(0)
+                j -= 1
+            if key:
+                found[key] = (rel, m.group(2))
     return found
 
 
-def claimed() -> tuple[dict[str, list[str]], list[str]]:
-    """Every scenario key a check names, plus the markers that could not be read.
-
-    Extraction is static, so the key must be a plain string literal. An
-    f-string or a variable is silently invisible to a regex, which would
-    understate coverage instead of failing — so those are counted and
-    reported rather than skipped.
-    """
-    found: dict[str, list[str]] = {}
+def claimed() -> tuple[dict[str, list[tuple[str, str]]], list[str]]:
+    """identifier -> [(check path, evidence level)], plus markers that could not be read."""
+    found: dict[str, list[tuple[str, str]]] = {}
     unreadable: list[str] = []
     for folder in ("checks", "journeys"):
-        pattern = os.path.join(BASE, folder, "**", "*.py")
-        for path in sorted(glob.glob(pattern, recursive=True)):
+        for path in sorted(glob.glob(os.path.join(BASE, folder, "**", "*.py"), recursive=True)):
             if os.path.basename(path) == "conftest.py":
-                continue   # defines the marker, does not use it
+                continue   # defines the markers, does not use them
             rel = os.path.relpath(path, REPO_ROOT)
-            with open(path, errors="ignore") as fh:
-                text = fh.read()
-            keys = list(MARKER_RE.finditer(text))
-            for m in keys:
-                found.setdefault(m.group("key"), []).append(rel)
-            total = len(ANY_MARKER_RE.findall(text))
-            if total > len(keys):
-                unreadable.append(f"{rel}: {total - len(keys)} marker(s) not a string literal")
+            text = open(path, errors="ignore").read()
+            # the evidence marker sits immediately above the scenario marker
+            for m in MARKER_RE.finditer(text):
+                before = text[:m.start()]
+                ev = EVIDENCE_RE.findall(before)
+                level = ev[-1] if ev else "observed"
+                found.setdefault(m.group("key"), []).append((rel, level))
+            missed = len(ANY_MARKER_RE.findall(text)) - len(MARKER_RE.findall(text))
+            if missed > 0:
+                unreadable.append(f"{rel}: {missed} marker(s) not a plain identifier literal")
     return found, unreadable
 
 
@@ -86,14 +92,17 @@ def main() -> int:
     known = scenarios()
     named, unreadable = claimed()
 
-    verified = {k: v for k, v in named.items() if k in known}
     orphaned = {k: v for k, v in named.items() if k not in known}
-    unverified = sorted(set(known) - set(named))
+    by_level: dict[str, set[str]] = {lvl: set() for lvl in LEVELS}
+    for key, entries in named.items():
+        if key not in known:
+            continue
+        for _path, level in entries:
+            by_level.setdefault(level, set()).add(key)
 
-    by_file: dict[str, list[tuple[str, bool]]] = {}
-    for key in sorted(known):
-        path, title = key.split("::", 1)
-        by_file.setdefault(path, []).append((title, key in verified))
+    proven = by_level["measured"]
+    weaker = (by_level["observed"] | by_level["inspected"]) - proven
+    untouched = sorted(set(known) - set(named))
 
     lines = [
         "# Verification coverage",
@@ -101,47 +110,65 @@ def main() -> int:
         f"<!-- generated by verification/tools/gen-coverage.py on "
         f"{datetime.date.today().isoformat()} - do not edit by hand -->",
         "",
-        f"{len(verified)} of {len(known)} scenarios are named by a check.",
+        f"**{len(proven)} of {len(known)} scenarios are proven** — played on the "
+        f"running application.",
         "",
-        "A scenario with no check is not necessarily a defect: some state a",
-        "promise about how the port is carried out rather than about the device,",
-        "and have no device-level evidence at all. They are listed so that the",
-        "choice not to verify them stays visible.",
+        f"{len(weaker)} more are checked without being proven: the running system "
+        f"was queried, or the build was read, but the scenario itself was not "
+        f"played. A patch can be green at build time and have no effect at "
+        f"runtime, which is exactly what those levels miss. They are useful "
+        f"feedback and they are not proof, so they are counted apart rather than "
+        f"folded into one number.",
         "",
-        "| Feature file | verified | total |",
+        "| level | scenarios | what it means |",
         "|---|---|---|",
+        f"| measured | {len(by_level['measured'])} | the scenario was played on the running application |",
+        f"| observed | {len(by_level['observed'])} | the running system was queried, the scenario was not played |",
+        f"| inspected | {len(by_level['inspected'])} | the build was read, nothing ran |",
+        f"| none | {len(untouched)} | no check names this scenario |",
     ]
-    for path in sorted(by_file):
-        rows = by_file[path]
-        lines.append(f"| `{path}` | {sum(1 for _, ok in rows if ok)} | {len(rows)} |")
 
-    if unreadable:
-        lines += ["", "## Markers that could not be read", "",
-                  "`@scenario(...)` must take a plain string literal: the report is",
-                  "extracted statically, and an f-string or a variable would understate",
-                  "coverage rather than fail.", ""]
-        for item in unreadable:
-            lines.append(f"- {item}")
+    if weaker:
+        lines += ["", "## Checked, not proven", "",
+                  "| scenario | title | level |", "|---|---|---|"]
+        for key in sorted(weaker):
+            path, title = known[key]
+            level = ", ".join(sorted({lvl for _p, lvl in named[key]}))
+            lines.append(f"| `{key}` | {title} | {level} |")
 
     if orphaned:
         lines += ["", "## Orphaned checks", "",
-                  "These name a scenario that no longer exists — the specification moved.",
-                  ""]
-        for key, checks in sorted(orphaned.items()):
-            lines.append(f"- `{key}` named by {', '.join(f'`{c}`' for c in checks)}")
+                  "These name an identifier no scenario carries — a typo, or a scenario "
+                  "deleted while its check was left behind.", ""]
+        for key, entries in sorted(orphaned.items()):
+            where = ", ".join(f"`{p}`" for p, _lvl in entries)
+            lines.append(f"- `{key}` named by {where}")
 
-    if unverified:
-        lines += ["", "## Not verified yet", ""]
-        for key in unverified:
-            lines.append(f"- `{key}`")
+    if unreadable:
+        lines += ["", "## Markers that could not be read", "",
+                  "`@scenario(...)` must take a plain identifier literal: the report is "
+                  "extracted statically, and an f-string would understate coverage "
+                  "rather than fail.", ""]
+        lines += [f"- {item}" for item in unreadable]
+
+    if untouched:
+        lines += ["", "## Not verified yet", "",
+                  "Some of these have no device-level evidence at all — they state a "
+                  "promise about how the port is carried out rather than about the "
+                  "device. They are listed so that the choice not to verify them stays "
+                  "visible.", "",
+                  "| scenario | file | title |", "|---|---|---|"]
+        for key in untouched:
+            path, title = known[key]
+            lines.append(f"| `{key}` | `{path}` | {title} |")
 
     out = os.path.join(BASE, "COVERAGE.md")
     with open(out, "w") as fh:
         fh.write("\n".join(lines) + "\n")
 
-    print(f"{len(verified)}/{len(known)} scenarios verified, "
-          f"{len(orphaned)} orphaned, {len(unreadable)} unreadable "
-          f"-> {os.path.relpath(out, REPO_ROOT)}")
+    print(f"{len(proven)} proven, {len(weaker)} checked but not proven, "
+          f"{len(untouched)} untouched, {len(orphaned)} orphaned, "
+          f"{len(unreadable)} unreadable -> {os.path.relpath(out, REPO_ROOT)}")
     return 1 if (orphaned or unreadable) else 0
 
 

@@ -9,7 +9,7 @@ from model import Journey, Screen
 
 FIRST_BOOT = Journey("first boot", [
     Screen(".WelcomeActivity", marker="Welcome",
-           scenarios=("features/branding/identity.feature::Boot",)),
+           scenarios=("@BRAND-1",)),
     Screen(".LocaleActivity"),
     Screen(".SimMissingActivity", optional=True),
     Screen(".NetworkSetupActivity"),

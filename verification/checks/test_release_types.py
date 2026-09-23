@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 
 from probes import prop
-from conftest import delta, scenario
+from conftest import delta, evidence, scenario
 
 #: 4.3-a17-20260921-UNOFFICIAL-sdk_phone_x86_64
 #: major.minor[.maintenance]-<generation>-<date>[<pipeline>]-<type>[-<extra>]-<device>
@@ -31,7 +31,8 @@ def parsed(device):
 
 
 @delta
-@scenario("features/updates/release-types.feature::The version carries the /e/OS version, the Android generation and the build")
+@evidence("observed")
+@scenario("@UPD-23")
 def test_version_string_composition(device):
     m = parsed(device)
     assert f"{m['major']}.{m['minor']}" == prop("ro.lineage.build.version", device), \
@@ -49,7 +50,8 @@ def test_version_string_composition(device):
         "the version suffix does not match LINEAGE_BUILD derived from the product name"
 
 
-@scenario("features/updates/release-types.feature::An unofficial build can still be identified")
+@evidence("observed")
+@scenario("@UPD-22")
 def test_unofficial_build_is_identified(device):
     release_type = prop("ro.lineage.releasetype", device)
     assert release_type, "a build with no release type cannot be identified"
@@ -57,7 +59,8 @@ def test_unofficial_build_is_identified(device):
         "the release type should appear in the version string"
 
 
-@scenario("features/updates/release-types.feature::A build can be traced back to the pipeline that produced it")
+@evidence("observed")
+@scenario("@UPD-25")
 def test_pipeline_identifier(device):
     """A locally built image has no pipeline, and that is not a defect.
 
@@ -74,7 +77,8 @@ def test_pipeline_identifier(device):
 
 
 @delta
-@scenario("features/updates/release-types.feature::A LineageOS release type is not recognised")
+@evidence("observed")
+@scenario("@UPD-21")
 def test_release_type_is_not_a_lineage_one(device):
     """/e/OS has its own release-type vocabulary; a LineageOS one means the
     /e/OS configuration did not apply."""

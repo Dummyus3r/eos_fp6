@@ -80,3 +80,27 @@ keep captures as review material rather than as assertions.
 Some scenarios state a promise about the porting process rather than about the
 device. Rather than contort them into something executable, or drop them,
 `COVERAGE.md` lists them as unverified.
+
+## The key is the scenario identifier
+
+The first version keyed on `<path>::<title>`. Both halves invite editing, and
+three titles already collide across the corpus, so the key moved to the
+permanent identifier `features/` now carries. The report shows the title
+alongside it, so a JUnit report stays readable without opening the
+specification, but the link itself is the number.
+
+## Only a measurement on the running application counts as proven
+
+Raised in review of !210: a patch can be green at compile time and have no
+effect at runtime, so what proves a scenario is playing it on the running
+application, not a test that reads the build.
+
+Taken as written. `@evidence(...)` records the level, and COVERAGE.md counts
+only `measured` as proven. The immediate effect is that the headline figure
+drops from 12 to 0, which is the honest number: everything written so far
+queries a booted system without playing a scenario.
+
+The weaker levels are kept rather than deleted. Reading the built image catches
+a whole class of regression in seconds, well before an emulator has booted —
+it is good feedback. It just is not proof, and the report says which is which
+instead of adding them together.

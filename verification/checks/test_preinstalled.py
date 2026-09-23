@@ -7,7 +7,7 @@ only asserts what ships.
 from __future__ import annotations
 
 from probes import packages
-from conftest import delta, scenario
+from conftest import delta, evidence, scenario
 
 #: Packages that would mean the real Google stack is on the device. microG
 #: deliberately impersonates two of them, so they are matched by package name
@@ -20,7 +20,8 @@ GOOGLE_STACK = {
 
 
 @delta
-@scenario("features/apps/preinstalled-applications.feature::Google Play services are replaced, not present")
+@evidence("observed")
+@scenario("@APP-48")
 def test_google_play_services_are_replaced(device):
     installed = packages(device)
     # microG ships under the Google package names on purpose: applications look
@@ -36,7 +37,8 @@ def test_google_play_services_are_replaced(device):
 
 
 @delta
-@scenario("features/apps/preinstalled-applications.feature::No device management client is preinstalled")
+@evidence("observed")
+@scenario("@APP-53")
 def test_no_mdm_client_preinstalled(device):
     installed = packages(device)
     suspects = {p for p in installed
@@ -45,7 +47,8 @@ def test_no_mdm_client_preinstalled(device):
 
 
 @delta
-@scenario("features/apps/preinstalled-applications.feature::The device is usable without installing anything")
+@evidence("observed")
+@scenario("@APP-47")
 def test_core_applications_ship(device):
     installed = packages(device)
     missing = {p for p in (
