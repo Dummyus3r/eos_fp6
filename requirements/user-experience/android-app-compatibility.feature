@@ -3,7 +3,7 @@
 # mechanisms (microG, Play Integrity compat, Android Auto); this promise is
 # the outcome — ordinary Android apps work — not the mechanism.
 
-@user-experience @requirement @P-10
+@user-experience @requirement @R-10
 Feature: Ordinary Android applications work as expected
 
   A mainstream Android application, including ones that depend on

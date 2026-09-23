@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@user-experience @requirement @P-14
+@user-experience @requirement @R-14
 Feature: The Murena Workspace account is a first-class part of the experience
 
   Setting up and using a Murena Workspace account (mail, contacts, calendar,

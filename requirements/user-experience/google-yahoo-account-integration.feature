@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@user-experience @requirement @P-13
+@user-experience @requirement @R-13
 Feature: A user can still add and use a Google or Yahoo account
 
   A user coming from a mainstream device must be able to add their existing

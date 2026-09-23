@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@sustainability @requirement @P-9
+@sustainability @requirement @R-9
 Feature: A device is kept secure and current for as long as reasonably possible
 
   /e/OS extends a smartphone's usable life well past what the original

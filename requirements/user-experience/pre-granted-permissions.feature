@@ -1,6 +1,6 @@
 # Proven by: features/apps/default-permissions.feature
 
-@user-experience @requirement @P-16
+@user-experience @requirement @R-16
 Feature: Default applications are pre-granted the permissions they need, and the user can always take them back
 
   A user who has just flashed /e/OS should not be walked through a
