@@ -1,6 +1,6 @@
 # Triage: what could prove each scenario
 
-<!-- rows are added by verification/tools/gen-triage.py; the levels are written by hand and never overwritten by it -->
+<!-- rows are added by checks/tools/gen-triage.py; the levels are written by hand and never overwritten by it -->
 
 Deciding what could ever prove a scenario is a judgement, worth making once.
 `unreviewed` means nobody has made it yet — it is not a level, it is a gap.

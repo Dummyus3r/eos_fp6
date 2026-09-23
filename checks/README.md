@@ -1,4 +1,4 @@
-# Verification
+# Checks
 
 This folder holds the **checks**: what actually looks at a build and decides
 whether [`features/`](../features/README.md) is satisfied. `features/` states
@@ -57,7 +57,7 @@ Today that means **0 of 344 proven** and 12 checked: everything written so far
 queries a booted system without playing a scenario. The journeys are what will
 move scenarios into `measured`.
 
-`verification/tools/gen-coverage.py` reads those markers and reports both
+`checks/tools/gen-coverage.py` reads those markers and reports both
 directions, because both are defects:
 
 * a scenario no check names — the specification promises something nothing
@@ -86,7 +86,7 @@ claims to verify has been lost, which is precisely what a verification suite
 exists to prevent.
 
 ```
-python3 verification/tools/negative-control.py <lineage serial>
+python3 checks/tools/negative-control.py <lineage serial>
 ```
 
 The reference build cannot play this role — it is /e/OS too, so a check passing
@@ -130,14 +130,14 @@ being quietly dropped.
 ## Running
 
 ```
-python3 verification/tools/gen-coverage.py           # report + CI gate, no device
+python3 checks/tools/gen-coverage.py           # report + CI gate, no device
 
-pytest verification/checks \
+pytest checks/device \
     --device emulator-5556 \
     --reference emulator-5554 \
     --product-out out/target/product/emu64x
 
-python3 verification/tools/negative-control.py emulator-5558   # a LineageOS build
+python3 checks/tools/negative-control.py emulator-5558   # a LineageOS build
 ```
 
 Checks whose fixtures are not supplied skip rather than fail, so the artefact
@@ -165,7 +165,7 @@ say nothing about a device, and they are in fact decidable against the branches
 and the manifest. One of them — "the difference between a branch and its
 upstream is exactly the /e/OS work" — is a check that already exists.
 
-`verification/tools/gen-triage.py` adds a row for any scenario that has none and
+`checks/tools/gen-triage.py` adds a row for any scenario that has none and
 **never overwrites a judgement**: the levels are written by hand.
 
 ## A claim is not a proof
@@ -177,8 +177,8 @@ skipped has proven nothing, and a static report cannot know which.
 `tools/proven.py` crosses the claims with a run:
 
 ```
-pytest verification --device <serial> --junit-xml=report.xml
-python3 verification/tools/proven.py report.xml
+pytest checks --device <serial> --junit-xml=report.xml
+python3 checks/tools/proven.py report.xml
 ```
 
 It counts only a scenario whose `measured` check actually passed, and names the
@@ -188,14 +188,14 @@ mid-wizard by an earlier walk.
 
 ## In CI
 
-`verification/.gitlab-ci.yml` declares two jobs, because their requirements
+`checks/.gitlab-ci.yml` declares two jobs, because their requirements
 differ sharply:
 
-* **`verification:coverage`** needs nothing but Python. It regenerates the
+* **`checks:coverage`** needs nothing but Python. It regenerates the
   report and fails when a check names a scenario that no longer exists, or when
   `COVERAGE.md` is stale — the drift worth catching on every change to
   `features/`.
-* **`verification:device`** needs a runner with a booted /e/OS emulator, so it
+* **`checks:device`** needs a runner with a booted /e/OS emulator, so it
   is tagged and gated on the serial being set.
 
 The device job publishes a JUnit report, which GitLab renders in the merge
@@ -204,18 +204,26 @@ under their Python function name, so what a reviewer reads there is the
 sentence from the specification:
 
 ```
-verification.checks.test_branding :: The build identifies itself as /e/OS
-verification.checks.test_release_types :: An unofficial build can still be identified
+checks.device.test_branding :: The build identifies itself as /e/OS
+checks.device.test_release_types :: An unofficial build can still be identified
 ```
 
 ## Layout
 
 ```
-verification/
-├── tools/probes.py          read-only probes: adb, and the built image
-├── tools/gen-coverage.py    generates COVERAGE.md, gates on orphaned checks
-├── tools/negative-control.py  runs the @delta checks against a LineageOS build
-├── checks/conftest.py       the @scenario marker and the device fixtures
-├── checks/test_*.py         the checks themselves
-└── journeys/                the flow model, and the flows
+checks/
+├── conftest.py              the markers and the device fixtures
+├── device/                  what queries a booted system      (observed)
+├── journeys/                what plays the scenario           (measured)
+└── tools/
+    ├── probes.py            read-only probes: adb, and the built image
+    ├── gen-coverage.py      generates COVERAGE.md, gates on orphaned checks
+    ├── gen-triage.py        maintains TRIAGE.md, never overwrites a judgement
+    ├── negative-control.py  runs the @delta checks against a LineageOS build
+    └── proven.py            crosses a run with the claims
 ```
+
+The subfolders are named after **where the evidence comes from**, which is the
+spine of the whole thing: listing the folder shows the model. `artefact/` will
+sit beside them for the `inspected` level — what reads the built image without
+starting anything.

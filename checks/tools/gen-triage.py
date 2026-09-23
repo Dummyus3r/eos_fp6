@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Maintain verification/TRIAGE.md: the level of evidence each scenario can reach.
+"""Maintain checks/TRIAGE.md: the level of evidence each scenario can reach.
 
 Deciding what could ever prove a scenario is a judgement, and it is worth making
 once: without it every contributor re-derives the same decision, and nobody can
@@ -16,8 +16,8 @@ This tool **never overwrites a judgement**. It adds `unreviewed` lines for
 scenarios that have none, drops nothing, and reports the counts. Editing the
 levels is human work.
 
-    python3 verification/tools/gen-triage.py          # report
-    python3 verification/tools/gen-triage.py --write  # add the missing lines
+    python3 checks/tools/gen-triage.py          # report
+    python3 checks/tools/gen-triage.py --write  # add the missing lines
 """
 from __future__ import annotations
 
@@ -113,7 +113,7 @@ def main(argv: list[str]) -> int:
     out = [
         "# Triage: what could prove each scenario",
         "",
-        "<!-- rows are added by verification/tools/gen-triage.py; the levels are"
+        "<!-- rows are added by checks/tools/gen-triage.py; the levels are"
         " written by hand and never overwritten by it -->",
         "",
         "Deciding what could ever prove a scenario is a judgement, worth making once.",

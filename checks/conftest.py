@@ -1,4 +1,4 @@
-"""pytest wiring for the verification checks.
+"""pytest wiring for the checks.
 
 `@scenario(...)` is a thin alias over a pytest marker: it carries the link to
 the specification and nothing else. Keeping it a marker rather than inventing a
@@ -17,7 +17,7 @@ suite has to survive the next generation without being rewritten, and a run
 that puts the older build under test should not read as `a17 = <the a16
 device>`.
 
-    pytest verification/checks --device emulator-5556 --reference emulator-5554
+    pytest checks/device --device emulator-5556 --reference emulator-5554
 """
 from __future__ import annotations
 
@@ -156,7 +156,7 @@ def evidence(level: str):
 
 
 #: Marks a check that asserts /e/OS content rather than a property Android
-#: would satisfy on its own. `verification/tools/negative-control.py` runs every
+#: would satisfy on its own. `checks/tools/negative-control.py` runs every
 #: check carrying it against a LineageOS build and reports the ones that pass —
 #: a check that passes there is asserting nothing about /e/OS.
 delta = pytest.mark.delta

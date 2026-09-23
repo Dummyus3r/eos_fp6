@@ -1,0 +1,42 @@
+# Check jobs. Included from the repository's .gitlab-ci.yml.
+#
+# Two jobs, because they have very different requirements:
+#
+#   * `checks:coverage` needs nothing but Python. It regenerates the
+#     coverage report and fails when a check names a scenario that no longer
+#     exists, which is the drift worth catching on every change to features/.
+#   * `checks:device` needs a runner with a booted /e/OS emulator, so it
+#     is tagged and does not block a merge on its own.
+
+.checks:
+  image: python:3.12-slim
+  stage: test
+
+checks:coverage:
+  extends: .checks
+  script:
+    - python3 checks/tools/gen-coverage.py
+    - git diff --exit-code checks/COVERAGE.md
+      || (echo "COVERAGE.md is stale - re-run checks/tools/gen-coverage.py"; exit 1)
+  rules:
+    - changes:
+        - features/**/*
+        - checks/**/*
+
+checks:device:
+  extends: .checks
+  tags: [android-emulator]
+  script:
+    - pip install --quiet pytest
+    - pytest checks/device
+        --device "$EOS_DEVICE_SERIAL"
+        --reference "$EOS_REFERENCE_SERIAL"
+        --junit-xml=checks-report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: checks-report.xml
+    expire_in: 1 week
+  allow_failure: false
+  rules:
+    - if: $EOS_DEVICE_SERIAL

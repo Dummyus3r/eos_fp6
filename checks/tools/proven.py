@@ -8,8 +8,8 @@ a check marked `measured` that fails, errors or is skipped has proven nothing.
 This crosses the claims with a run. Only a scenario whose `measured` check
 actually passed is counted as proven.
 
-    pytest verification --device <serial> --junit-xml=report.xml
-    python3 verification/tools/proven.py report.xml
+    pytest checks --device <serial> --junit-xml=report.xml
+    python3 checks/tools/proven.py report.xml
 
 Exits non-zero if any scenario is claimed proven but its check did not pass.
 """
@@ -32,7 +32,7 @@ def claims() -> dict[str, str]:
     rank = {"inspected": 1, "observed": 2, "measured": 3}
     best: dict[str, str] = {}
     import glob
-    for folder in ("checks", "journeys"):
+    for folder in ("device", "journeys"):
         for path in glob.glob(os.path.join(BASE, folder, "**", "*.py"), recursive=True):
             if os.path.basename(path) == "conftest.py":
                 continue

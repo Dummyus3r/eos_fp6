@@ -10,7 +10,7 @@ prevent.
 The reference build cannot supply this: it is /e/OS too, so a check passing on
 both says nothing. The control has to be a LineageOS image.
 
-    python3 verification/tools/negative-control.py emulator-5558
+    python3 checks/tools/negative-control.py emulator-5558
 
 Exits non-zero when any delta-marked check passes against it.
 """
@@ -54,7 +54,7 @@ def main(argv: list[str]) -> int:
     with tempfile.TemporaryDirectory() as tmp:
         report = os.path.join(tmp, "report.json")
         subprocess.run(
-            [sys.executable, "-m", "pytest", os.path.join(BASE, "checks"),
+            [sys.executable, "-m", "pytest", os.path.join(BASE, "device"),
              "-m", "delta", "--device", serial, "-q",
              "--tb=no", f"--junit-xml={report}.xml"],
             capture_output=True, text=True,
