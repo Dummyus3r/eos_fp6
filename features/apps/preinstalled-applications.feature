@@ -33,8 +33,14 @@ Feature: The /e/OS application set
 
   @APP-48
   Scenario: Google Play services are replaced, not present
-    Then microG and a store stub are preinstalled in place of Google Play services
-    And no Google application is present
+    Then microG answers under the Google Play services package names
+    And the store stub answers under the Play Store one
+    And no Google application ships beyond that stack, save the empty Android Auto stub
+    # The package names are Google's on purpose: an application looking for
+    # Play services has to find something. Reading this as "no com.google
+    # package ships" would have microG removed and every such application
+    # break — see compatibility/microg-signature-spoofing.feature for what
+    # answers, and compatibility/android-auto.feature for the stub.
 
   @APP-49
   Scenario: Telephony devices get the messaging set
