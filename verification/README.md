@@ -21,9 +21,10 @@ behind.
 The link lives in the check, as a marker:
 
 ```python
+@delta
 @scenario("features/branding/identity.feature::The build identifies itself as /e/OS")
-def test_build_identifies_as_eos(a17):
-    assert re.match(r"^\d+\.\d+-a17-", prop("ro.lineage.version", a17))
+def test_build_identifies_as_eos(device):
+    assert re.match(r"^\d+\.\d+.*-a17-", prop("ro.lineage.version", device))
 ```
 
 Nothing else records the link — no mapping file to keep in sync, and no test
@@ -45,9 +46,34 @@ It exits non-zero on the second, so it runs as a CI gate and not only as a
 report. It also refuses a marker that is not a plain string literal: extraction
 is static, and an f-string would understate coverage instead of failing.
 
-## Comparing against the previous generation
+## Three roles, not three generations
 
-Several checks take both an `a17` device and an `a16` one. Where the promise is
+Devices are addressed by role — `device` for the build under test, `reference`
+for a previous /e/OS build, `lineage` for the negative control. Naming them
+after roles rather than after a16/a17 is deliberate: the suite has to survive
+the next generation without being rewritten, and a run putting the older build
+under test should not read as `a17 = <the a16 device>`.
+
+## The negative control
+
+A check marked `@delta` asserts /e/OS content, so it must **fail** on a build
+with no /e/OS content. One that passes there is asserting something Android or
+LineageOS satisfies on its own: it will keep passing after the /e/OS change it
+claims to verify has been lost, which is precisely what a verification suite
+exists to prevent.
+
+```
+python3 verification/tools/negative-control.py <lineage serial>
+```
+
+The reference build cannot play this role — it is /e/OS too, so a check passing
+on both says nothing about it. The tool refuses a device carrying `foundation.e`
+packages or `ro.elegal.url`, because being handed a reference instead of a
+control would produce a report reading as "this suite asserts nothing".
+
+## Comparing against a previous build
+
+Several checks take both a `device` and a `reference`. Where the promise is
 "/e/OS decides this, not LineageOS", comparing against the previous generation
 states it better than a literal: `== "Selenium.ogg"` keeps passing while meaning
 nothing the day the chosen sound changes.
@@ -84,9 +110,11 @@ being quietly dropped.
 python3 verification/tools/gen-coverage.py           # report + CI gate, no device
 
 pytest verification/checks \
-    --a17 emulator-5556 \
-    --a16 emulator-5554 \
+    --device emulator-5556 \
+    --reference emulator-5554 \
     --product-out out/target/product/emu64x
+
+python3 verification/tools/negative-control.py emulator-5558   # a LineageOS build
 ```
 
 Checks whose fixtures are not supplied skip rather than fail, so the artefact
@@ -98,6 +126,7 @@ pass runs without a device and the device pass runs without a reference.
 verification/
 ├── tools/probes.py          read-only probes: adb, and the built image
 ├── tools/gen-coverage.py    generates COVERAGE.md, gates on orphaned checks
+├── tools/negative-control.py  runs the @delta checks against a LineageOS build
 ├── checks/conftest.py       the @scenario marker and the device fixtures
 ├── checks/test_*.py         the checks themselves
 └── journeys/                the flow model, and the flows

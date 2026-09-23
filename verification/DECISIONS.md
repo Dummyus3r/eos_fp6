@@ -47,6 +47,26 @@ nothing reaches, because upstream had commented out the step that led to it.
 They compiled, they read correctly in the wizard script, and they were never
 shown. No unit test and no review caught it.
 
+## Fixtures are roles, not generations
+
+The first version named them `a17` and `a16`. Putting the older build under test
+then read as `a17 = <the a16 device>`, and every check would have needed
+rewriting at the next generation. `device` / `reference` / `lineage` say what
+each one is for.
+
+## A negative control, separate from the reference
+
+Running the a17 checks against the a16 build was tried as a way of measuring
+whether they discriminate. It does not work: a16 is /e/OS too, so a check
+passing on both says nothing — and the experiment reported perfectly good
+checks as weak. The control has to be a LineageOS build, and
+`tools/negative-control.py` refuses a device carrying /e/OS content so that
+mistake cannot be made silently.
+
+This costs something real: it means keeping a LineageOS image of the generation
+around. `lineage-24-pinned.xml` records the tree a17 was cut from, which is what
+that image would be rebuilt from.
+
 ## No screenshot comparison
 
 Tried in principle, rejected on the hardware: the emulator renders through
