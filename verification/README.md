@@ -143,6 +143,31 @@ python3 verification/tools/negative-control.py emulator-5558   # a LineageOS bui
 Checks whose fixtures are not supplied skip rather than fail, so the artefact
 pass runs without a device and the device pass runs without a reference.
 
+## What could prove each scenario
+
+`TRIAGE.md` records, per scenario, the level of evidence that could ever prove
+it — decided once, rather than re-derived by whoever picks the scenario up next.
+It also answers the question a coverage figure cannot: how much of this corpus
+is coverable at all.
+
+| level | meaning |
+|---|---|
+| `measured` | only playing the scenario on the running application shows it |
+| `observed` | querying the booted system is enough |
+| `inspected` | reading the built image is enough |
+| `repository` | provable against the repositories and the manifest, not the device |
+| `unverifiable` | nothing can decide it mechanically |
+| `unreviewed` | nobody has judged it yet — a gap, not a level |
+
+`repository` came out of doing the triage rather than planning it: the fourteen
+scenarios of `process/fork-maintenance.feature` looked unverifiable because they
+say nothing about a device, and they are in fact decidable against the branches
+and the manifest. One of them — "the difference between a branch and its
+upstream is exactly the /e/OS work" — is a check that already exists.
+
+`verification/tools/gen-triage.py` adds a row for any scenario that has none and
+**never overwrites a judgement**: the levels are written by hand.
+
 ## In CI
 
 `verification/.gitlab-ci.yml` declares two jobs, because their requirements

@@ -104,3 +104,19 @@ The weaker levels are kept rather than deleted. Reading the built image catches
 a whole class of regression in seconds, well before an emulator has booted —
 it is good feedback. It just is not proof, and the report says which is which
 instead of adding them together.
+
+## Triage before writing checks
+
+Deciding what could prove a scenario is the expensive part, and it is a
+judgement. Made ad hoc, it gets re-derived by every contributor and never adds
+up to an answer about the corpus as a whole.
+
+So it is recorded once, per scenario, in `TRIAGE.md`, keyed by the permanent
+identifier. `unreviewed` is deliberately not a level: it reads as a gap, and the
+tool never fills it in on its own.
+
+Doing it turned up a level the plan had missed. `process/fork-maintenance.feature`
+looked unverifiable — fourteen scenarios that say nothing about a device — and
+is in fact provable against the repositories and the manifest. Calling those
+unverifiable would have written off fourteen scenarios that can be gated in CI
+today.
