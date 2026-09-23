@@ -58,7 +58,12 @@ def _scenario_titles() -> dict[str, str]:
     """identifier -> scenario title, read from features/ at collection time."""
     import glob
     import re
-    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    root = os.path.dirname(_HERE)
+    if not os.path.isdir(os.path.join(root, "features")):
+        raise RuntimeError(
+            f"features/ not found next to {_HERE} - the titles would silently "
+            "degrade to bare identifiers, and the report would stop being readable"
+        )
     scenario_re = re.compile(r"^\s*Scenario(?: Outline)?:\s*(.+?)\s*$")
     tag_re = re.compile(r"^\s*@[\w@ -]+\s*$")
     id_re = re.compile(r"@[A-Z]+-\d+\b")
