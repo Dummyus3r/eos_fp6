@@ -3,7 +3,7 @@
 # features/apps/default-app-associations.feature specify today's wiring, not
 # the product promise that the set stays coherent and usable.
 
-@user-experience @requirement
+@user-experience @requirement @R-12
 Feature: The default set of applications is coherent and usable out of the box
 
   A user who has just flashed /e/OS finds a complete, coherent set of default

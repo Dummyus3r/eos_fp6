@@ -6,7 +6,7 @@
 # information and an opt-out, neither of which exists today) is an open
 # question — not decided here.
 
-@privacy @requirement
+@privacy @requirement @R-5
 Feature: No telemetry is ever sent without the user's consent
 
   /e/OS collects no usage statistics, and sends no crash report, unless the

@@ -4,7 +4,7 @@
 # against e/os/GmsCore source (PushRegisterService.kt, GcmPrefs.kt), not yet
 # captured in any features/ file.
 
-@privacy @requirement
+@privacy @requirement @R-4
 Feature: A freshly flashed device contacts no Google server by default
 
   Time sync, DNS, captive-portal detection, connectivity checks, address

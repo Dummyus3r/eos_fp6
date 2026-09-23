@@ -23,32 +23,39 @@ Feature: Keyboard with on-device speech to text
     Given the device runs /e/OS
     And the offline speech-to-text engine is preinstalled
 
+  @SYS-9
   Scenario: Dictation uses the on-device engine
     When the user taps the speech-to-text button on the keyboard
     Then the offline speech-to-text keyboard is opened
     And no audio leaves the device
 
+  @SYS-10
   Scenario: Dictation is available to everyone
     Then the speech-to-text button is not gated behind a paid plan
 
+  @SYS-11
   Scenario: The cloud voice key is off by default
     Given a freshly flashed device
     Then the cloud voice input key is disabled
 
+  @SYS-12
   Scenario: The speech-to-text button is reachable when suggestions are off
     Given the user has disabled word suggestions
     When the keyboard is shown
     Then the speech-to-text button is shown on the suggestion strip
 
+  @SYS-13
   Scenario: The emoji key is available by default
     Given a freshly flashed device
     Then the emoji key is enabled
     Given a device updated from an earlier /e/OS release
     Then the emoji key is enabled
 
+  @SYS-14
   Scenario: The keyboard follows the system theme
     When the system switches between light and dark
     Then the keyboard is re-themed accordingly without being restarted
 
+  @SYS-15
   Scenario: The engine holds the permissions it needs
     Then the speech-to-text engine already holds the microphone permission

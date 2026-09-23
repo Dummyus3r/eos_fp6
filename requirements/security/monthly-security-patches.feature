@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@security @requirement
+@security @requirement @R-7
 Feature: Security patches ship monthly
 
   Every supported device receives the Android security patch level on a

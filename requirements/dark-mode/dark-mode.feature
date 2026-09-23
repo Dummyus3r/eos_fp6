@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@dark-mode @requirement
+@dark-mode @requirement @R-1
 Feature: A system-wide dark mode is available and respected
 
   The user can switch the system to a dark theme, and the system UI and

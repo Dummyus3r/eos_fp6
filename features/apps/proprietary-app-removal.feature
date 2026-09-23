@@ -8,16 +8,19 @@ Feature: Google proprietary blobs are stripped from device builds
   personalisation services and on-device intelligence models. /e/OS overrides
   them all so they never reach the image.
 
+  @APP-55
   Scenario: Hotword enrolment blobs are absent
     Given a device tree that declares Google hotword enrolment packages
     When an /e/OS image is built for that device
     Then none of those packages are present in the image
 
+  @APP-56
   Scenario: Device personalisation and on-device intelligence blobs are absent
     Given a device tree that declares device personalisation or network intelligence prebuilts
     When an /e/OS image is built for that device
     Then none of those packages are present in the image
 
+  @APP-57
   Scenario: Ambient sensing is absent
     Given a device tree that declares the ambient sense prebuilt
     When an /e/OS image is built for that device

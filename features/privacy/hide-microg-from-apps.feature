@@ -25,39 +25,46 @@ Feature: Hiding microG from selected applications
     And microG is installed
     And microG maintains the list of applications it should be hidden from
 
+  @PRIV-19
   Scenario: An application on the hide list cannot see microG
     Given microG has been asked to hide itself from "com.example.banking"
     When "com.example.banking" queries the installed packages
     Then microG's packages are absent from the result
     And "com.example.banking" cannot resolve microG's services
 
+  @PRIV-20
   Scenario: Other applications still use microG
     Given microG has been asked to hide itself from "com.example.banking"
     When "com.example.messaging" queries the installed packages
     Then microG's packages are present in the result
     And push notifications delivered through microG keep working for "com.example.messaging"
 
+  @PRIV-21
   Scenario: The hide list holds several applications
     Given the hide list contains "com.example.banking" and "com.example.gov"
     Then microG is hidden from both applications
     And it stays visible to every other application
 
+  @PRIV-22
   Scenario: Changing the list takes effect without a reboot
     Given microG is visible to "com.example.banking"
     When microG adds "com.example.banking" to the hide list
     Then microG becomes invisible to "com.example.banking"
     And no reboot is required
 
+  @PRIV-23
   Scenario: The list is per user
     Given the device has a primary user and a secondary user
     And microG is hidden from "com.example.banking" for the primary user only
     When "com.example.banking" runs as the secondary user
     Then it can see microG
 
+  @PRIV-24
   Scenario: Only microG maintains the list
     Then the setting holding the list is a private system setting
     And a third-party application cannot read or write it
 
+  @PRIV-25
   Scenario: An empty list hides nothing
     Given the hide list is empty
     Then microG is visible to every application

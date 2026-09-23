@@ -42,26 +42,31 @@ Feature: Which application handles what
     so it holds the autofill and credential roles, with microG behind it for
     applications that ask for a Google passkey specifically.
 
+    @APP-13
     Scenario: Filling a login form
       When an application asks for autofill
       Then the /e/OS password manager is offered
       And the user is not asked to pick a provider first
 
+    @APP-14
     Scenario: Creating or using a passkey
       When an application requests a credential
       Then the /e/OS password manager is the primary provider
       And microG is offered as a secondary provider
 
+    @APP-15
     Scenario: A passkey held on another device
       When an application requests a credential from a nearby device
       Then microG serves the request
 
+    @APP-16
     Scenario: The user remains free to change it
       When the user selects another autofill or credential provider
       Then that choice is honoured
 
   Rule: The /e/OS applications hold the system roles
 
+    @APP-17
     Scenario Outline: Roles are pre-assigned
       When the system needs <role>
       Then <application> handles it
@@ -76,42 +81,50 @@ Feature: Which application handles what
         | reading notifications         | BlissLauncher            |
         | the screen reader             | the preinstalled TalkBack |
 
+    @APP-18
     Scenario: The gallery's storage permission is presented as a system one
       Given the /e/OS gallery holds the system gallery role
       When the user opens its permissions
       Then its media access is shown as a system permission rather than a revocable grant
 
+    @APP-19
     Scenario: Dynamic icons are bound to the right applications
       Then the calendar icon is taken from the /e/OS calendar
       And the clock icon is taken from the preinstalled clock
 
   Rule: The device stays usable when it is managed
 
+    @APP-20
     Scenario: A managed device keeps its launcher
       Given the device is provisioned as managed
       Then BlissLauncher is kept as a required application
       And the user is not left without a home screen
 
+    @APP-21
     Scenario: A managed user keeps its launcher
       Given a managed user profile is created
       Then BlissLauncher is kept as a required application
 
   Rule: Presentation details that would otherwise leak the upstream product
 
+    @APP-22
     Scenario: The maps application is named for what it does
       Given the preinstalled maps application is a third-party product
       Then it appears to the user as "Maps"
       And it carries the /e/OS icon
 
+    @APP-23
     Scenario: Vendor components ship with usable wording
       Given a Qualcomm vendor component such as the broadcast service or the power-off alarm
       Then /e/OS supplies its user-visible strings
       And they are translated in the languages /e/OS ships
 
+    @APP-24
     Scenario: Applications that open instantly do not flash a splash screen
       When the account manager or the PWA player is launched
       Then no splash screen is shown
 
+    @APP-25
     Scenario: The wallpaper picker is the /e/OS one
       When the user changes the wallpaper or the style
       Then the /e/OS picker opens
@@ -121,9 +134,11 @@ Feature: Which application handles what
     /e/OS shipped a Murena MDM prebuilt until it was dropped. A device is
     enrolled by installing the operator's own device owner application.
 
+    @APP-26
     Scenario: A consumer device
       Then no device management client is preinstalled
 
+    @APP-27
     Scenario: An enrolled device
       Given the device is enrolled by QR code
       Then the device owner application named by the enrolment code is installed

@@ -27,6 +27,7 @@ Feature: One visual identity across the system applications
   Background:
     Given the device runs /e/OS
 
+  @APP-1
   Scenario Outline: System applications carry the /e/OS identity
     When the user opens <application>
     Then its colours follow the /e/OS palette in both light and dark themes
@@ -44,23 +45,28 @@ Feature: One visual identity across the system applications
       | the keyboard       |
       | the permission UI  |
 
+  @APP-2
   Scenario: The shared UI library provides the common components
     Then switches, colours and common icons come from the shared /e/OS UI library
     And the same component looks the same in every application
 
+  @APP-3
   Scenario: The palette has concrete values
     Then the accent is "#0086FF" in the light theme and "#5DB2FF" in the dark theme
     And the inverse accent is "#5DB2FF" in the light theme and "#0086FF" in the dark theme
     And every application resolves its accent from the shared library rather than redefining one
 
+  @APP-4
   Scenario: The platform resolves to the same accent
     Then the framework's primary and material accent colours point at the /e/OS accent
     And an application using the platform theme is accented without doing anything
 
+  @APP-5
   Scenario: The setup screens use the /e/OS palette
     When any screen built on the setup design library is shown
     Then it uses the /e/OS colours in light and dark themes
 
+  @APP-6
   Scenario: Icon shape is consistent
     Then adaptive icons are masked to the /e/OS squircle
     And round icons are not used

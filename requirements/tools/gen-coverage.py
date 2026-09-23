@@ -17,6 +17,20 @@ REPO_ROOT = os.path.dirname(BASE)
 
 NONE_YET = re.compile(r'\(none yet.*?\)', re.IGNORECASE)
 
+#: A citation may name a whole features/ file, or a single scenario by its
+#: permanent identifier. The identifier is the precise form: it survives the
+#: scenario being renamed or moved, and it says which scenario proves the
+#: promise rather than leaving a reader to guess which of a file's twenty do.
+SCENARIO_ID = re.compile(r'@[A-Z]+-\d+')
+
+
+def known_scenario_ids():
+    """Every identifier features/ defines, from its registry."""
+    registry = os.path.join(REPO_ROOT, 'features', 'IDS.md')
+    if not os.path.isfile(registry):
+        return set()
+    return set(re.findall(r'`(@[A-Z]+-\d+)`', open(registry, errors='ignore').read()))
+
 
 def parse(path):
     """Return (title, cited_paths) for one requirement .feature file.
@@ -32,12 +46,12 @@ def parse(path):
                 in_block = True
                 body = body[len('Proven by:'):].strip()
             elif in_block and not re.match(r'^[A-Za-z0-9_./-]+\.feature', body) \
-                    and ',' not in line[:4]:
+                    and not SCENARIO_ID.match(body) and ',' not in line[:4]:
                 in_block = False
             if in_block:
                 for part in NONE_YET.sub('', body).split(','):
                     part = part.strip().rstrip(',')
-                    if part.endswith('.feature'):
+                    if part.endswith('.feature') or SCENARIO_ID.fullmatch(part):
                         cited.append(part)
         elif line.startswith('Feature:'):
             title = line[len('Feature:'):].strip()
@@ -47,13 +61,16 @@ def parse(path):
 
 def main():
     rows, broken = [], []
+    ids = known_scenario_ids()
     for p in sorted(glob.glob(os.path.join(BASE, '**', '*.feature'), recursive=True)):
         rel = os.path.relpath(p, BASE)
         title, cited = parse(p)
         resolved = []
         for c in cited:
-            full = os.path.join(REPO_ROOT, c)
-            exists = os.path.isfile(full)
+            if SCENARIO_ID.fullmatch(c):
+                exists = c in ids
+            else:
+                exists = os.path.isfile(os.path.join(REPO_ROOT, c))
             resolved.append((c, exists))
             if not exists:
                 broken.append((rel, c))
@@ -79,6 +96,21 @@ def main():
             '| Requirement | Feature |', '|---|---|']
     for rel, title, _ in unproven:
         out.append(f'| `{rel}` | {title} |')
+
+    coarse = [(rel, [c for c, ok in resolved if ok and not SCENARIO_ID.fullmatch(c)])
+              for rel, _t, resolved in rows]
+    coarse = [(rel, cites) for rel, cites in coarse if cites]
+    if coarse:
+        out += ['', '## Citations still at file granularity', '',
+                'These name a whole `features/` file. A file holds many scenarios, '
+                'and only some of them prove the promise — citing the scenario by '
+                'its identifier says which, and survives a rename. Narrowing these '
+                'is editorial work: it takes deciding which scenarios actually '
+                'prove the promise, which is why it is reported rather than '
+                'guessed.', '',
+                '| Requirement | Cites |', '|---|---|']
+        for rel, cites in coarse:
+            out.append(f'| `{rel}` | {", ".join(f"`{c}`" for c in cites)} |')
 
     if broken:
         out += ['', '## Broken citations', '',

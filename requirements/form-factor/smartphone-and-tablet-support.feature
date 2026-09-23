@@ -1,6 +1,6 @@
 # Proven by: (none yet)
 
-@form-factor @requirement
+@form-factor @requirement @R-2
 Feature: The system works on both smartphones and tablets, in portrait and tablet orientation
 
   The UI adapts to the device's form factor: a smartphone in portrait, and a

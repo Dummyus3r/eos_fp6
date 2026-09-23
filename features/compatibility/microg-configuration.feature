@@ -27,23 +27,28 @@ Feature: What microG does out of the box
     notifications at all. This is the deliberate trade-off at the heart of
     /e/OS's compatibility story.
 
+    @COMPAT-17
     Scenario: Cloud messaging
       Then Google Cloud Messaging is enabled
       And applications relying on it receive their push notifications
 
+    @COMPAT-18
     Scenario: Device check-in
       Then device check-in is enabled
 
+    @COMPAT-19
     Scenario: Talking to Google is not routed through Tor
       Then requests to Google are made directly
       And Tor routing is off
 
+    @COMPAT-20
     Scenario: Google accounts can be added
       Then the account manager accepts Google accounts
       And two-step verification is supported
 
   Rule: Integrity checks are answered
 
+    @COMPAT-21
     Scenario: SafetyNet and DroidGuard
       Then SafetyNet is enabled
       And DroidGuard is enabled
@@ -56,20 +61,24 @@ Feature: What microG does out of the box
     resolution is served by an open database, and reverse geocoding by an open
     service.
 
+    @COMPAT-22
     Scenario: Network location source
       Then Wi-Fi and cell positioning are enabled
       And they resolve against the "beacondb" open location database
       And not against Google's location service
 
+    @COMPAT-23
     Scenario: Reverse geocoding
       Then addresses are resolved through the open geocoder
 
+    @COMPAT-24
     Scenario: The device improves its own positioning locally
       Then Wi-Fi and cell learning are enabled
       And moving-network detection is enabled
 
   Rule: Store features work without the Play Store
 
+    @COMPAT-25
     Scenario Outline: In-app functionality backed by microG
       Then <feature> is enabled
 
@@ -84,9 +93,11 @@ Feature: What microG does out of the box
 
   Rule: microG holds privileged permissions
 
+    @COMPAT-26
     Scenario: The allowlist is explicit
       Then microG is allowlisted for installing a location provider, modifying phone state, scanning networks and leaving the idle allowlist
       And the allowlist is a file in the build, reviewable like any other change
 
+    @COMPAT-27
     Scenario: The store stub holds a narrower set
       Then the store stub is allowlisted only for signature spoofing, installing and deleting packages, network access and notification naming

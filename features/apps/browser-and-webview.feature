@@ -23,11 +23,13 @@ Feature: The browser and the WebView are updated independently of the system
   Background:
     Given a freshly flashed /e/OS device
 
+  @APP-7
   Scenario: The browser and the WebView are separate applications
     Then the browser is installed as its own package
     And the WebView is installed as its own package
     And neither requires the other to be installed first
 
+  @APP-8
   Scenario: The browser can be updated without the system
     Given a newer browser version is published to the store
     When the user updates it
@@ -35,14 +37,17 @@ Feature: The browser and the WebView are updated independently of the system
     And it does not require an OS update
     And it does not require the WebView to be updated at the same time
 
+  @APP-9
   Scenario: The WebView replaces the AOSP one
     Then the /e/OS WebView is the WebView provider
     And the AOSP WebView is not shipped
 
+  @APP-10
   Scenario: The browser replaces the LineageOS and AOSP browsers
     Then no LineageOS or AOSP browser is shipped alongside it
     And no Google search widget is shipped
 
+  @APP-11
   Scenario: Both are built for the device's architecture
     Then the APK matching the device architecture is installed
     And no APK for another architecture is included in the image
@@ -53,6 +58,7 @@ Feature: The browser and the WebView are updated independently of the system
     between the browser and the WebView. That size was traded for the ability to
     ship a browser security fix without an OS release.
 
+    @APP-12
     Scenario: The image carries both applications in full
       Then the browser and the WebView each carry their own copy of the engine
       And the image is correspondingly larger than one using a shared library layout

@@ -32,12 +32,14 @@ Feature: /e/OS system updates
   Background:
     Given the device runs /e/OS
 
+  @UPD-1
   Scenario: Updates come from /e/OS infrastructure
     When the updater checks for updates
     Then it queries "https://ota.ecloud.global"
     And it identifies itself with the /e/OS user agent
     And the request carries an anonymous identifier rather than a device identifier
 
+  @UPD-2
   Scenario: The device is offered updates of its own release type only
     When the updater checks for updates
     Then the request carries the device's release type
@@ -45,72 +47,87 @@ Feature: /e/OS system updates
     # The release types and what else depends on them:
     # updates/release-types.feature
 
+  @UPD-3
   Scenario: The system updates are reachable immediately
     When the user opens Settings
     Then the system update entry is near the top of the main page
     And its summary shows the /e/OS version
 
+  @UPD-4
   Scenario: The device checks daily
     Given automatic checking is enabled
     Then the device checks for updates once a day
 
+  @UPD-5
   Scenario: Release notes are shown
     When an update is available
     Then the user can read the /e/OS release notes for it
     And the notes open in an in-app browser tab
 
+  @UPD-6
   Scenario: Android version upgrades are offered
     Given the available update targets a newer Android version than the installed one
     When the updater lists updates
     Then the update is offered
     And the user is told that this is a major upgrade
 
+  @UPD-7
   Scenario: Older Android versions are not offered
     Given an update targets an older Android version than the installed one
     Then it is not listed
 
+  @UPD-8
   Scenario: Free space is checked before installing
     Given there is not enough free space for the update
     When the user starts the installation
     Then the installation is refused with an explanation
 
+  @UPD-9
   Scenario: Battery level is checked before installing
     Given the battery is below the required level and the device is not charging
     When the user starts the installation
     Then the installation is refused with an explanation
 
+  @UPD-10
   Scenario: Downloads react to connectivity changes
     Given a download is in progress
     When the network is lost and comes back
     Then the download resumes without the user intervening
 
+  @UPD-11
   Scenario: An A/B device installs in one pass
     Given the device uses A/B partitions
     When the user installs an update
     Then the update is downloaded and applied in a single operation
 
+  @UPD-12
   Scenario: The user is reminded to reboot
     Given an update has been installed and a reboot is pending
     Then a notification stays in the shade until the device reboots
     And the user can delete the downloaded update from that notification
 
+  @UPD-13
   Scenario: Downloaded updates are cleaned up
     Given an update has been applied
     Then the downloaded file is deleted automatically
 
+  @UPD-14
   Scenario: Only the relevant update is shown by default
     When the user opens the updater
     Then only the update they should install is listed
     And the user can choose to show all available updates
 
+  @UPD-15
   Scenario: A file can be installed from local storage
     When the user picks an update file from the device
     Then it is validated before being installed
 
+  @UPD-16
   Scenario: Managed devices see the update state
     Given a device owner application queries the system update status
     Then it receives the state reported by the /e/OS updater
 
+  @UPD-17
   Scenario: Testers can target the staging server
     Given the user has enabled developer mode
     And the user has enabled the staging OTA server in Settings
@@ -118,6 +135,7 @@ Feature: /e/OS system updates
     Then it queries "https://test.ota.ecloud.global" instead of the production server
     And this is independent of the release type of the build
 
+  @UPD-18
   Scenario: Developer mode relaxes the strictness of the query
     Given the user has enabled developer mode
     When the updater checks for updates

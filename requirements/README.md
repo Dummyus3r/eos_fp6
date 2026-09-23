@@ -9,9 +9,20 @@ by a human, independently of any single feature or issue — checked against
 
 * One `Feature:` per file, one promise per feature; `Rule:` groups scenarios
   that illustrate the same facet of it, same as in `features/`.
-* Each file opens with a `# Proven by:` comment listing the `features/*.feature`
-  files whose scenarios currently prove this requirement, or `# Proven by:
-  (none yet)` when nothing does. This is a citation, not a duplication —
+* Each requirement carries a permanent identifier, `@R-n`, on its `Feature:`
+  line. A requirement is what a merge request, a test or a verdict cites —
+  "this serves R6" — so the citable unit is the requirement, not the scenarios
+  that illustrate facets of it. The number is **never reused**, even after the
+  requirement is dropped, so an old citation keeps resolving.
+  `requirements/tools/assign-ids.py` assigns to requirements that have none and
+  never renumbers; the registry is `requirements/IDS.md`, mirroring
+  `features/IDS.md`.
+* Each file opens with a `# Proven by:` comment listing what proves this
+  requirement, or `# Proven by: (none yet)` when nothing does. A citation may
+  name a whole `features/*.feature` file or, better, the individual scenarios by
+  their `@PREFIX-n` identifiers: a file holds many scenarios and only some prove
+  the requirement, and an identifier survives a rename where a path does not.
+  `COVERAGE.md` lists the citations still at file granularity, as work to narrow. This is a citation, not a duplication —
   the executable detail stays in `features/`; a requirement file states the
   promise and points at what proves it. `requirements/tools/gen-coverage.py`
   parses this line, so keep it to a bare, comma-separated list of paths — put

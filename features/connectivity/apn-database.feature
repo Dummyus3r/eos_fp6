@@ -20,23 +20,28 @@ Feature: Carrier APN database
     Given the device runs /e/OS
     And a SIM card is inserted
 
+  @NET-1
   Scenario: Data and MMS work without manual configuration
     When the device registers on the carrier network
     Then the APN matching the carrier's MCC and MNC is selected
     And mobile data and MMS work without the user entering an APN
 
+  @NET-2
   Scenario: MVNOs are covered
     Given the SIM belongs to a mobile virtual network operator
     Then a dedicated APN entry exists for it rather than the host network's
 
+  @NET-3
   Scenario: Corrections are carried by /e/OS
     Given a carrier whose upstream APN entry is wrong
     Then /e/OS ships the corrected entry
 
+  @NET-4
   Scenario: MediaTek devices use their own database
     Given the device is built with the MediaTek APN configuration enabled
     Then the MediaTek APN database is installed instead of the common one
 
+  @NET-5
   Scenario: The database is validated
     When the APN database is built
     Then it is checked against the APN schema

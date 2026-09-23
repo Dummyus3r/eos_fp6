@@ -15,14 +15,17 @@ Feature: Advanced Privacy is part of the settings
     Given the device runs /e/OS
     And Advanced Privacy is preinstalled
 
+  @SYS-1
   Scenario: Advanced Privacy appears in Settings
     When the user opens Settings
     Then an Advanced Privacy entry is shown at the top level with its own icon
 
+  @SYS-2
   Scenario: The entry opens the privacy dashboard
     When the user taps the Advanced Privacy entry
     Then the Advanced Privacy dashboard is opened
 
+  @SYS-3
   Scenario: The entry is searchable
     When the user searches the settings for privacy
     Then the Advanced Privacy entry is among the results

@@ -65,6 +65,7 @@ Feature: Android Auto can be installed by the user
     Given the device runs /e/OS
     And the Android Auto stub is preinstalled in the system image
 
+  @COMPAT-1
   Scenario: The user installs the real Android Auto
     Given the APK is named "com.google.android.projection.gearhead"
     And its signing chain contains the certificate digest pinned in the platform
@@ -72,25 +73,30 @@ Feature: Android Auto can be installed by the user
     Then the installation is accepted although the stub carries a different signature
     And the installed application replaces the stub
 
+  @COMPAT-2
   Scenario: The installed application gets the privileges the stub reserved
     Given the real Android Auto has been installed over the stub
     When it checks one of the privileged permissions on the pinned list
     Then the permission is reported as granted
 
+  @COMPAT-3
   Scenario: Only the pinned permissions are granted
     Given the real Android Auto has been installed over the stub
     When it checks a privileged permission that is not on the pinned list
     Then the permission is not granted by virtue of being Android Auto
 
+  @COMPAT-4
   Scenario: Android Auto is usable
     Given the real Android Auto has been installed
     When the user connects the device to a compatible head unit
     Then Android Auto starts
 
+  @COMPAT-5
   Scenario: It holds the automotive projection role
     Then the platform recognises it as the system automotive projection application
     And that recognition is pinned to the same certificate digest as the installation
 
+  @COMPAT-6
   Scenario: It can manage its own companion device association
     When it associates with a head unit
     Then it is treated as an allowed companion device application
@@ -98,18 +104,21 @@ Feature: Android Auto can be installed by the user
 
   Rule: The relaxation is pinned to one package and one signing certificate
 
+    @COMPAT-7
     Scenario: A package with the right name but the wrong signature
       Given an APK named "com.google.android.projection.gearhead"
       And its signing chain does not contain the pinned certificate digest
       When the user installs it
       Then the installation is refused because the signatures do not match
 
+    @COMPAT-8
     Scenario: A different package signed by the same certificate
       Given an APK signed by the pinned certificate but with another package name
       When it tries to overwrite a system application
       Then the installation is refused because the signatures do not match
       And it is not granted the Android Auto privileged permissions
 
+    @COMPAT-9
     Scenario: Any other package overwriting a system application
       When a third-party package tries to overwrite a system application
       Then the installation is refused because the signatures do not match

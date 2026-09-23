@@ -26,36 +26,45 @@ Feature: LineageOS-specific surfaces are replaced by /e/OS ones
   Background:
     Given the device runs /e/OS
 
+  @SYS-16
   Scenario: Updates are signed by /e/OS
     Then the LineageOS OTA certificate is not shipped
     And the /e/OS signing keys are used for the OTA certificates
 
+  @SYS-17
   Scenario: Support links point at /e/OS
     When the user opens the NFC or fingerprint help
     Then no LineageOS help page is offered
     And the permission help links to the /e/OS community
 
+  @SYS-18
   Scenario: Contributors and legal notices name /e/OS
     When the user opens the contributors list
     Then /e/OS contributors are listed
 
+  @SYS-19
   Scenario: The security dialog names /e/OS
     When the user opens the security patch dialog
     Then it refers to /e/OS
 
+  @SYS-20
   Scenario: The microG entry is named for what it does
     When the user browses the /e/OS settings
     Then the microG settings entry is labelled "App compatibility"
 
+  @SYS-21
   Scenario: An OpenPGP key manager is offered
     Then OpenKeychain is available from the /e/OS settings
 
+  @SYS-22
   Scenario: LineageOS add-on survival scripts are not shipped
     Then no LineageOS addon.d survival script is present in the image
 
+  @SYS-23
   Scenario: Google partner makefiles are not used
     Then no partner GMS makefile is inherited by the build
 
+  @SYS-24
   Scenario: Wallpaper-driven colour selection is removed from the theme picker
     When the user opens the theme picker
     Then no wallpaper colour selection is offered

@@ -24,23 +24,27 @@ Feature: Self-contained flashing package for manual installation
   Background:
     Given an /e/OS build for a device that has a flashing configuration
 
+  @DEV-1
   Scenario: The build produces a flashable archive
     When the release artefacts are built
     Then an image package archive is produced alongside the OTA package
     And it is named after the /e/OS version
     And an MD5 and a SHA-256 checksum are produced next to it
 
+  @DEV-2
   Scenario: The archive is self-contained
     Then it contains the partition images the device needs
     And it contains the device's flashing script
     And it contains a fastboot binary for GNU/Linux, for macOS and for Windows
     And the user does not have to install the Android platform tools
 
+  @DEV-3
   Scenario: The script picks the right fastboot for the host
     When the user runs the flashing script
     Then the bundled fastboot for the host operating system is used
     And an unsupported operating system is reported and the script stops
 
+  @DEV-4
   Scenario: The script waits for the right device
     Given several devices are connected
     When the user runs the flashing script
@@ -49,12 +53,14 @@ Feature: Self-contained flashing package for manual installation
 
   Rule: The script refuses to run rather than half-flash a device
 
+    @DEV-5
     Scenario: The bootloader is still locked
       Given the device bootloader is locked
       When the user runs the flashing script
       Then the script reports that the bootloader must be unlocked first
       And it flashes nothing
 
+    @DEV-6
     Scenario: Critical partitions are still locked
       Given the device requires critical partitions to be unlocked
       And they are locked
@@ -62,28 +68,33 @@ Feature: Self-contained flashing package for manual installation
       Then the script tells the user to run the critical unlock first
       And it flashes nothing
 
+    @DEV-7
     Scenario: A partition fails to flash
       Given a partition cannot be written
       When the failure occurs
       Then the script stops
       And it tells the user how to get back into fastboot mode and start again
 
+  @DEV-8
   Scenario: The device's own flashing sequence is respected
     Then the firmware images are flashed to both slots where the device requires it
     And the device is rebooted into the bootloader between the firmware and the system images
     And it is switched into fastbootd when the device requires it for the logical partitions
 
+  @DEV-9
   Scenario: A clean flash wipes what it must
     Given the device configuration asks for a clean flash
     Then the user data and metadata partitions are erased
     And the super partition is wiped before the logical partitions are written
 
+  @DEV-10
   Scenario: The rollback index is reset where the device supports it
     Given the device configuration asks for a rollback index reset
     When the script runs
     Then the reset is attempted
     And the script continues when the device does not implement the command
 
+  @DEV-11
   Scenario: The device reboots into /e/OS
     When the flashing sequence completes
     Then the script reboots the device

@@ -3,7 +3,7 @@
 # APN/network values, not the promise that carrier-provided services keep
 # working.
 
-@user-experience @requirement
+@user-experience @requirement @R-11
 Feature: Carrier and operator services keep working
 
   Calls, SMS, MMS, visual voicemail, RCS and carrier-specific provisioning
