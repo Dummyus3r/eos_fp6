@@ -26,8 +26,13 @@ import sys
 
 import pytest
 
-sys.path.insert(
-    0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tools"))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+# tools/ holds the probes, journeys/ the walk; both are imported by test modules
+# in either subfolder, and this conftest sits above both so the options and
+# fixtures are seen from each.
+for _d in (_HERE, os.path.join(_HERE, "tools"), os.path.join(_HERE, "journeys")):
+    if _d not in sys.path:
+        sys.path.insert(0, _d)
 
 
 def pytest_addoption(parser):

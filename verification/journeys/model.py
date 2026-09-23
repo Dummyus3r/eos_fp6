@@ -50,6 +50,17 @@ class Screen:
     applies: Callable[[str], bool] | None = None
     """Predicate on the serial: whether this screen is expected on this device."""
 
+    next_label: str | None = None
+    """Text of the control that leaves this screen, located at run time. None
+    means the walk stops here — the last screen of a journey, or one whose exit
+    needs an action the journey declares itself."""
+
+    def leave(self, serial: str) -> None:
+        from runner import tap_text
+        if self.next_label is None:
+            raise NotImplementedError(f"{self.activity} declares no way out")
+        tap_text(serial, self.next_label)
+
     def matches(self, serial: str) -> bool:
         try:
             if self.activity not in resumed_activity(serial):

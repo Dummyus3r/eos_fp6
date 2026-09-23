@@ -168,6 +168,24 @@ upstream is exactly the /e/OS work" — is a check that already exists.
 `verification/tools/gen-triage.py` adds a row for any scenario that has none and
 **never overwrites a judgement**: the levels are written by hand.
 
+## A claim is not a proof
+
+`gen-coverage.py` reads the source: it reports what each check *claims* to
+verify and at what level. A check marked `measured` that fails, errors or is
+skipped has proven nothing, and a static report cannot know which.
+
+`tools/proven.py` crosses the claims with a run:
+
+```
+pytest verification --device <serial> --junit-xml=report.xml
+python3 verification/tools/proven.py report.xml
+```
+
+It counts only a scenario whose `measured` check actually passed, and names the
+ones claimed but not passing. That distinction is not academic — the first run
+of it reported 0 proven and five skipped, because the device had been left
+mid-wizard by an earlier walk.
+
 ## In CI
 
 `verification/.gitlab-ci.yml` declares two jobs, because their requirements

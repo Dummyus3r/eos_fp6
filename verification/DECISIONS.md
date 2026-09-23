@@ -120,3 +120,30 @@ looked unverifiable — fourteen scenarios that say nothing about a device — a
 is in fact provable against the repositories and the manifest. Calling those
 unverifiable would have written off fourteen scenarios that can be gated in CI
 today.
+
+## The walk drives through adb alone
+
+No agent, no instrumentation package, nothing installed. The first-boot journey
+runs before the device is provisioned, and putting a test package on it at that
+moment perturbs exactly what is being measured. It also keeps the suite honest
+about what it is: it launches the built product and measures it, rather than
+instrumenting it.
+
+The cost is that waiting, scrolling and locating are written here rather than
+supplied by a tool. That is about a hundred lines, and the thing a tool would
+not have given — recording the traversed sequence, so a step that never came is
+reported by name — is the part worth having.
+
+## A run counts only when the device is in the right state
+
+A journey is stateful: it starts at the beginning of the wizard, and a previous
+walk leaves the device elsewhere. Rather than wipe from inside the test, which
+would make a failure indistinguishable from a device in the wrong state, the
+journey skips and says so.
+
+It also refuses to run against an image older than the tree. `m <module>`
+rebuilds an APK and does not regenerate the partition images the emulator boots
+from, so a module build can be green while the device still runs the previous
+image — and the walk then reports steps as missing that are present in the
+source. That is the most misleading failure this suite can produce, because it
+looks exactly like a real defect. It happened, which is why the guard exists.
