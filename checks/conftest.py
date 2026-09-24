@@ -35,6 +35,9 @@ for _d in (_HERE, os.path.join(_HERE, "tools"), os.path.join(_HERE, "journeys"))
         sys.path.insert(0, _d)
 
 
+ACCOUNT_FILE = os.path.expanduser("~/.config/eos-checks/account.env")
+
+
 def pytest_addoption(parser):
     parser.addoption("--device", default="", help="serial of the build under test")
     parser.addoption("--reference", default="",
@@ -43,6 +46,8 @@ def pytest_addoption(parser):
                      help="serial of a LineageOS build, used as the negative control")
     parser.addoption("--product-out", default="",
                      help="path to out/target/product/<device> for artefact checks")
+    parser.addoption("--account-file", default=ACCOUNT_FILE,
+                     help="file holding the test account the sign-in checks use")
 
 
 def pytest_configure(config):
@@ -128,6 +133,43 @@ def product_out(request):
     if not path:
         pytest.skip("no --product-out given (artefact checks need a built image)")
     return path
+
+
+@pytest.fixture(scope="session")
+def account(request):
+    """The test account the sign-in checks use, read from a file outside the repo.
+
+    Never a command-line argument and never a literal in a check: an argument
+    lands in the shell history and in the CI log of every job that runs the
+    suite, and a literal lands in the repository for good. The file lives in the
+    operator's home, readable by them alone, and is passed to the suite by path.
+
+    Two things follow from an account existing at all, and they are worth saying
+    where the fixture is defined rather than in a README nobody reads:
+
+    * **the address will appear in artefacts.** A check that signs in types it
+      into a field, and the runner saves a hierarchy dump and a screenshot when a
+      step fails. Use an account that exists only for this, never a real one.
+    * **the password is masked on screen but not in this process.** Nothing here
+      logs it, and nothing should: it is returned, used, and never printed —
+      which is why the assertion messages of the sign-in checks name the field
+      and not its content.
+    """
+    path = request.config.getoption("--account-file")
+    if not os.path.exists(path):
+        pytest.skip(f"no test account at {path} (see checks/README.md)")
+    values = {}
+    with open(path) as fh:
+        for line in fh:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            values[key.strip()] = value.strip().strip('"\'')
+    missing = [k for k in ("EOS_ACCOUNT_EMAIL", "EOS_ACCOUNT_PASSWORD") if not values.get(k)]
+    if missing:
+        pytest.skip(f"{path} is missing {', '.join(missing)}")
+    return values
 
 
 def scenario(key: str):

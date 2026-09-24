@@ -227,3 +227,35 @@ The subfolders are named after **where the evidence comes from**, which is the
 spine of the whole thing: listing the folder shows the model. `artefact/` will
 sit beside them for the `inspected` level — what reads the built image without
 starting anything.
+
+
+## The test account
+
+Seventeen scenarios describe a device with a Murena Workspace account on it —
+`@ID-2` to `@ID-9`, the restore step of the setup wizard, Find My Device. No
+fixture stands in for that honestly, so those checks need real credentials.
+
+They are read from a file outside the repository, never from a command-line
+argument and never from a literal in a check. An argument lands in the shell
+history and in the log of every CI job that runs the suite; a literal lands in
+the repository for good.
+
+```
+mkdir -p ~/.config/eos-checks && chmod 700 ~/.config/eos-checks
+cat > ~/.config/eos-checks/account.env <<'EOF'
+EOS_ACCOUNT_EMAIL=...
+EOS_ACCOUNT_PASSWORD=...
+EOS_ACCOUNT_SERVER=https://ecloud.global
+EOF
+chmod 600 ~/.config/eos-checks/account.env
+```
+
+`--account-file` points elsewhere if needed. Without the file, the checks that
+need it skip with that reason rather than failing, so the suite stays green on a
+machine that has no account.
+
+**Use an account that exists only for this.** A check that signs in types the
+address into a field, and the runner saves a screenshot and a hierarchy dump
+when a step fails — so the address ends up in the artefacts of every failed run.
+The password is masked on screen and never printed by anything here, but the
+address is not a secret the suite can keep.

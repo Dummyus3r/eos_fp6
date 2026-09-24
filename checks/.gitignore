@@ -1,2 +1,8 @@
 __pycache__/
 *.pyc
+
+# Never in the repository, whatever the name: the account a check signs in with.
+*.env
+account*
+*credentials*
+*secret*
