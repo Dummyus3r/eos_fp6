@@ -126,9 +126,26 @@ def read(serial: str, max_scrolls: int = 12) -> list[str]:
     return seen
 
 
+def to_top(serial: str, times: int = 5) -> None:
+    """Scroll back to the top of whatever is on screen."""
+    for _ in range(times):
+        _adb(serial, "shell", "input", "swipe", *SWIPE_DOWN)
+        time.sleep(0.4)
+    time.sleep(0.6)
+
+
 def enter(serial: str, label: str, expect: str = "", scrolls: int = 12) -> str:
-    """Scroll to an entry, tap it, and confirm where it led."""
+    """Scroll to an entry, tap it, and confirm where it led.
+
+    The screen is brought back to the top first. `tap_text` only scrolls
+    downwards, so an entry *above* the current position is invisible to it — and
+    after reading a screen, which scrolls to the bottom to gather everything, the
+    current position is the bottom. Every entry above then reports as missing,
+    which reads as a defect and is an artefact of where the last step left the
+    scroll.
+    """
     from runner import tap_text
+    to_top(serial)
     tap_text(serial, label, scrolls=scrolls)
     return settle(serial, expect)
 
