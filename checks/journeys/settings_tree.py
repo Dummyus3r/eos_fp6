@@ -69,3 +69,25 @@ def search(serial: str, term: str) -> list[str]:
     _adb(serial, "shell", "input", "text", term.replace(" ", "%s"))
     time.sleep(3.0)
     return settings.read(serial)
+
+
+def private_dns(serial: str) -> list[str]:
+    """The Private DNS dialog, reached the way a user reaches it.
+
+    It has no intent of its own, so it is only reachable by walking
+    *Network & internet* and tapping the entry.
+    """
+    homepage(serial)
+    settings.navigate(serial, "Network & internet", "Private DNS")
+    return settings.read(serial)
+
+
+def developer_options(serial: str) -> list[str]:
+    """Every entry of the developer options, in the order they are listed.
+
+    The order is the point for `@PRIV-32`: what is asserted is not that the
+    /e/OS entries exist but that they are gathered, and only a sequence can
+    show that.
+    """
+    settings.start(serial, action="android.settings.APPLICATION_DEVELOPMENT_SETTINGS")
+    return settings.read(serial, max_scrolls=40)

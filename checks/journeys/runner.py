@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import os
 import re
+from xml.sax import saxutils
 import subprocess
 import time
 from dataclasses import dataclass, field
@@ -77,7 +78,16 @@ def wait_for(screen, serial: str, timeout: float = 30.0, poll: float = 1.0) -> b
 
 
 def _find(serial: str, label: str):
-    pattern = r'text="' + re.escape(label) + r'"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"'
+    """Locate a node by its visible label.
+
+    The hierarchy is XML, so its attributes are escaped: the entry a user reads
+    as *Network & internet* appears as `text="Network &amp; internet"`. Matching
+    the raw label finds nothing, and a great many settings entries contain an
+    ampersand — the failure reads as "the entry is missing", which is the wrong
+    conclusion about the build.
+    """
+    pattern = (r'text="' + re.escape(saxutils.escape(label))
+               + r'"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"')
     return re.search(pattern, ui_dump(serial))
 
 

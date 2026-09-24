@@ -17,6 +17,7 @@ Three mistakes are worth designing against, all met while building this:
 from __future__ import annotations
 
 import re
+from xml.sax import saxutils
 import time
 
 from probes import ProbeError, resumed_activity, ui_dump, _adb
@@ -29,9 +30,14 @@ SWIPE_DOWN = ("540", "600", "540", "1500", "800")
 
 
 def _texts(dump: str) -> list[str]:
+    """The visible labels of a screen, as a user would read them.
+
+    Unescaped: the hierarchy is XML, and a caller comparing against
+    `"Security & privacy"` would never match the `&amp;` the dump carries.
+    """
     seen = []
     for t in re.findall(r'text="([^"]*)"', dump):
-        t = t.strip()
+        t = saxutils.unescape(t).strip()
         if t and t not in seen:
             seen.append(t)
     return seen
@@ -125,3 +131,23 @@ def enter(serial: str, label: str, expect: str = "", scrolls: int = 12) -> str:
     from runner import tap_text
     tap_text(serial, label, scrolls=scrolls)
     return settle(serial, expect)
+
+
+def navigate(serial: str, *labels: str, expect: str = "") -> str:
+    """Walk down the settings tree by tapping each label in turn.
+
+    Many screens have no intent of their own — Private DNS, the theme picker,
+    every leaf of a dashboard — so they can only be reached the way a user
+    reaches them. Each tap is followed by waiting for the screen to change, so
+    a label that was found but whose tap did nothing fails here rather than
+    three assertions later.
+    """
+    from probes import resumed_activity
+    before = resumed_activity(serial)
+    for i, label in enumerate(labels):
+        enter(serial, label, expect=expect if i == len(labels) - 1 else "")
+        now = resumed_activity(serial)
+        if now == before and i < len(labels) - 1:
+            time.sleep(1.5)                   # same activity, new fragment: let it draw
+        before = now
+    return resumed_activity(serial)
