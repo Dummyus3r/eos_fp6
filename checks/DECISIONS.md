@@ -147,3 +147,32 @@ from, so a module build can be green while the device still runs the previous
 image — and the walk then reports steps as missing that are present in the
 source. That is the most misleading failure this suite can produce, because it
 looks exactly like a real defect. It happened, which is why the guard exists.
+
+## Two surfaces cannot be captured, and they stay uncovered
+
+`uiautomator dump` captures a window only after it goes idle, and answers
+`ERROR: could not get idle state.` otherwise. Two surfaces of this build never
+go idle:
+
+* **the launcher** draws continuously — around sixty frames a second with the
+  device untouched;
+* **About phone** (`Settings$MyDeviceInfoActivity`) never settles either, from a
+  freshly started process, on a16 and on a17 alike.
+
+No amount of retrying helps, and the workarounds considered are worse than the
+gap. Reading the hierarchy of a *different* screen and hoping it is the right
+one is what the previous probe did by accident, and it is how a check comes to
+pass while looking at nothing. Comparing screenshots would decide nothing about
+text. Installing an on-device automation agent would make the device under test
+different from the one shipped, which is the one property this suite must not
+give up.
+
+So the scenarios living on those surfaces — `@SYS-43` and `@SYS-44` on *About
+phone*, the eight notification-badge scenarios on the launcher — are left
+uncovered rather than checked against something weaker. `COVERAGE.md` counts
+them as untouched, which is the truth.
+
+The way out, when it is worth the cost, is an instrumentation APK built in the
+tree that calls `dumpWindowHierarchy()` without waiting for idle. That is a
+real piece of work and it changes what runs on the device, so it is a decision
+to take deliberately, not a workaround to slip in.

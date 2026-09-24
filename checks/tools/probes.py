@@ -18,6 +18,7 @@ Nothing here writes to the device.
 from __future__ import annotations
 
 import os
+import time
 import re
 import shutil
 import subprocess
@@ -94,15 +95,44 @@ def resumed_activity(serial: str = "") -> str:
     return m.group(1)
 
 
-def ui_dump(serial: str = "") -> str:
+class DumpUnavailable(ProbeError):
+    """The hierarchy could not be captured — as opposed to being empty."""
+
+
+def ui_dump(serial: str = "", retries: int = 12, delay: float = 2.0) -> str:
     """The current view hierarchy as XML.
 
-    Screens that set FLAG_SECURE dump an empty hierarchy; that is Android
-    refusing the capture, not a probe failure, so callers should fall back to
-    `resumed_activity` there rather than treat it as an error.
+    `uiautomator dump` waits for the window to go idle and gives up with
+    `ERROR: could not get idle state.` when it does not. A screen that is still
+    resolving something — the SIM status on *About phone*, the launcher while
+    its widgets load — fails for a few seconds and then succeeds, so the failure
+    is retried rather than reported.
+
+    What must never happen is the earlier behaviour: dumping into a fixed path,
+    ignoring the error, and returning whatever the *previous* successful dump
+    had left there. A check then judges one screen by looking at another, passes
+    or fails for a reason that has nothing to do with the device, and nothing
+    says so. The file is therefore removed first, the tool's own success line is
+    required, and an unavailable hierarchy raises.
+
+    Screens that set FLAG_SECURE are a different case: Android returns no root
+    node at all. That is a refusal, not a failure, so it yields an empty string
+    and callers fall back to `resumed_activity`.
     """
-    _adb(serial, "shell", "uiautomator", "dump", "/sdcard/ui.xml")
-    return _adb(serial, "shell", "cat", "/sdcard/ui.xml")
+    for attempt in range(retries):
+        out = _adb(serial, "shell",
+                   "rm -f /sdcard/ui.xml; uiautomator dump /sdcard/ui.xml 2>&1 | tail -1")
+        if "dumped to" in out:                 # AOSP spells it "hierchary"
+            xml = _adb(serial, "shell", "cat", "/sdcard/ui.xml")
+            if xml.strip():
+                return xml
+        elif "null root node" in out:          # FLAG_SECURE, or nothing drawn yet
+            return ""
+        if attempt < retries - 1:
+            time.sleep(delay)
+    raise DumpUnavailable(
+        f"the hierarchy could not be captured after {retries} attempts "
+        f"(last answer: {out.strip()!r}) - the screen never went idle")
 
 
 # --------------------------------------------------------------------------

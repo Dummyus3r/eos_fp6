@@ -37,8 +37,21 @@ def claims() -> dict[str, str]:
             if os.path.basename(path) == "conftest.py":
                 continue
             text = open(path, errors="ignore").read()
+            lines = text.splitlines()
             for m in MARKER.finditer(text):
-                levels = EVIDENCE.findall(text[:m.start()])
+                # The level is read from the decorator block the scenario marker
+                # belongs to, on either side of it. Searching backwards through
+                # the file picks up the previous check's level when the two
+                # decorators are written in the other order — and a check whose
+                # level is misread as `observed` disappears from this report
+                # entirely when it fails, which is the one case it exists for.
+                line_no = text[:m.start()].count("\n")
+                start = end = line_no
+                while start > 0 and lines[start - 1].lstrip().startswith("@"):
+                    start -= 1
+                while end + 1 < len(lines) and lines[end + 1].lstrip().startswith("@"):
+                    end += 1
+                levels = EVIDENCE.findall("\n".join(lines[start:end + 1]))
                 level = levels[-1] if levels else "observed"
                 key = m.group(1)
                 if rank.get(level, 0) > rank.get(best.get(key, ""), 0):

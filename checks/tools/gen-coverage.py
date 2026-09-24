@@ -76,10 +76,22 @@ def claimed() -> tuple[dict[str, list[tuple[str, str]]], list[str]]:
                 continue   # defines the markers, does not use them
             rel = os.path.relpath(path, REPO_ROOT)
             text = open(path, errors="ignore").read()
-            # the evidence marker sits immediately above the scenario marker
+            # The evidence marker belongs to the same decorator block as the
+            # scenario marker, and may sit on either side of it. Searching
+            # backwards through the whole file instead — as this did — reads the
+            # *previous* check's level whenever the two decorators are written in
+            # the other order, and reports a level that is right only by luck.
+            lines = text.splitlines()
             for m in MARKER_RE.finditer(text):
-                before = text[:m.start()]
-                ev = EVIDENCE_RE.findall(before)
+                line_no = text[:m.start()].count("\n")
+                start = line_no
+                while start > 0 and lines[start - 1].lstrip().startswith("@"):
+                    start -= 1
+                end = line_no
+                while end + 1 < len(lines) and lines[end + 1].lstrip().startswith("@"):
+                    end += 1
+                block = "\n".join(lines[start:end + 1])
+                ev = EVIDENCE_RE.findall(block)
                 level = ev[-1] if ev else "observed"
                 found.setdefault(m.group("key"), []).append((rel, level))
             missed = len(ANY_MARKER_RE.findall(text)) - len(MARKER_RE.findall(text))
