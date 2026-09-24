@@ -160,3 +160,26 @@ def test_eos_developer_entries_are_grouped(device):
     assert all(start < p <= start + len(ours) * 2 for p in positions), (
         f"the /e/OS entries are not gathered under their heading: "
         f"heading at {start}, entries at {positions}")
+
+
+@scenario("@COMPAT-34")
+@evidence("measured")
+@delta
+def test_app_compatibility_entry_leads_to_microg(device):
+    """The renamed entry has to open microG's own settings.
+
+    Reached through the settings search, which is how a user finds an entry
+    that does not sit on the home page — and which covers the whole tree rather
+    than the one path a walk happens to take.
+
+    A rename that leaves the entry pointing elsewhere — or pointing nowhere —
+    would still satisfy a check on the label. What matters is that the user who
+    taps *App compatibility* lands in microG, and that nothing offers them the
+    name /e/OS deliberately stopped using.
+    """
+    opened = settings_tree.search_and_open(
+        device, "compatibility", "App compatibility", expect="gms")
+    assert "com.google.android.gms" in opened, (
+        f"the App compatibility entry opened {opened!r}")
+    assert "microg" in opened.lower(), (
+        f"it did not land in the microG settings: {opened!r}")

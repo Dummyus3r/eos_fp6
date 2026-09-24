@@ -91,3 +91,14 @@ def developer_options(serial: str) -> list[str]:
     """
     settings.start(serial, action="android.settings.APPLICATION_DEVELOPMENT_SETTINGS")
     return settings.read(serial, max_scrolls=40)
+
+
+def search_and_open(serial: str, term: str, label: str, expect: str = "") -> str:
+    """Search the settings for a term, tap a result, and return where it led.
+
+    The settings search is a first-class way into the tree, and for an entry
+    that lives several screens deep it is the way a user actually gets there.
+    It also covers the whole tree, where walking covers only the path walked.
+    """
+    search(serial, term)
+    return settings.enter(serial, label, expect=expect)
