@@ -50,16 +50,33 @@ class Screen:
     applies: Callable[[str], bool] | None = None
     """Predicate on the serial: whether this screen is expected on this device."""
 
-    next_label: str | None = None
-    """Text of the control that leaves this screen, located at run time. None
-    means the walk stops here — the last screen of a journey, or one whose exit
-    needs an action the journey declares itself."""
+    next_label: str | tuple[str, ...] | None = None
+    """Text of the control that leaves this screen, or several to try in order.
+
+    Several, because the same step is not labelled the same across generations:
+    a16's account step offers *Create Account / Sign in / Skip* where a17's
+    offers *Next*. A model naming one of them stops dead on the other, and
+    because the walk cannot go on, every step after it reports as never
+    reached — one wrong label reads as a dozen missing screens.
+
+    None means the walk stops here: the last screen of a journey, or one whose
+    exit needs an action the journey declares itself."""
 
     def leave(self, serial: str) -> None:
+        from probes import ProbeError
         from runner import tap_text
         if self.next_label is None:
             raise NotImplementedError(f"{self.activity} declares no way out")
-        tap_text(serial, self.next_label)
+        labels = ((self.next_label,) if isinstance(self.next_label, str)
+                  else self.next_label)
+        for label in labels:
+            try:
+                tap_text(serial, label)
+                return
+            except ProbeError:
+                continue
+        raise ProbeError(
+            f"{self.activity}: none of {labels} is on the screen")
 
     def matches(self, serial: str) -> bool:
         try:

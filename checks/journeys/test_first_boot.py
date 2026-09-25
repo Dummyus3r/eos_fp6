@@ -17,7 +17,7 @@ import os
 
 import pytest
 
-from conftest import evidence, scenario
+from conftest import delta, evidence, scenario
 from first_boot import FIRST_BOOT
 from runner import diagnose, walk
 
@@ -113,3 +113,65 @@ def test_account_step_comes_after_date_and_time(first_boot):
 def test_recovery_update_is_never_offered(first_boot):
     assert not any("Recovery" in s.screen for s in first_boot.steps if s.reached), \
         f"a recovery update step was offered: {' -> '.join(first_boot.traversed)}"
+
+
+@evidence("measured")
+@scenario("@SYS-38")
+@delta
+def test_parental_control_can_be_set_up_from_the_wizard(first_boot, device):
+    """The wizard offers to set parental control up, not merely to reach a screen.
+
+    Distinct from `@SETUP-16`, which asks whether the step exists in the flow.
+    This asks what the step lets the user do, which is the promise a port can
+    keep in the flow and lose in the screen.
+    """
+    shown = first_boot.showed("ParentalControlActivity")
+    assert shown, "the parental control step was never reached"
+    assert any("arental" in t for t in shown), (
+        f"the step does not present itself as parental control: {shown}")
+
+
+@evidence("measured")
+@scenario("@SETUP-17")
+@delta
+def test_find_my_device_step_offers_both_choices(first_boot, device):
+    """The step has to let the user enable Find My Device *and* skip it.
+
+    A step that only offers to enable it is a step the user cannot get past
+    without accepting, which is not what the scenario promises.
+    """
+    shown = first_boot.showed("FindMyDeviceActivity")
+    if not shown:
+        pytest.skip("the Find My Device step was not reached on this walk")
+    assert any("ind my" in t.lower() or "Find My" in t for t in shown), (
+        f"the step does not name Find My Device: {shown}")
+    assert any(t.lower() in ("skip", "not now") for t in shown), (
+        f"the step offers no way to skip it: {shown}")
+
+
+@evidence("measured")
+@scenario("@SYS-6")
+@delta
+def test_find_my_device_can_be_enabled_during_setup(first_boot):
+    """The enabling control itself is on the step, not behind a later screen."""
+    shown = first_boot.showed("FindMyDeviceActivity")
+    if not shown:
+        pytest.skip("the Find My Device step was not reached on this walk")
+    assert any(t.lower().startswith(("set up", "enable", "activate", "turn on"))
+               for t in shown), (
+        f"nothing on the step enables Find My Device: {shown}")
+
+
+@evidence("measured")
+@scenario("@PRIV-26")
+@delta
+def test_setup_never_offers_usage_statistics(first_boot):
+    """No step of the wizard proposes to send usage statistics.
+
+    LineageOS asks during setup. The check reads every label the walk met rather
+    than looking at one screen, because the offer could be anywhere in the flow —
+    and an offer nobody walks past is still an offer.
+    """
+    offending = [t for t in first_boot.everything_shown
+                 if "statistic" in t.lower() or "usage data" in t.lower()]
+    assert not offending, f"the wizard offers usage statistics: {offending}"

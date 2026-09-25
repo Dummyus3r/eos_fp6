@@ -176,3 +176,62 @@ The way out, when it is worth the cost, is an instrumentation APK built in the
 tree that calls `dumpWindowHierarchy()` without waiting for idle. That is a
 real piece of work and it changes what runs on the device, so it is a decision
 to take deliberately, not a workaround to slip in.
+
+## A scenario whose wording and whose build disagree: `@ID-5`
+
+`@ID-5` promises that creating a contact **preselects** the Murena Workspace
+account. On a16 — the shipped build, not a port — the editor opens an account
+chooser instead, headed *Choose a default account for new contacts*, with the
+Murena account listed first and nothing marked as selected.
+
+The commit the feature file cites is *"Contacts: Sort /e/ account with first
+priority and allow user to modify primary account for profile"*. It promises an
+order, and the build delivers an order.
+
+So the scenario is stricter than what /e/OS built. Writing a check either way
+would be wrong: asserting preselection reports a defect in a build that behaves
+as designed, and relaxing the assertion to "listed first" quietly rewrites the
+specification to match the code, which is the one thing a specification must not
+do.
+
+It is left uncovered until the wording is settled by whoever owns it. The
+question is narrow: is the promise that the account is *offered first*, or that
+the user is *not asked*?
+
+## Another disagreement: `@SETUP-3`
+
+`@SETUP-3` promises that skipping the Murena Workspace account step leaves **no
+restore step** behind it. On a16 the next screen is exactly that step, headed
+*Already an /e/OS user?*, offering *Sign in to restore* and *Skip*.
+
+The wizard script routes `account → restore → parental control` unconditionally,
+so the restore step is not conditioned on an account at all; it is where a user
+who has one signs in. That is a defensible design — it is simply not the one the
+scenario describes.
+
+Left uncovered, with the same question for its owner as `@ID-5`: is the promise
+that the step is *absent* without an account, or that it does not *block* a user
+who has none?
+
+## And a third: `@SETUP-15`
+
+`@SETUP-15` promises that the location step of the wizard lets the user enable
+**Wi-Fi-based location**. Neither generation offers it. The step is *Location
+services*, and it proposes two things: letting apps that asked for permission use
+the location, and downloading satellite assistance data. Both builds carry the
+same three strings, so this is not something a17 lost — it is something neither
+has.
+
+## What these three have in common
+
+`@ID-5`, `@SETUP-3` and `@SETUP-15` are not port defects. They are places where
+the specification promises more, or other, than the shipped build delivers — and
+they were found by trying to check them against a16, the build /e/OS ships
+today.
+
+That is worth more than the coverage number they cost. A specification nobody
+checks drifts from the product without anyone noticing, and the drift is only
+visible when something tries to hold the two together. Each is recorded here
+rather than quietly relaxed: rewriting an assertion until it passes turns the
+specification into a description of the code, which is the one thing it must
+never become.

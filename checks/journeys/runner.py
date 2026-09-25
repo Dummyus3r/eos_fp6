@@ -31,6 +31,14 @@ class Step:
     reached: bool
     activity: str = ""
     note: str = ""
+    texts: tuple[str, ...] = ()
+    """What the screen showed when it was reached.
+
+    Captured during the walk because it cannot be captured afterwards: by the
+    time a check runs, the wizard has moved on. Recording it turns one traversal
+    into evidence for every assertion about what a step offered, instead of one
+    walk per question.
+    """
 
 
 @dataclass
@@ -49,6 +57,23 @@ class Walk:
     @property
     def missed(self) -> list[str]:
         return [s.screen for s in self.steps if not s.reached]
+
+    def showed(self, screen: str) -> tuple[str, ...]:
+        """What the named step showed, or () if it was never reached."""
+        for step in self.steps:
+            if step.screen == screen and step.reached:
+                return step.texts
+        return ()
+
+    @property
+    def everything_shown(self) -> list[str]:
+        """Every label the walk met, across all the steps it reached."""
+        seen: list[str] = []
+        for step in self.steps:
+            for t in step.texts:
+                if t not in seen:
+                    seen.append(t)
+        return seen
 
     def diff(self, other: "Walk") -> dict[str, list[str]]:
         """Steps one walk traversed and the other did not.
@@ -182,7 +207,12 @@ def walk(journey, serial: str, out_dir: str, timeout: float = 30.0) -> Walk:
 
         activity = resumed_activity(serial)
         capture(serial, out_dir, f"{len(result.steps):02d}-{name}")
-        result.steps.append(Step(name, True, activity=activity))
+        try:
+            texts = tuple(dict.fromkeys(
+                saxutils.unescape(t) for t in re.findall(r'text="([^"]+)"', ui_dump(serial))))
+        except ProbeError:
+            texts = ()          # FLAG_SECURE, or a screen that never goes idle
+        result.steps.append(Step(name, True, activity=activity, texts=texts))
 
         try:
             screen.leave(serial)
