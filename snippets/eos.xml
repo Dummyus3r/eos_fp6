@@ -170,7 +170,7 @@
   <!-- eLib -->
   <project path="packages/apps/elib" name="e/os/elib" remote="e"/>
   <!-- PreBuilts -->
-  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v4.3"/>
+  <project path="external/prebuiltapks" name="e/os/android_prebuilts_prebuiltapks_lfs" remote="e" revision="v4.4"/>
   <!-- PicoTTS -->
   <project path="external/svox" name="e/os/picotts" remote="e" revision="v4.3"/>
   <!-- vendor /e/os -->
